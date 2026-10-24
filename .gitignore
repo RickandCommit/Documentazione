@@ -1,0 +1,20 @@
+# Internal
+regole.md
+
+# Typst cache & output
+*.pdf
+_site/
+.typst/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor & IDE configurations
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*~
