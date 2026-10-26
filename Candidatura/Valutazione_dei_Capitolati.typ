@@ -3,110 +3,85 @@
   author: "RickandCommit",
 )
 
+
 #set page(
   paper: "a4",
   margin: (x: 2.5cm, y: 2.5cm),
-  numbering: "1",
-  header: context {
-    if here().page() > 1 [
-      #set text(size: 9pt)
-      #grid(
-        columns: (1fr, 1fr),
-        align: (left, right),
-        [RickandCommit],
-        [Valutazione dei capitolati],
-      )
-      #v(0.08cm)
-      #line(length: 100%, stroke: 0.5pt)
-    ]
-  },
-  footer: context {
-    if here().page() > 1 [
-      #align(center)[
-        #text(size: 9pt)[#counter(page).display()]
-      ]
-    ]
-  },
+  footer: context [
+    #line(length: 100%, stroke: 0.5pt + rgb("#b5b5b5"))
+    #v(-0.2cm)
+    #grid(
+      columns: (1fr, 1fr, 1fr),
+      align: (left + horizon, center + horizon, right + horizon),
+      [
+        #box(height: 11pt, baseline: 15%)[#image("neon_logo.png")]
+        #h(4pt)
+        #text(size: 9pt, weight: "bold")[RickandCommit]
+      ],
+      [#text(size: 9pt)[#counter(page).display()]],
+      [#text(size: 9pt)[Valutazione dei capitolati]],
+    )
+  ],
 )
 
-#set text(font: "Libertinus Serif", size: 11pt, lang: "it")
-#set par(justify: true, leading: 0.65em, spacing: 0.65em)
+
+#set text(font: "Libertinus Serif", size: 12pt, lang: "it")
 #set heading(numbering: "1.1")
-#set list(spacing: 0.65em)
+#set par(justify: true, leading: 0.68em)
 
-#show heading.where(level: 1): set text(size: 15pt, weight: "bold")
-#show heading.where(level: 2): set text(size: 12.5pt, weight: "bold")
-#show heading.where(level: 3): set text(size: 11pt, weight: "bold")
-#show heading.where(level: 1): set block(above: 2.35em, below: 1.3em)
-#show heading.where(level: 2): set block(above: 1.75em, below: 1.05em)
-#show heading.where(level: 3): set block(above: 1.45em, below: 0.9em)
-
-#show outline.entry.where(level: 1): set text(weight: "bold")
-#show outline.entry.where(level: 1): set block(above: 1.25em)
-
-#grid(
-  columns: (1fr, 1fr),
-  align: (left + horizon, right + horizon),
-  [#image("neon_completo.png", width: 6cm)],
-  [#image("unipd_logo.png", width: 3cm)],
-)
-
-#v(2cm)
-
-#align(center)[
-  #text(size: 22pt, weight: "bold")[Valutazione dei capitolati]
+#show heading.where(level: 1): it => block(above: 1.8em, below: 1em)[
+  #text(size: 15pt, weight: "bold")[#it]
+]
+#show heading.where(level: 2): it => block(above: 1.4em, below: 0.8em)[
+  #text(size: 13pt, weight: "bold")[#it]
+]
+#show heading.where(level: 3): it => block(above: 1.3em, below: 0.7em)[
+  #text(size: 12pt, weight: "bold")[#it]
 ]
 
-#v(1.6cm)
 
+ // ==================== FRONTESPIZIO ====================
 #align(center)[
-  #text(size: 12pt, weight: "bold")[RickandCommit]
-  
-  #text(size: 10pt)[Università di Padova]
-  
-  #text(size: 10pt)[Ingegneria del Software — a.a. 2026/2027]
+  #grid(
+    columns: (auto, auto),
+    column-gutter: 2cm,
+    align: horizon,
+    [#image("neon_completo.png", width: 5.5cm)],
+    [#image("unipd_logo.png", width: 3.5cm)],
+  )
+
+  #v(0.3cm)
+  #text(size: 11pt)[Università di Padova]
+  #v(0.05cm)
+  #text(size: 10.5pt)[Corso di Ingegneria del Software · A.A. 2026/2027]
+
+  #v(0.6cm)
+  #text(size: 26pt, weight: "bold")[Valutazione dei capitolati]
+  #v(0.25cm)
+  #text(size: 10pt, style: "italic")[Versione v0.1.0 · Ultima modifica: 2026-10-25]
 ]
 
-#v(1.65cm)
+#v(0.5cm)
 
-#align(center)[
-  #text(size: 12pt, weight: "bold")[Informazioni documento]
-]
-#v(0.28cm)
-
+// ==================== INFORMAZIONI GENERALI ====================
 #table(
-  columns: (1.8cm, 2.0cm, 2.4cm, 1fr),
-  align: (center + horizon, center + horizon, center + horizon, left + horizon),
-  stroke: 0.5pt,
-  inset: (x: 5pt, y: 5pt),
-  fill: (col, row) => if row == 0 { rgb("#d9d9d9") } else { none },
-
-  table.cell(align: center + horizon)[#text(size: 9pt, weight: "bold")[Versione]],
-  table.cell(align: center + horizon)[#text(size: 9pt, weight: "bold")[Data]],
-  table.cell(align: center + horizon)[#text(size: 9pt, weight: "bold")[Stato]],
-  table.cell(align: center + horizon)[#text(size: 9pt, weight: "bold")[Destinatari]],
-
-  [#text(size: 9pt)[0.1.0]],
-  [#text(size: 9pt)[2026/10/23]],
-  [#text(size: 9pt)[In redazione]],
-  [#text(size: 9pt)[RickandCommit e  prof. Tullio Vardanega]],
+  columns: (auto, 1fr),
+  stroke: 0.5pt + rgb("#b5b5b5"),
+  inset: 7pt,
+  [*Data creazione*], [2026-10-23],
+  [*Stato*], [In redazione],
+  [*Destinatari*], [Prof. Tullio Vardanega \ Prof. Riccardo Cardin],
 )
 
-#v(1fr)
-
-#align(center)[
-  #text(size: 10pt)[*Contatto:* #link("mailto:rickandcommit@gmail.com")[rickandcommit\@gmail.com]]
-]
-
-#pagebreak()
-#counter(page).update(1)
 #v(0.4cm)
 
-#text(size: 16pt, weight: "bold")[Registro delle modifiche]
-#v(0.55cm)
+// ==================== REGISTRO DELLE MODIFICHE ====================
+= Registro delle modifiche
 
+
+#text(size: 10pt)[
 #table(
-  columns: (1.8cm, 2.0cm, 2.4cm, 2.4cm, 2.4cm, 1fr),
+  columns: (1.9cm, 2.0cm, 2.0cm, 2.5cm, 2.5cm, 1fr),
   align: (
     center + horizon,
     center + horizon,
@@ -115,93 +90,68 @@
     center + horizon,
     left + horizon,
   ),
-  stroke: 0.5pt,
-  inset: (x: 5pt, y: 5pt),
-  fill: (col, row) => if row == 0 { rgb("#d9d9d9") } else { none },
+  stroke: 0.5pt + rgb("#b5b5b5"),
+  inset: 6pt,
+  fill: (col, row) => if row == 0 { rgb("#e5e7eb") } else { none },
 
-  table.cell(align: center + horizon)[#text(size: 9pt, weight: "bold")[Versione]],
-  table.cell(align: center + horizon)[#text(size: 9pt, weight: "bold")[Data]],
-  table.cell(align: center + horizon)[#text(size: 9pt, weight: "bold")[Autore]],
-  table.cell(align: center + horizon)[#text(size: 9pt, weight: "bold")[Verificatore]],
-  table.cell(align: center + horizon)[#text(size: 9pt, weight: "bold")[Approvatore]],
-  table.cell(align: center + horizon)[#text(size: 9pt, weight: "bold")[Descrizione]],
+  table.cell(align: center + horizon)[*Versione*],
+  table.cell(align: center + horizon)[*Data*],
+  table.cell(align: center + horizon)[*Autore*],
+  table.cell(align: center + horizon)[*Verificatore*],
+  table.cell(align: center + horizon)[*Approvatore*],
+  table.cell(align: center + horizon)[*Descrizione*],
 
-  [#text(size: 9pt)[0.1.0]],
-  [#text(size: 9pt)[2026/10/23]],
-  [#text(size: 9pt)[Luka Lacic]],
-  [#text(size: 9pt)[-]],
-  [#text(size: 9pt)[-]],
-  [#text(size: 9pt)[Prima stesura del documento]],
+  [0.1.0],
+  [2026-10-23],
+  [Luka Lacic],
+  [Alessandro Rasia dal Polo],
+  [Dorde \ Blagojevic],
+  [Prima stesura del documento],
 )
+]
 
 #pagebreak()
-#v(0.4cm)
-#text(size: 16pt, weight: "bold")[Indice]
-#v(0.18cm)
-#outline(title: none, depth: 3)
-
+#outline(title: "Indice")
 #pagebreak()
-#v(0.4cm)
 
 = Introduzione
+
 
 == Finalità del documento
 
 Il presente documento raccoglie l'analisi dei capitolati d'appalto effettuata dal gruppo RickandCommit nell'ambito di Ingegneria del Software.
 L'obiettivo è individuare la proposta più adatta agli interessi, alla possibilità di acquisire nuove competenze e alle possibilità organizzative del gruppo.
-La valutazione prende in esame diversi elementi tecnici e progettuali, in modo
-da confrontare le alternative con criteri condivisi.
-Per ogni capitolato vengono illustrati lo scopo del progetto e le principali
-considerazioni che ne evidenziano le opportunità e le difficoltà. Tali elementi
-costituiranno il riferimento per motivare la scelta conclusiva del gruppo.
+La valutazione prende in esame diversi elementi tecnici e progettuali, in modo da confrontare le alternative con criteri condivisi.
+Per ogni capitolato vengono illustrati lo scopo del progetto e le principali considerazioni che ne evidenziano le opportunità e le difficoltà. Tali elementi costituiranno il riferimento per motivare la scelta conclusiva del gruppo.
 
 
 = Fattori considerati nella selezione del progetto
 
-Per esaminare le proposte in modo omogeneo, il gruppo ha individuato sette
-fattori di valutazione, applicabili a ciascun capitolato:
+Per esaminare le proposte in modo omogeneo, il gruppo ha individuato sette fattori di valutazione, applicabili a ciascun capitolato:
 
 #v(0.45em)
 
-- *Complessità tecnica:* considera l'impegno necessario per sviluppare il
-  prodotto, dalla definizione dell'architettura all'integrazione dei componenti.
-  Una sfida tecnica può essere formativa, ma deve rimanere sostenibile rispetto
-  al tempo disponibile e ai requisiti obbligatori.
+- *Complessità tecnica:* considera l'impegno necessario per sviluppare il prodotto, dalla definizione dell'architettura all'integrazione dei componenti. Una sfida tecnica può essere formativa, ma deve rimanere sostenibile rispetto al tempo disponibile e ai requisiti obbligatori.
 
-- *Tecnologie interessate:* prende in esame linguaggi, framework, strumenti e
-  servizi previsti dal progetto, distinguendo quelli richiesti da quelli
-  suggeriti. La loro scelta può incidere sulle attività iniziali e
-  sull'organizzazione del lavoro.
+- *Tecnologie interessate:* prende in esame linguaggi, framework, strumenti e servizi previsti dal progetto, distinguendo quelli richiesti da quelli suggeriti. La loro scelta può incidere sulle attività iniziali e sull'organizzazione del lavoro.
 
-- *Opportunità di apprendimento:* riguarda la possibilità di approfondire
-  conoscenze già acquisite e sviluppare nuove competenze. Sono considerate interessanti le esperienze che permettono di utilizzare strumenti e metodologie diffusi nello sviluppo software.
+- *Opportunità di apprendimento:* riguarda la possibilità di approfondire conoscenze già acquisite e sviluppare nuove competenze. Sono considerate interessanti le esperienze che permettono di utilizzare strumenti e metodologie diffusi nello sviluppo software.
 
-- *Chiarezza progettuale:* valuta quanto siano comprensibili e ben definiti
-  gli obiettivi, i requisiti e i risultati attesi. Indicazioni precise
-  aiutano a stimare le attività e a ripartirle tra i componenti del gruppo.
+- *Chiarezza progettuale:* valuta quanto siano comprensibili e ben definiti gli obiettivi, i requisiti e i risultati attesi. Indicazioni precise aiutano a stimare le attività e a ripartirle tra i componenti del gruppo.
 
-- *Supporto del proponente:* considera la disponibilità di referenti tecnici,
-  incontri di confronto e materiali utili allo sviluppo. Un'assistenza
-  adeguata facilita la risoluzione dei dubbi e riduce i rischi legati
-  a problemi non previsti.
+- *Supporto del proponente:* considera la disponibilità di referenti tecnici, incontri di confronto e materiali utili allo sviluppo. Un'assistenza adeguata facilita la risoluzione dei dubbi e riduce i rischi legati a problemi non previsti.
 
-- *Criticità e fattori di rischio:* individua gli elementi che potrebbero
-  rallentare o compromettere il progetto, come requisiti poco circoscritti,
-  dipendenze da servizi esterni o difficoltà nel reperire le risorse
-  necessarie. Tali aspetti vengono distinti dalla difficoltà tecnica.
+- *Criticità e fattori di rischio:* individua gli elementi che potrebbero rallentare o compromettere il progetto, come requisiti poco circoscritti, dipendenze da servizi esterni o difficoltà nel reperire le risorse necessarie. Tali aspetti vengono distinti dalla difficoltà tecnica.
 
-- *Interesse del gruppo:* esprime il grado di motivazione condiviso verso
-  il tema e gli obiettivi del progetto. Siccome un interesse comune può favorire la collaborazione e la continuità dell'impegno durante lo sviluppo, questo fattore assume una imprtanza significativa.
+- *Interesse del gruppo:* esprime il grado di motivazione condiviso verso il tema e gli obiettivi del progetto. Siccome un interesse comune può favorire la collaborazione e la continuità dell'impegno durante lo sviluppo, questo fattore assume una importanza significativa.
 
 #v(0.55em)
 
-I fattori saranno considerati nel loro insieme, con pari attenzione,
-per individuare la proposta più coerente con le caratteristiche del gruppo.
+I fattori saranno considerati nel loro insieme, con pari attenzione, per individuare la proposta più coerente con le caratteristiche del gruppo.
 
 #pagebreak()
 
 = Valutazione del capitolato selezionato
-
 
 == C7 – SmartDashboard: piattaforma di Business Intelligence self-service potenziata da AI
 
@@ -229,7 +179,6 @@ Il progetto prevede la realizzazione di SmartDashboard, una piattaforma di Busin
 
 
 = Valutazione degli altri capitolati
-
 
 == C0 – AIRA: AI Requests Automation
 
@@ -306,7 +255,6 @@ Il progetto prevede la realizzazione di un assistente conversazionale integrato 
 *Interesse del gruppo:* Il capitolato ha suscitato un elevato interesse nel gruppo, soprattutto per l'applicazione dell'intelligenza artificiale a un servizio aziendale concreto. La proposta è stata infatti inserita tra le tre alternative finali maggiormente considerate. Tuttavia, a seguito del confronto conclusivo, il gruppo ha deciso di orientarsi verso un altro capitolato (C7 - SmartDashboard).
 
 
-
 == C3 – FossDot
 
 *Proponente:* Uranion EMEA Ltd.
@@ -330,7 +278,6 @@ Il progetto prevede la realizzazione di uno smart speaker open source, progettat
 *Criticità e fattori di rischio:* Le principali difficoltà riguardano l'integrazione tra hardware, firmware e servizi di elaborazione vocale. È inoltre necessario considerare la gestione dei dati audio personali, per i quali il capitolato richiama l'attenzione al rispetto del GDPR. La verifica dell'intero sistema su un dispositivo fisico rappresenta un ulteriore impegno progettuale.
 
 *Interesse del gruppo:* La proposta presenta aspetti interessanti, in particolare per la realizzazione di un prodotto open source che combina intelligenza artificiale e componenti hardware. Tuttavia, l'ampiezza delle attività necessarie e la presenza di sviluppo embedded rappresentano elementi impegnativi. Il gruppo ha preferito orientarsi verso altre proposte.
-
 
 
 == C4 – Piattaforma per la gestione dei veicoli e dei servizi post-vendita
@@ -358,7 +305,6 @@ Il progetto prevede la realizzazione di una piattaforma software distribuita per
 *Interesse del gruppo:* Il capitolato affronta un problema concreto e offre opportunità formative nell'ambito dei sistemi distribuiti. Tuttavia, il gruppo ha infine deciso di orientarsi verso un'altra proposta (C7 - SmartDashboard).
 
 
-
 == C5 – RareCare Navigator
 
 *Proponente:* Miriade S.r.l.
@@ -382,7 +328,6 @@ Il progetto prevede la realizzazione di una piattaforma digitale per supportare 
 *Criticità e fattori di rischio:* Le principali difficoltà riguardano la protezione dei dati sanitari, la gestione delle autorizzazioni e la necessità di fornire risposte AI basate su informazioni verificate. Anche la definizione di un perimetro di sviluppo sostenibile rappresenta un aspetto importante, considerando le numerose funzionalità previste.
 
 *Interesse del gruppo:* Il progetto presenta una finalità sociale significativa e offre interessanti opportunità formative. Tuttavia, la delicatezza delle informazioni trattate e le responsabilità legate alla sicurezza e all'affidabilità del sistema ne aumentano l'impegno progettuale. Il capitolato non è rientrato tra le proposte approfondite dal gruppo per la scelta finale.
-
 
 
 == C6 – Sistema IA di Caching Semantico e Dashboard FinOps
@@ -410,7 +355,6 @@ Il progetto prevede l'estensione di LiteLLM, un sistema open source utilizzato p
 *Interesse del gruppo:* Il capitolato offre opportunità formative nell'ambito dell'intelligenza artificiale e dell'ottimizzazione dei servizi software. Tuttavia, l'integrazione con un sistema esistente e la necessità di verificare il comportamento del caching semantico costituiscono aspetti impegnativi. Il gruppo ha infine deciso di orientarsi verso altre proposte.
 
 
-
 == C8 – Sonar: Documentazione vivente di uno store Shopify
 
 *Proponente:* Halue S.r.l. Società Benefit
@@ -434,7 +378,6 @@ Il progetto prevede la realizzazione di un'applicazione web capace di analizzare
 *Criticità e fattori di rischio:* Le principali difficoltà riguardano l'affidabilità delle scansioni e la correttezza delle segnalazioni prodotte dal sistema. Il progetto richiede inoltre al gruppo di creare autonomamente uno store Shopify di prova, da utilizzare anche per verificare i risultati. Un ulteriore aspetto da considerare è la gestione dei limiti dei servizi gratuiti di Vercel e Supabase.
 
 *Interesse del gruppo:* Il capitolato ha suscitato un notevole interesse per il suo obiettivo concreto e per le opportunità di apprendimento offerte dalle tecnologie coinvolte. La proposta è stata infatti inclusa tra le tre alternative finali maggiormente considerate. Nonostante gli aspetti positivi, a seguito del confronto conclusivo il gruppo ha deciso di selezionare un altro capitolato (C7 - SmartDashboard).
-
 
 
 == C9 – SpecCheck
