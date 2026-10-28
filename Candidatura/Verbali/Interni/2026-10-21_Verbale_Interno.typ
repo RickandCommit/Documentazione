@@ -87,7 +87,7 @@
   [*Descrizione*],
   [1.1.0], [2026-10-25], [Sara Stefani], [Alessandro Rasia dal Polo], [Aggiunta del collegamento alle issue di tracciamento su GitHub Projects],
   [1.0.0], [2026-10-22], [Sara Stefani], [Alessandro Rasia dal Polo], [Prima stesura del verbale approvata],
-  [0.1.0], [2026-10-21], [Sara Stefani], [Alessandro Rasia dal Polo], [Bozza iniziale della riunione],
+  [0.1.0], [2026-10-21], [Sara Stefani], [Alessandro Rasia dal Polo], [Stesura iniziale del verbale],
 )
 ]
 
