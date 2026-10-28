@@ -63,7 +63,7 @@
   inset: 7pt,
   [*Data*], [2026-10-21],
   [*Ora inizio – Ora fine*], [15.00 – 16.30],
-  [*Modalità*], [via Discord],
+  [*Modalità*], [Discord],
   [*Redattore*], [Sara Stefani],
   [*Verificatore*], [Alessandro Rasia dal Polo],
   [*Destinatari*], [Prof. Tullio Vardanega \ Prof. Riccardo Cardin],
