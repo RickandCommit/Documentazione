@@ -58,7 +58,7 @@
   #v(0.6cm)
   #text(size: 26pt, weight: "bold")[Valutazione dei capitolati]
   #v(0.25cm)
-  #text(size: 10pt, style: "italic")[Versione v0.1.0 · Ultima modifica: 2026-10-25]
+  #text(size: 10pt, style: "italic")[Versione v0.2.0 · Ultima modifica: 2026-10-28]
 ]
 
 #v(0.5cm)
@@ -101,6 +101,13 @@
   table.cell(align: center + horizon)[*Approvatore*],
   table.cell(align: center + horizon)[*Descrizione*],
 
+  [0.2.0],
+  [2026-10-28],
+  [Luka Lacic],
+  [Alessandro Rasia dal Polo],
+  [Dorde \ Blagojevic],
+  [Modifica delle preferenze del gruppo],
+  
   [0.1.0],
   [2026-10-23],
   [Luka Lacic],
@@ -120,9 +127,12 @@
 == Finalità del documento
 
 Il presente documento raccoglie l'analisi dei capitolati d'appalto effettuata dal gruppo RickandCommit nell'ambito di Ingegneria del Software.
-L'obiettivo è individuare la proposta più adatta agli interessi, alla possibilità di acquisire nuove competenze e alle possibilità organizzative del gruppo.
+
+L'obiettivo è presentare le valutazioni che hanno portato a individuare la proposta più adatta agli interessi, alle opportunità di apprendimento e alle possibilità organizzative del gruppo.
+
 La valutazione prende in esame diversi elementi tecnici e progettuali, in modo da confrontare le alternative con criteri condivisi.
-Per ogni capitolato vengono illustrati lo scopo del progetto e le principali considerazioni che ne evidenziano le opportunità e le difficoltà. Tali elementi costituiranno il riferimento per motivare la scelta conclusiva del gruppo.
+Per ogni capitolato vengono illustrati lo scopo del progetto e le principali considerazioni che ne evidenziano le opportunità e le difficoltà. Tali elementi costituiscono il riferimento per motivare la scelta conclusiva del gruppo.
+
 
 
 = Fattori considerati nella selezione del progetto
@@ -147,35 +157,39 @@ Per esaminare le proposte in modo omogeneo, il gruppo ha individuato sette fatto
 
 #v(0.55em)
 
-I fattori saranno considerati nel loro insieme, con pari attenzione, per individuare la proposta più coerente con le caratteristiche del gruppo.
-
-#pagebreak()
+I fattori sono stati considerati nel loro insieme, con pari attenzione, per individuare la proposta più coerente con le caratteristiche del gruppo.
 
 = Valutazione del capitolato selezionato
 
-== C7 – SmartDashboard: piattaforma di Business Intelligence self-service potenziata da AI
 
-*Proponente:* Ergon Informatica S.r.l.
+== C2 – NEXUM Concierge
+
+*Proponente:* Eggon S.r.l.
 
 === Obiettivo
 
-Il progetto prevede la realizzazione di SmartDashboard, una piattaforma di Business Intelligence che permetta agli utenti aziendali di analizzare autonomamente i dati provenienti dai propri sistemi gestionali. Le informazioni dovranno essere raccolte, trasformate e organizzate in un archivio ottimizzato per l'analisi, per poi essere visualizzate attraverso un'applicazione web. Gli utenti potranno creare dashboard personalizzate tramite un'interfaccia drag & drop, utilizzando grafici, tabelle e indicatori, e applicare filtri per esplorare i dati. La piattaforma dovrà inoltre integrare un assistente basato sull'intelligenza artificiale, capace di generare visualizzazioni a partire da richieste in linguaggio naturale.
+
+Il progetto prevede la realizzazione di NEXUM Concierge, un assistente conversazionale destinato alla piattaforma NEXUM, dedicata alla comunicazione aziendale e alla gestione dei servizi per il personale. Attraverso una chat, gli utenti potranno consultare regolamenti aziendali, ricevere istruzioni sull'utilizzo della piattaforma, accedere ai propri dati ed effettuare operazioni tramite linguaggio naturale.
+
+Il prodotto minimo richiesto (MVP) si concentra sulla gestione di ferie e permessi e comprende quattro capacità principali: consultazione delle regole aziendali, accesso alle istruzioni di NEXUM, lettura dei dati personali e registrazione delle richieste. Il sistema dovrà mantenere il contesto della conversazione, recuperare le informazioni dalle fonti appropriate e guidare l'utente nelle operazioni, richiedendo una conferma esplicita prima dell'invio.
+
+È inoltre prevista la realizzazione di un'interfaccia amministrativa per la gestione dei documenti e di una base di conoscenza che consenta di fornire risposte fondate sulle informazioni disponibili. La soluzione dovrà essere progettata in modo da permettere, in futuro, l'estensione ad altri servizi aziendali.
 
 === Considerazioni
 
-*Complessità tecnica:* Il progetto presenta una complessità significativa, poiché richiede lo sviluppo di componenti differenti e la loro integrazione. È necessario gestire il recupero e la trasformazione dei dati, realizzare un archivio adatto all'analisi e sviluppare un'applicazione web con dashboard interattive. A queste attività si aggiunge l'integrazione dell'intelligenza artificiale. Il proponente suggerisce tuttavia un approccio graduale, che permetta di completare prima la piattaforma di Business Intelligence e successivamente introdurre le funzionalità AI.
+*Complessità tecnica:* Il progetto presenta una complessità significativa, poiché richiede l'integrazione di diverse componenti all'interno di un unico sistema. Oltre allo sviluppo dell'interfaccia conversazionale e alla gestione del contesto, sarà necessario realizzare un sistema per l'elaborazione e la consultazione dei documenti, un'interfaccia amministrativa e il collegamento ai servizi applicativi di NEXUM. Un aspetto particolarmente impegnativo riguarda la capacità dell'assistente di distinguere le richieste informative dalle operazioni sui dati personali, utilizzando correttamente le funzionalità disponibili. Il perimetro dell'MVP è tuttavia circoscritto all'area ferie e permessi, permettendo di affrontare lo sviluppo attraverso fasi progressive e verificabili.
 
-*Tecnologie interessate:* Ergon lascia al gruppo libertà nella scelta delle tecnologie, proponendo alcune soluzioni di riferimento. Per il data warehouse viene consigliato DuckDB, mentre per la raccolta dei dati sono suggeriti database relazionali come PostgreSQL e strumenti Python per la loro trasformazione, come Polars. Per il frontend vengono indicati React, Angular o Vue, mentre per l'intelligenza artificiale si suggerisce l'integrazione con modelli linguistici accessibili tramite API, come GPT o Claude. L'architettura proposta costituisce un riferimento e non un vincolo.
+*Tecnologie interessate:* La piattaforma NEXUM utilizza Angular e TypeScript per le interfacce, Ruby on Rails per il backend e tecnologie come PostgreSQL, Redis e AWS S3 per la gestione dei dati e dei documenti. Per il Concierge, invece, la scelta dello stack tecnologico, dei modelli linguistici e dei servizi AI sarà concordata con Eggon durante la fase iniziale. Il progetto comprende inoltre l'elaborazione di documenti aziendali, la costruzione di una base di conoscenza e l'integrazione con servizi applicativi attraverso interfacce definite. Potranno quindi essere approfondite tecniche di recupero delle informazioni, come quelle impiegate nei sistemi RAG, e modalità di collegamento tra modelli linguistici e funzionalità software. La scelta delle tecnologie dovrà essere motivata in base alle esigenze effettive della soluzione.
 
-*Opportunità di apprendimento:* Il progetto offre numerose possibilità di acquisire nuove competenze, combinando lo sviluppo di applicazioni web con la gestione e l'analisi dei dati. In particolare, permette di approfondire il funzionamento dei data warehouse, i processi di trasformazione dei dati e la realizzazione di dashboard interattive. L'integrazione dell'intelligenza artificiale rappresenta inoltre un'occasione per conoscere le modalità con cui i modelli linguistici possono essere utilizzati all'interno di applicazioni software.
+*Opportunità di apprendimento:* Il progetto rappresenta un'importante opportunità per ampliare le conoscenze del gruppo in diversi ambiti dello sviluppo software. In particolare, permetterà di approfondire l'utilizzo dei modelli linguistici all'interno di applicazioni reali, la gestione del contesto conversazionale e le tecniche per recuperare informazioni da documenti aziendali e generare risposte verificabili. Un ulteriore aspetto formativo riguarda l'integrazione tra intelligenza artificiale e servizi applicativi, attraverso la quale sarà possibile comprendere come un assistente possa non soltanto fornire informazioni, ma anche eseguire operazioni sui dati. Il progetto offrirà inoltre occasioni per sviluppare competenze nella progettazione di interfacce, nella gestione delle autorizzazioni, nell'integrazione tramite API e nella verifica dell'affidabilità del software. La varietà delle attività consentirà al gruppo di confrontarsi con tecnologie e problematiche differenti, acquisendo competenze applicabili anche ad altri contesti professionali.
 
-*Chiarezza progettuale:* Il capitolato descrive in modo dettagliato gli obiettivi, le funzionalità principali e l'architettura di riferimento. Sono inoltre presenti esempi grafici delle interfacce e indicazioni sulle tecnologie utilizzabili. Il proponente riconosce l'ampiezza del progetto e suggerisce di suddividere i requisiti in obbligatori, desiderabili e facoltativi, lasciando al gruppo il compito di stabilire le priorità durante l'analisi.
+*Chiarezza progettuale:* Il capitolato descrive in modo dettagliato gli obiettivi, le funzionalità richieste e i criteri di accettazione, delimitando il prodotto minimo all'ambito delle ferie e dei permessi. Sono individuate quattro capacità principali che dovranno essere integrate in un unico percorso conversazionale. Il proponente suddivide inoltre la realizzazione in tre fasi: sviluppo di un primo prototipo e definizione delle interfacce, completamento delle funzionalità e verifica finale dell'MVP. Questa organizzazione costituisce un riferimento utile per pianificare le attività e controllare progressivamente i risultati. Rimangono da concordare alcuni aspetti tecnici, tra cui lo stack, i contratti di integrazione e le soglie di prestazione.
 
-*Supporto del proponente:* Ergon prevede incontri di allineamento ogni quindici giorni per verificare l'avanzamento del progetto, discutere le difficoltà e riesaminare le priorità. Il referente aziendale rimane inoltre disponibile per ulteriori chiarimenti e incontri. Su richiesta del gruppo, l'azienda può anche fornire dati di un caso di studio reale da utilizzare durante lo sviluppo e i test.
+*Supporto del proponente:* Eggon prevede incontri di allineamento settimanali o bisettimanali, da concordare con il gruppo, per discutere l'avanzamento dei lavori, chiarire i requisiti e confrontarsi sulle scelte progettuali. È inoltre prevista la creazione di un gruppo Telegram dedicato alle comunicazioni rapide e la possibilità di organizzare incontri in presenza. L'azienda si impegna a fornire documentazione, manuali NEXUM, regolamenti di esempio e dati di prova, oltre alle API documentate o ai simulatori conformi necessari per lo sviluppo. La disponibilità al confronto sulle soluzioni tecniche e sull'utilizzo degli strumenti di supporto rappresenta un elemento positivo per affrontare le difficoltà del progetto.
 
-*Criticità e fattori di rischio:* La principale difficoltà riguarda l'ampiezza del progetto, che comprende sia la gestione completa dei dati sia lo sviluppo delle funzionalità di intelligenza artificiale. Un ulteriore aspetto critico è garantire che l'assistente interpreti correttamente le richieste degli utenti e produca risultati coerenti con i dati disponibili, evitando errori nelle analisi. Sarà inoltre necessario prestare attenzione ai tempi di risposta e alla protezione delle informazioni.
+*Criticità e fattori di rischio:* Le principali criticità riguardano l'affidabilità delle risposte generate dall'assistente e la corretta esecuzione delle operazioni sui dati personali. Sarà necessario garantire che le risposte siano supportate da fonti verificabili, che le autorizzazioni vengano rispettate e che le richieste siano registrate soltanto dopo una conferma esplicita dell'utente. Un ulteriore rischio riguarda l'interpretazione di informazioni incomplete o ambigue, come date e periodi relativi alle ferie, e la gestione di eventuali errori o invii ripetuti. Anche la dipendenza dalle interfacce di integrazione e dai servizi AI richiederà attenzione durante la pianificazione. La definizione di un MVP circoscritto e la possibilità di utilizzare simulatori conformi costituiscono elementi utili per contenere tali difficoltà.
 
-*Interesse del gruppo:* Il capitolato ha suscitato un particolare interesse nel gruppo per l'obiettivo di realizzare una piattaforma che renda l'analisi dei dati più semplice e accessibile attraverso l'intelligenza artificiale. Un ulteriore elemento determinante è rappresentato dalla possibilità di conoscere e utilizzare tecnologie nuove, approfondendo diversi ambiti dello sviluppo software. Pur considerando la complessità del progetto, la varietà delle competenze acquisibili e la possibilità di procedere per fasi hanno contribuito a rendere SmartDashboard la proposta scelta da RickandCommit.
+*Interesse del gruppo:* Il capitolato ha suscitato un particolare interesse nel gruppo per la possibilità di realizzare un prodotto concreto che integri l'intelligenza artificiale con funzionalità aziendali effettivamente utilizzabili. L'elemento di maggiore interesse è rappresentato dalle numerose opportunità di apprendimento: il progetto permetterà infatti di ampliare significativamente le conoscenze del gruppo, approfondendo sia l'utilizzo dei modelli linguistici sia aspetti legati alla gestione della conoscenza, allo sviluppo applicativo e all'integrazione di sistemi differenti. La possibilità di confrontarsi con tecnologie nuove e affrontare problemi diversi, dalla progettazione delle interfacce alla verifica dell'affidabilità delle risposte, costituisce un importante stimolo formativo. Sono stati inoltre valutati positivamente la chiarezza del prodotto minimo richiesto, l'organizzazione progressiva dello sviluppo e il supporto previsto da Eggon. Pur considerando le difficoltà tecniche e le responsabilità legate alla gestione dei dati, il gruppo ritiene che il progetto offra un equilibrio interessante tra complessità, possibilità di crescita e concretezza degli obiettivi. Per queste ragioni, RickandCommit ha scelto NEXUM Concierge come capitolato da svolgere.
 
 
 = Valutazione degli altri capitolati
@@ -230,31 +244,6 @@ Il progetto prevede la realizzazione di un sistema che permetta di controllare g
 *Interesse del gruppo:* Il progetto offre opportunità formative interessanti, soprattutto nell'ambito dell'intelligenza artificiale e della domotica. Tuttavia, considerando l'ampiezza dei requisiti e l'impegno necessario per soddisfarli, il gruppo ha preferito orientarsi verso altri capitolati.
 
 
-== C2 – NEXUM Concierge
-
-*Proponente:* Eggon S.r.l.
-
-=== Obiettivo
-
-Il progetto prevede la realizzazione di un assistente conversazionale integrato nella piattaforma NEXUM, dedicata alla comunicazione e alla gestione dei servizi aziendali. Attraverso una chat, il personale potrà consultare regolamenti, ricevere istruzioni sull'utilizzo della piattaforma, accedere ai propri dati ed effettuare operazioni tramite linguaggio naturale. Il prodotto minimo richiesto si concentra sulla gestione di ferie e permessi e comprende un'interfaccia conversazionale, un sistema per la consultazione dei documenti aziendali e le funzionalità necessarie per leggere i dati personali e registrare richieste.
-
-=== Considerazioni
-
-*Complessità tecnica:* Il progetto presenta una complessità significativa, poiché richiede di integrare diverse funzionalità in un unico sistema. Oltre alla chat e alla gestione del contesto delle conversazioni, sono necessari un sistema di consultazione dei documenti, un'interfaccia amministrativa e il collegamento ai servizi per la lettura e la registrazione delle richieste.
-
-*Tecnologie interessate:* La piattaforma NEXUM utilizza Angular per le interfacce, Ruby on Rails per il backend e tecnologie come PostgreSQL e Redis per la gestione dei dati. Per il Concierge, invece, la scelta dello stack tecnologico, dei modelli linguistici e dei servizi AI sarà concordata con il proponente durante la fase iniziale.
-
-*Opportunità di apprendimento:* Il progetto offre la possibilità di approfondire l'utilizzo dei modelli linguistici, la gestione della conoscenza aziendale e l'integrazione dell'intelligenza artificiale con servizi applicativi. Permette inoltre di lavorare su un prodotto destinato a rispondere a esigenze aziendali concrete.
-
-*Chiarezza progettuale:* Il capitolato è dettagliato e definisce chiaramente il perimetro dell'MVP, limitandolo all'area ferie e permessi. Sono inoltre descritti i requisiti, le fasi di sviluppo e i criteri di accettazione. Alcuni aspetti tecnici, come le interfacce di integrazione e le soglie di prestazione, devono invece essere definiti insieme al proponente.
-
-*Supporto del proponente:* Eggon prevede incontri settimanali o bisettimanali da concordare con il gruppo, oltre a un canale Telegram per le comunicazioni rapide. L'azienda si impegna inoltre a fornire documentazione, dati di prova e API documentate o simulatori necessari allo sviluppo.
-
-*Criticità e fattori di rischio:* Le principali difficoltà riguardano la correttezza delle risposte generate, la gestione delle autorizzazioni e l'affidabilità delle operazioni sui dati personali. Un ulteriore elemento da considerare è la dipendenza dalle interfacce di integrazione, che dovranno essere concordate con Eggon durante il progetto.
-
-*Interesse del gruppo:* Il capitolato ha suscitato un elevato interesse nel gruppo, soprattutto per l'applicazione dell'intelligenza artificiale a un servizio aziendale concreto. La proposta è stata infatti inserita tra le tre alternative finali maggiormente considerate. Tuttavia, a seguito del confronto conclusivo, il gruppo ha deciso di orientarsi verso un altro capitolato (C7 - SmartDashboard).
-
-
 == C3 – FossDot
 
 *Proponente:* Uranion EMEA Ltd.
@@ -302,7 +291,7 @@ Il progetto prevede la realizzazione di una piattaforma software distribuita per
 
 *Criticità e fattori di rischio:* L'ampiezza delle funzionalità e la presenza di diversi soggetti coinvolti potrebbero rendere impegnativa la definizione e la realizzazione del prodotto minimo. La necessità di concordare i principali flussi dell'MVP rappresenta inoltre un aspetto da chiarire per pianificare correttamente il lavoro.
 
-*Interesse del gruppo:* Il capitolato affronta un problema concreto e offre opportunità formative nell'ambito dei sistemi distribuiti. Tuttavia, il gruppo ha infine deciso di orientarsi verso un'altra proposta (C7 - SmartDashboard).
+*Interesse del gruppo:* Il capitolato affronta un problema concreto e offre opportunità formative nell'ambito dei sistemi distribuiti. Tuttavia, il gruppo ha infine deciso di orientarsi verso un'altra proposta (C2 – NEXUM Concierge).
 
 
 == C5 – RareCare Navigator
@@ -355,6 +344,33 @@ Il progetto prevede l'estensione di LiteLLM, un sistema open source utilizzato p
 *Interesse del gruppo:* Il capitolato offre opportunità formative nell'ambito dell'intelligenza artificiale e dell'ottimizzazione dei servizi software. Tuttavia, l'integrazione con un sistema esistente e la necessità di verificare il comportamento del caching semantico costituiscono aspetti impegnativi. Il gruppo ha infine deciso di orientarsi verso altre proposte.
 
 
+
+== C7 – SmartDashboard: piattaforma di Business Intelligence self-service potenziata da AI
+
+*Proponente:* Ergon Informatica S.r.l.
+
+=== Obiettivo
+
+Il progetto prevede la realizzazione di SmartDashboard, una piattaforma di Business Intelligence che permetta agli utenti aziendali di analizzare autonomamente i dati provenienti dai propri sistemi gestionali. Le informazioni dovranno essere raccolte, trasformate e organizzate in un archivio ottimizzato per l'analisi, per poi essere visualizzate attraverso un'applicazione web. Gli utenti potranno creare dashboard personalizzate tramite un'interfaccia drag & drop, utilizzando grafici, tabelle e indicatori, e applicare filtri per esplorare i dati. È inoltre prevista l'integrazione di un assistente basato sull'intelligenza artificiale, capace di generare visualizzazioni a partire da richieste in linguaggio naturale.
+
+=== Considerazioni
+
+*Complessità tecnica:* Il progetto presenta una complessità significativa, poiché richiede la realizzazione e l'integrazione di componenti per la raccolta e la trasformazione dei dati, la loro organizzazione in un archivio analitico e la visualizzazione attraverso dashboard interattive. A queste attività si aggiunge l'integrazione dell'intelligenza artificiale. Il proponente suggerisce un approccio graduale, che permetta di sviluppare inizialmente la piattaforma di Business Intelligence e successivamente introdurre le funzionalità AI.
+
+*Tecnologie interessate:* Ergon lascia al gruppo libertà nella scelta delle tecnologie, proponendo alcune soluzioni di riferimento. Tra queste figurano DuckDB per il data warehouse, PostgreSQL e strumenti Python come Polars per la gestione dei dati, React, Angular o Vue per il frontend e modelli linguistici accessibili tramite API per le funzionalità di intelligenza artificiale.
+
+*Opportunità di apprendimento:* Il progetto offre numerose possibilità di acquisire competenze nell'ambito dello sviluppo web, della gestione e dell'analisi dei dati. In particolare, permette di approfondire i processi di trasformazione dei dati, il funzionamento dei data warehouse, la realizzazione di dashboard interattive e l'integrazione dei modelli linguistici in applicazioni software.
+
+*Chiarezza progettuale:* Il capitolato descrive gli obiettivi, le funzionalità principali e un'architettura di riferimento, accompagnata da esempi grafici delle interfacce. Il proponente riconosce l'ampiezza del progetto e suggerisce di distinguere i requisiti in obbligatori, desiderabili e facoltativi, lasciando al gruppo la definizione delle priorità.
+
+*Supporto del proponente:* Ergon prevede incontri di allineamento ogni quindici giorni per verificare l'avanzamento delle attività, discutere eventuali difficoltà e riesaminare le priorità. Il referente aziendale rimane inoltre disponibile per chiarimenti e ulteriori incontri. Su richiesta, l'azienda può fornire dati relativi a un caso di studio reale da utilizzare durante lo sviluppo.
+
+*Criticità e fattori di rischio:* Le principali difficoltà riguardano l'ampiezza delle funzionalità previste e la necessità di integrare correttamente la gestione dei dati con l'intelligenza artificiale. Particolare attenzione dovrebbe essere dedicata all'affidabilità delle analisi generate, ai tempi di risposta e alla protezione delle informazioni.
+
+*Interesse del gruppo:* Il capitolato ha suscitato un notevole interesse per la possibilità di realizzare una piattaforma che renda l'analisi dei dati più semplice e accessibile attraverso l'intelligenza artificiale. La varietà delle tecnologie coinvolte e le opportunità di apprendimento hanno contribuito a renderlo una delle tre proposte maggiormente considerate dal gruppo. Pur riconoscendone gli aspetti positivi e il valore formativo, RickandCommit ha scelto di orientarsi verso il capitolato C2 – NEXUM Concierge.
+
+
+
 == C8 – Sonar: Documentazione vivente di uno store Shopify
 
 *Proponente:* Halue S.r.l. Società Benefit
@@ -377,7 +393,7 @@ Il progetto prevede la realizzazione di un'applicazione web capace di analizzare
 
 *Criticità e fattori di rischio:* Le principali difficoltà riguardano l'affidabilità delle scansioni e la correttezza delle segnalazioni prodotte dal sistema. Il progetto richiede inoltre al gruppo di creare autonomamente uno store Shopify di prova, da utilizzare anche per verificare i risultati. Un ulteriore aspetto da considerare è la gestione dei limiti dei servizi gratuiti di Vercel e Supabase.
 
-*Interesse del gruppo:* Il capitolato ha suscitato un notevole interesse per il suo obiettivo concreto e per le opportunità di apprendimento offerte dalle tecnologie coinvolte. La proposta è stata infatti inclusa tra le tre alternative finali maggiormente considerate. Nonostante gli aspetti positivi, a seguito del confronto conclusivo il gruppo ha deciso di selezionare un altro capitolato (C7 - SmartDashboard).
+*Interesse del gruppo:* Il capitolato ha suscitato un notevole interesse per il suo obiettivo concreto e per le opportunità di apprendimento offerte dalle tecnologie coinvolte. La proposta è stata infatti inclusa tra le tre alternative finali maggiormente considerate. Nonostante gli aspetti positivi, a seguito del confronto conclusivo il gruppo ha deciso di selezionare un altro capitolato (C2 – NEXUM Concierge).
 
 
 == C9 – SpecCheck
