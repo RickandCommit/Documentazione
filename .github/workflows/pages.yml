@@ -34,15 +34,15 @@ jobs:
           # Compila Documenti Principali di Candidatura (se presenti)
           if [ -f "Candidatura/Valutazione_dei_Capitolati.typ" ]; then
             echo "Compilazione Valutazione dei Capitolati..."
-            typst compile Candidatura/Valutazione_dei_Capitolati.typ _site/Candidatura/Valutazione_dei_Capitolati_v1.0.0.pdf
+            typst compile --root . Candidatura/Valutazione_dei_Capitolati.typ _site/Candidatura/Valutazione_dei_Capitolati_v1.0.0.pdf
           fi
           if [ -f "Candidatura/Dichiarazione_degli_Impegni.typ" ]; then
             echo "Compilazione Dichiarazione degli Impegni..."
-            typst compile Candidatura/Dichiarazione_degli_Impegni.typ _site/Candidatura/Dichiarazione_degli_Impegni_v1.0.0.pdf
+            typst compile --root . Candidatura/Dichiarazione_degli_Impegni.typ _site/Candidatura/Dichiarazione_degli_Impegni_v1.0.0.pdf
           fi
           if [ -f "Candidatura/2026-10-29_Lettera_di_Presentazione.typ" ]; then
             echo "Compilazione Lettera di Presentazione..."
-            typst compile Candidatura/2026-10-29_Lettera_di_Presentazione.typ _site/Candidatura/2026-10-29_Lettera_di_Presentazione.pdf
+            typst compile --root . Candidatura/2026-10-29_Lettera_di_Presentazione.typ _site/Candidatura/2026-10-29_Lettera_di_Presentazione.pdf
           fi
 
           # Compila Verbali Interni
@@ -51,7 +51,7 @@ jobs:
               if [ -f "$f" ]; then
                 base=$(basename "$f" .typ)
                 echo "Compilazione verbale $base..."
-                typst compile "$f" "_site/Candidatura/Verbali/Interni/${base}.pdf"
+                typst compile --root . "$f" "_site/Candidatura/Verbali/Interni/${base}.pdf"
               fi
             done
           fi
@@ -62,7 +62,7 @@ jobs:
               if [ -f "$f" ]; then
                 base=$(basename "$f" .typ)
                 echo "Compilazione verbale esterno $base..."
-                typst compile "$f" "_site/Candidatura/Verbali/Esterni/${base}.pdf"
+                typst compile --root . "$f" "_site/Candidatura/Verbali/Esterni/${base}.pdf"
               fi
             done
           fi

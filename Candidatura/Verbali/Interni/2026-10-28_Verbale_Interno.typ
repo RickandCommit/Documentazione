@@ -1,78 +1,17 @@
-// Verbale interno — riunione del 2026-10-28
-// File: 2026-10-28_Verbale_Interno.typ
+#import "../../../.github/template/template.typ": *
 
-#let data-verbale = "2026-10-28"
-#let tipo-verbale = "Verbale Interno" // Cambiare in "Verbale Esterno" se applicabile
-
-#set document(title: tipo-verbale + " " + data-verbale + " — RickandCommit", author: "RickandCommit")
-#set page(
-  paper: "a4",
-  margin: (x: 2.5cm, y: 2.5cm),
-  footer: context [
-    #line(length: 100%, stroke: 0.5pt + rgb("#b5b5b5"))
-    #v(-0.2cm)
-    #grid(
-      columns: (1fr, 1fr, 1fr),
-      align: (left + horizon, center + horizon, right + horizon),
-      [
-        #box(height: 11pt, baseline: 15%)[#image("neon_logo.png")]
-        #h(4pt)
-        #text(size: 9pt, weight: "bold")[RickandCommit]
-      ],
-      [#text(size: 9pt)[#counter(page).display()]],
-      [#text(size: 9pt)[#tipo-verbale #data-verbale]],
-    )
-  ],
+#show: verbale.with(
+  titolo: "Verbale del Terzo Incontro",
+  tipo: "Verbale Interno",
+  data: "2026-10-28",
+  versione: "v0.2.0",
+  ultima-modifica: "2026-10-29",
+  ora-inizio: "15:00",
+  ora-fine: "16:00",
+  modalita: "Discord",
+  redattore: "Sara Stefani",
+  verificatore: "Alessandro Rasia dal Polo",
 )
-#set text(font: "Libertinus Serif", size: 12pt, lang: "it")
-#set heading(numbering: "1.1")
-#set par(justify: true, leading: 0.68em)
-
-#show heading.where(level: 1): it => block(above: 1.8em, below: 1em)[
-  #text(size: 15pt, weight: "bold")[#it]
-]
-#show heading.where(level: 2): it => block(above: 1.4em, below: 0.8em)[
-  #text(size: 13pt, weight: "bold")[#it]
-]
-
-#let nessuna = [Nessuna azione operativa.]
-#let issue(n) = link("https://github.com/RickandCommit/Documentazione/issues/" + str(n))[\##n]
-
-// ==================== FRONTESPIZIO ====================
-#align(center)[
-  #grid(
-    columns: (auto, auto),
-    column-gutter: 2cm,
-    align: horizon,
-    [#image("neon_completo.png", width: 5.5cm)],
-    [#image("unipd_logo.png", width: 3.5cm)],
-  )
-  #v(0.3cm)
-  #text(size: 11pt)[Università di Padova]
-  #v(0.05cm)
-  #text(size: 10.5pt)[Corso di Ingegneria del Software · A.A. 2026/2027]
-  #v(0.6cm)
-  #text(size: 26pt, weight: "bold")[Verbale del Terzo Incontro]
-  #v(0.25cm)
-  #text(size: 10pt, style: "italic")[Versione v0.2.0 · Ultima modifica: 2026-10-29]
-]
-
-#v(0.5cm)
-
-// ==================== INFORMAZIONI GENERALI ====================
-#table(
-  columns: (auto, 1fr),
-  stroke: 0.5pt + rgb("#b5b5b5"),
-  inset: 7pt,
-  [*Data*], [#data-verbale],
-  [*Ora inizio – Ora fine*], [15:00 – 16:00],
-  [*Modalità*], [Discord],
-  [*Redattore*], [Sara Stefani],
-  [*Verificatore*], [Alessandro Rasia dal Polo],
-  [*Destinatari*], [Prof. Tullio Vardanega \ Prof. Riccardo Cardin],
-)
-
-#v(0.4cm)
 
 // ==================== 1. REGISTRO DELLE MODIFICHE ====================
 = Registro delle modifiche
