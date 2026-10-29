@@ -1,75 +1,17 @@
-// Verbale primo incontro — RickandCommit
-// Progetto di Ingegneria del Software (a.a. 2026/2027) — Università di Padova
+#import "../../../.github/template/template.typ": *
 
-#set document(title: "Verbale primo incontro — RickandCommit", author: "RickandCommit")
-#set page(
-  paper: "a4",
-  margin: (x: 2.5cm, y: 2.5cm),
-  footer: context [
-    #line(length: 100%, stroke: 0.5pt + rgb("#b5b5b5"))
-    #v(-0.2cm)
-    #grid(
-      columns: (1fr, 1fr, 1fr),
-      align: (left + horizon, center + horizon, right + horizon),
-      [
-        #box(height: 11pt, baseline: 15%)[#image("neon_logo.png")]
-        #h(4pt)
-        #text(size: 9pt, weight: "bold")[RickandCommit]
-      ],
-      [#text(size: 9pt)[#counter(page).display()]],
-      [#text(size: 9pt)[Verbale Interno 2026-10-15]],
-    )
-  ],
+#show: verbale.with(
+  titolo: "Verbale del Primo Incontro",
+  tipo: "Verbale Interno",
+  data: "2026-10-15",
+  versione: "v1.1.0",
+  ultima-modifica: "2026-10-25",
+  ora-inizio: "15.00",
+  ora-fine: "16.30",
+  modalita: "Discord",
+  redattore: "Sara Stefani",
+  verificatore: "Alessandro Rasia dal Polo",
 )
-#set text(font: "Libertinus Serif", size: 12pt, lang: "it")
-#set heading(numbering: "1.1")
-#set par(justify: true, leading: 0.68em)
-
-#show heading.where(level: 1): it => block(above: 1.8em, below: 1em)[
-  #text(size: 15pt, weight: "bold")[#it]
-]
-#show heading.where(level: 2): it => block(above: 1.4em, below: 0.8em)[
-  #text(size: 13pt, weight: "bold")[#it]
-]
-
-#let issue(n) = link("https://github.com/RickandCommit/Documentazione/issues/" + str(n))[#text(fill: rgb("#0969da"))[#underline[\##n]]]
-#let nessuna = [Nessuna azione operativa.]
-
-// ==================== FRONTESPIZIO ====================
-#align(center)[
-  #grid(
-    columns: (auto, auto),
-    column-gutter: 2cm,
-    align: horizon,
-    [#image("neon_completo.png", width: 5.5cm)],
-    [#image("unipd_logo.png", width: 3.5cm)],
-  )
-  #v(0.3cm)
-  #text(size: 11pt)[Università di Padova]
-  #v(0.05cm)
-  #text(size: 10.5pt)[Corso di Ingegneria del Software · A.A. 2026/2027]
-  #v(0.6cm)
-  #text(size: 26pt, weight: "bold")[Verbale del Primo Incontro]
-  #v(0.25cm)
-  #text(size: 10pt, style: "italic")[Versione v1.1.0 · Ultima modifica: 2026-10-25]
-]
-
-#v(0.5cm)
-
-// ==================== INFORMAZIONI GENERALI ====================
-#table(
-  columns: (auto, 1fr),
-  stroke: 0.5pt + rgb("#b5b5b5"),
-  inset: 7pt,
-  [*Data*], [2026-10-15],
-  [*Ora inizio – Ora fine*], [15.00 – 16.30],
-  [*Modalità*], [Discord],
-  [*Redattore*], [Sara Stefani],
-  [*Verificatore*], [Alessandro Rasia dal Polo],
-  [*Destinatari*], [Prof. Tullio Vardanega \ Prof. Riccardo Cardin],
-)
-
-#v(0.4cm)
 
 // ==================== 1. REGISTRO DELLE MODIFICHE ====================
 = Registro delle modifiche
