@@ -3,6 +3,9 @@ regole.md
 
 # Typst cache & output
 *.pdf
+!Candidatura/Verbali/Esterni/*_firmato.pdf
+!Diapositive/*.pdf
+!.github/site/assets/**/*.pdf
 _site/
 .typst/
 
