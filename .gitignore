@@ -9,6 +9,11 @@ regole.md
 _site/
 .typst/
 
+# Python cache & artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+
 # OS specific files
 .DS_Store
 Thumbs.db
