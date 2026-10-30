@@ -4,10 +4,10 @@
   titolo: "Verbale del Terzo Incontro",
   tipo: "Verbale Interno",
   data: "2026-10-28",
-  versione: "v0.2.0",
-  ultima-modifica: "2026-10-29",
-  ora-inizio: "15:00",
-  ora-fine: "16:00",
+  versione: "v1.0.0",
+  ultima-modifica: "2026-10-30",
+  ora-inizio: "15.00",
+  ora-fine: "16.00",
   modalita: "Discord",
   redattore: "Sara Stefani",
   verificatore: "Alessandro Rasia dal Polo",
@@ -25,6 +25,7 @@
   fill: (col, row) => if row == 0 { rgb("#e5e7eb") } else { none },
   [*Versione*], [*Data*], [*Autore*], [*Verificatore*], [*Descrizione*],
 
+  [1.0.0], [2026-10-30], [Sara Stefani], [Alessandro Rasia dal Polo], [Verifica e approvazione del verbale],
   [0.2.0], [2026-10-29], [Sara Stefani], [Alessandro Rasia dal Polo], [Aggiornamento della tabella delle decisioni],
   [0.1.0], [2026-10-28], [Sara Stefani], [Alessandro Rasia dal Polo], [Stesura iniziale del verbale],
 )
