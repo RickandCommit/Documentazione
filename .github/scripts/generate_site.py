@@ -327,7 +327,7 @@ def build_candidatura_section(site_dir: str, root_dir: str, is_archived: bool = 
 
     # 1. Lettera di Presentazione
     lettera_pdf = find_pdf_in_dirs(r".*Lettera_di_Presentazione.*\.pdf$", search_dirs)
-    lettera_href = "Candidatura/2026-10-29_Lettera_di_Presentazione.pdf"
+    lettera_href = "Candidatura/2026-10-30_Lettera_di_Presentazione.pdf"
     if lettera_pdf:
         fname = os.path.basename(lettera_pdf)
         lettera_href = f"Candidatura/{fname}"
