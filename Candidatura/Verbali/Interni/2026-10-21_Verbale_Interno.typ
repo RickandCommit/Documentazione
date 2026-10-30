@@ -89,7 +89,6 @@ Il gruppo ha stabilito di lavorare secondo *sprint bisettimanali*. La rotazione 
 
 Nella fase preliminare attuale i ruoli restano flessibili; il conteggio rigoroso delle ore e dei costi sul foglio di calcolo condiviso partirà con la presentazione della candidatura e l'eventuale approvazione dell'appalto.
 
-#pagebreak(weak: true)
 == Ambiente di lavoro su GitHub
 
 La struttura delle cartelle del repository è stata discussa collegialmente e confermata.
