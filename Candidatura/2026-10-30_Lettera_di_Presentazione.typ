@@ -1,7 +1,6 @@
 #import "../.github/template/template.typ": *
 
 #show: lettera.with(
-  titolo: "Lettera di Presentazione — Candidatura Capitolato C2",
   data: "30 Ottobre 2026",
   destinatari: [
     *Ai gentili Committenti:* \
@@ -23,11 +22,22 @@ Egregi Professori,
 
 con la presente il gruppo *RickandCommit* intende sottoporre formalmente alla Vostra attenzione la propria candidatura per la realizzazione del capitolato d'appalto *C2 – NEXUM: Concierge per Richieste Operative*, proposto dall'azienda *Eggon S.r.l.*.
 
-Nel seguito vengono presentate sinteticamente le principali motivazioni della scelta, la documentazione a corredo della candidatura e la composizione del team di progetto.
+Di seguito vengono presentate le principali motivazioni della scelta a corredo della candidatura e la composizione del team di progetto.
+Tutta la documentazione ufficiale è consultabile e liberamente accessibile al seguente indirizzo:
+#align(center)[
+  #box(
+    fill: rgb("#f8fafc"),
+    stroke: 0.5pt + rgb("#cbd5e1"),
+    inset: (x: 14pt, y: 8pt),
+    radius: 4pt,
+    link("https://rickandcommit.github.io/Documentazione/")[https://rickandcommit.github.io/Documentazione/]
+  )
+]
+
 
 = Motivazioni della scelta
 
-A valle di un'approfondita analisi comparativa dei dieci capitolati d'appalto e degli incontri conoscitivi svolti con i referenti aziendali (tra cui Ergon Informatica S.r.l. e Halue S.r.l.), il gruppo ha deliberato all'unanimità l'assegnazione della prima preferenza al capitolato *C2 – NEXUM Concierge*.
+A valle di un'approfondita analisi comparativa dei dieci capitolati d'appalto e degli incontri conoscitivi svolti con i referenti aziendali (Eggon S.r.l., Ergon Informatica S.r.l. e Halue S.r.l.), il gruppo ha deliberato all'unanimità l'assegnazione della prima preferenza al capitolato *C2 – NEXUM Concierge*.
 
 Le motivazioni cardine che hanno orientato la decisione del gruppo risiedono in:
 - *Chiarezza e solidità dell'obiettivo (MVP):* il capitolato definisce con precisione e concretezza le quattro capacità operative essenziali del prodotto minimo funzionante nell'ambito della gestione di ferie e permessi, garantendo un perimetro di lavoro ben circoscritto, realistico e verificabile.
@@ -40,13 +50,13 @@ Le motivazioni cardine che hanno orientato la decisione del gruppo risiedono in:
 = Documentazione allegata a supporto della candidatura
 
 A corredo della candidatura, il gruppo mette a disposizione i seguenti documenti formali:
-- *Valutazione dei Capitolati* (`Valutazione_dei_Capitolati.pdf`), contenente l'analisi comparativa approfondita di tutti i capitolati e il dettaglio dei criteri decisionali;
-- *Dichiarazione degli Impegni* (`Dichiarazione_degli_Impegni.pdf`), contenente il preventivo economico, la ripartizione dettagliata delle ore produttive per ciascun ruolo e componente, e la scadenza temporale concordata per la consegna finale;
+- #underline(text(fill: blue)[#link("https://rickandcommit.github.io/Documentazione/Candidatura/Valutazione_dei_Capitolati_v1.0.0.pdf")[Valutazione dei Capitolati]]), contenente l'analisi comparativa approfondita di tutti i capitolati e il dettaglio dei criteri decisionali;
+- #underline(text(fill: blue)[#link("https://rickandcommit.github.io/Documentazione/Candidatura/Dichiarazione_degli_Impegni_v1.0.0.pdf")[Dichiarazione degli Impegni]]), contenente il preventivo economico, la ripartizione dettagliata delle ore produttive per ciascun ruolo e componente, e la scadenza temporale concordata per la consegna finale;
 - I verbali degli incontri esterni svolti con i referenti aziendali controfirmati dai proponenti.
 
 = Costi e pianificazione del progetto
 
-Come dettagliato nel documento *Dichiarazione degli Impegni*, il costo complessivo stimato per la realizzazione del progetto è pari a *12.575,00 €*, a fronte di un impegno produttivo complessivo di *630 ore* (90 ore individuali per ciascun componente). La consegna finale del prodotto collaudato (Product Baseline - PB) è fissata entro il *26 marzo 2027*.
+Come dettagliato nel documento *Dichiarazione degli Impegni*, il costo complessivo stimato per la realizzazione del progetto è pari a *12.845,00 €*, a fronte di un impegno produttivo complessivo di *630 ore* (90 ore individuali per ciascun componente). La consegna finale del prodotto collaudato (Product Baseline - PB) è fissata entro il *26 marzo 2027*.
 
 = Componenti del gruppo
 
@@ -72,7 +82,6 @@ Il gruppo *RickandCommit* è composto da 7 studenti:
 
 = Altri riferimenti utili
 
-- *Sito web ufficiale di documentazione:* #link("https://rickandcommit.github.io/Documentazione/")[https://rickandcommit.github.io/Documentazione/]
 - *Repository GitHub ufficiale:* #link("https://github.com/RickandCommit/Documentazione")[https://github.com/RickandCommit/Documentazione]
 - *Organizzazione GitHub del gruppo:* #link("https://github.com/RickandCommit")[https://github.com/RickandCommit]
 
