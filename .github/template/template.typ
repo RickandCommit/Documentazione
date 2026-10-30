@@ -200,3 +200,87 @@
 
   body
 }
+
+// ==================== TEMPLATE LETTERA DI PRESENTAZIONE ====================
+#let lettera(
+  titolo: "Lettera di Presentazione",
+  data: "30 Ottobre 2026",
+  destinatari: [
+    *Ai gentili Committenti:* \
+    Prof. Tullio Vardanega \
+    Prof. Riccardo Cardin \
+    Università di Padova \
+    Dipartimento di Matematica «Tullio Levi-Civita»
+  ],
+  mittente: [
+    *Mittente:* \
+    Gruppo *RickandCommit* \
+    Email: #link("mailto:rickandcommit@gmail.com")[rickandcommit\@gmail.com] \
+    \
+    *Data:* 30 Ottobre 2026
+  ],
+  body
+) = {
+  set document(title: titolo + " — RickandCommit", author: "RickandCommit")
+  set page(
+    paper: "a4",
+    margin: (top: 2.2cm, bottom: 2.2cm, left: 2.5cm, right: 2.5cm),
+    header: context {
+      if here().page() > 1 [
+        #grid(
+          columns: (1fr, 1fr),
+          align: (left + horizon, right + horizon),
+          [
+            #logo-inline
+            #h(4pt)
+            #text(size: 8.5pt, weight: "bold")[RickandCommit]
+          ],
+          [#text(size: 8.5pt, fill: rgb("#4b5563"))[#titolo]],
+        )
+        #v(-0.15cm)
+        #line(length: 100%, stroke: 0.5pt + rgb("#b5b5b5"))
+      ]
+    },
+    footer: context [
+      #line(length: 100%, stroke: 0.5pt + rgb("#b5b5b5"))
+      #v(-0.2cm)
+      #grid(
+        columns: (1fr, 1fr, 1fr),
+        align: (left + horizon, center + horizon, right + horizon),
+        [
+          #logo-inline
+          #h(4pt)
+          #text(size: 8.5pt, weight: "bold")[RickandCommit]
+        ],
+        [#text(size: 8.5pt)[#counter(page).display()]],
+        [#text(size: 8.5pt)[Candidatura — #data]],
+      )
+    ]
+  )
+  set text(font: "Libertinus Serif", size: 10.5pt, lang: "it")
+  set par(justify: true, leading: 0.62em)
+
+  // Intestazione con loghi in cima alla prima pagina
+  grid(
+    columns: (1fr, 1fr),
+    align: (left + horizon, right + horizon),
+    [#logo-completo(width: 4.8cm)],
+    [#logo-unipd(width: 3.2cm)],
+  )
+  v(0.15cm)
+  line(length: 100%, stroke: 0.5pt + rgb("#b5b5b5"))
+  v(0.35cm)
+
+  // Griglia Mittente e Destinatari
+  grid(
+    columns: (1fr, 1.2fr),
+    gutter: 1cm,
+    mittente,
+    destinatari,
+  )
+
+  v(0.35cm)
+
+  body
+}
+
