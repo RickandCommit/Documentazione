@@ -41,7 +41,7 @@
   [2026-10-30],
   [Luka Lacic],
   [Alessandro Rasia dal Polo],
-  [Rilascio e approvazione della baseline con preventivo a 12.575,00 €, impegno a 90h/persona, matrice di rotazione e analisi rischi],
+  [Rilascio e approvazione della baseline con preventivo a 12.845,00 €, impegno a 90h/persona, matrice di rotazione e analisi rischi],
 
   [0.3.0],
   [2026-10-29],
@@ -110,15 +110,15 @@ La seguente tabella riporta la distribuzione analitica delle ore di ciascun comp
   table.cell(align: left + horizon)[*Componente*],
   [*Re*], [*Am*], [*An*], [*Pj*], [*Pr*], [*Ve*], [*Totale*],
 
-  [Bajaj Jatin], [8], [7], [8], [20], [23], [24], [*90*],
-  [Blagojevic Dorde], [8], [7], [9], [21], [23], [22], [*90*],
-  [Bonetto Nicola], [8], [7], [9], [21], [22], [23], [*90*],
-  [Furin Francesco], [8], [8], [8], [20], [23], [23], [*90*],
-  [Lacic Luka], [8], [8], [8], [21], [23], [22], [*90*],
-  [Rasia dal Polo Alessandro], [8], [8], [9], [20], [23], [23], [*90*],
-  [Stefani Sara], [8], [7], [9], [20], [23], [23], [*90*],
+  [Bajaj Jatin], [8], [9], [12], [20], [20], [21], [*90*],
+  [Blagojevic Dorde], [8], [9], [12], [20], [19], [22], [*90*],
+  [Bonetto Nicola], [8], [9], [12], [20], [20], [21], [*90*],
+  [Furin Francesco], [8], [9], [12], [20], [20], [21], [*90*],
+  [Lacic Luka], [8], [9], [12], [20], [19], [22], [*90*],
+  [Rasia dal Polo Alessandro], [8], [9], [12], [20], [20], [21], [*90*],
+  [Stefani Sara], [8], [9], [12], [20], [19], [22], [*90*],
 
-  [*Totale ore ruolo*], [*56*], [*51*], [*60*], [*143*], [*160*], [*160*], [*630*],
+  [*Totale ore ruolo*], [*56*], [*63*], [*84*], [*140*], [*137*], [*150*], [*630*],
 )
 ]
 
@@ -157,9 +157,9 @@ Per favorire la crescita professionale di tutti i componenti e garantire la mass
 
 Il monte ore complessivo di 630 ore è stato distribuito seguendo un rigoroso criterio di ottimizzazione qualitativa ed economica:
 
-- *Specularità tra Programmazione (160h, 25,40%) e Verifica (160h, 25,40%):* la scelta di assegnare esattamente lo stesso monte ore allo sviluppo del codice e al controllo qualità scaturisce dalla volontà metodologica di non considerare la verifica come un'attività secondaria o relegata a valle. Al contrario, lo sviluppo guidato dai test e la revisione continua procedono di pari passo con la scrittura del software, prevenendo l'accumulo di debito tecnico e anomalie tardive;
-- *Centralità della Progettazione (143h, 22,70%):* la natura ibrida del capitolato C2 (che unisce componenti generativi LLM, architetture RAG e integrazioni transazionali su dati aziendali) richiede un'architettura modulare, manutenibile e sicura. Investire oltre il 22% delle ore totali nella progettazione dettagliata consente di definire contratti di interfaccia chiari e stabili, riducendo drasticamente il rischio di rifacimenti in fase di codifica;
-- *Efficienza sui ruoli di gestione e specifica (Re 56h, Am 51h, An 60h):* i ruoli di Responsabile (8,89%), Amministratore (8,10%) e Analista (9,52%) sono stati calibrati con precisione per garantire la necessaria copertura metodologica senza appesantire inutilmente il costo totale del progetto. L'Analisi dei Requisiti (60 ore) è concentrata principalmente nella prima fase per consentire la corretta definizione del perimetro dell'MVP, mentre Amministrazione e Gestione poggiano su procedure snelle e automatizzate tramite CI/CD.
+- *Attenzione al controllo qualità e sviluppo (Pr 137h, 21,75% e Ve 150h, 23,81%):* la scelta di riservare alla verifica un monte ore leggermente superiore a quello di programmazione scaturisce dalla volontà metodologica di prevenire l'accumulo di debito tecnico e garantire che ogni componente di codice e documento sia sottoposto a verifica puntuale e indipendente;
+- *Centralità della Progettazione (140h, 22,22%):* la natura ibrida del capitolato C2 (che unisce componenti generativi LLM, architetture RAG e integrazioni transazionali su dati aziendali) richiede un'architettura modulare, manutenibile e sicura. Investire oltre il 22% delle ore totali nella progettazione dettagliata consente di definire contratti di interfaccia chiari e stabili, riducendo drasticamente il rischio di rifacimenti in fase di codifica;
+- *Potenziamento di Analisi e Amministrazione (Re 56h, Am 63h, An 84h):* l'Analisi dei Requisiti (84 ore, 13,33%) è stata significativamente potenziata per garantire una modellazione rigorosa dei casi d'uso e dei requisiti nell'RTB. L'Amministrazione (63 ore, 10,00%) assicura il mantenimento continuo degli standard di qualità e dell'infrastruttura CI/CD, mentre il Responsabile (56 ore, 8,89%) garantisce un coordinamento costante ed efficiente.
 
 = Preventivo dei costi
 
@@ -188,32 +188,32 @@ Il costo preventivato è calcolato applicando le tariffe orarie ufficiali stabil
   table.cell(align: center + horizon)[*Quota ore*],
 
   [Responsabile], [30,00 €/h], [56], [1.680,00 €], [8,89%],
-  [Amministratore], [20,00 €/h], [51], [1.020,00 €], [8,10%],
-  [Analista], [25,00 €/h], [60], [1.500,00 €], [9,52%],
-  [Progettista], [25,00 €/h], [143], [3.575,00 €], [22,70%],
-  [Programmatore], [15,00 €/h], [160], [2.400,00 €], [25,40%],
-  [Verificatore], [15,00 €/h], [160], [2.400,00 €], [25,40%],
+  [Amministratore], [20,00 €/h], [63], [1.260,00 €], [10,00%],
+  [Analista], [25,00 €/h], [84], [2.100,00 €], [13,33%],
+  [Progettista], [25,00 €/h], [140], [3.500,00 €], [22,22%],
+  [Programmatore], [15,00 €/h], [137], [2.055,00 €], [21,75%],
+  [Verificatore], [15,00 €/h], [150], [2.250,00 €], [23,81%],
 
-  [*Totale complessivo*], [—], [*630*], [*12.575,00 €*], [*100,00%*],
+  [*Totale complessivo*], [—], [*630*], [*12.845,00 €*], [*100,00%*],
 )
 ]
 
 == Costo totale preventivato e conformità al budget
 
-Il costo complessivo stimato per la realizzazione del progetto è pari a *12.575,00 €* (dodicimilacinquecentosettantacinque euro/00).
+Il costo complessivo stimato per la realizzazione del progetto è pari a *12.845,00 €* (dodicimilaottocentoquarantacinque euro/00).
 
 Tale preventivo risulta:
-- *Pienamente conforme alla soglia minima didattica:* per un gruppo di sette componenti, il regolamento impone un costo minimo obbligatorio di 12.000,00 €. L'importo di 12.575,00 € supera tale limite di 575,00 €;
+- *Pienamente conforme alla soglia minima didattica:* per un gruppo di sette componenti, il regolamento impone un costo minimo obbligatorio di 12.000,00 €. L'importo di 12.845,00 € supera tale limite di 845,00 €;
 - *Collocato nella fascia ottimale di mercato didattico:* l'importo si attesta perfettamente entro il range di riferimento ottimale (12.530 € – 12.980 €), garantendo credibilità di pianificazione ed evitando qualsiasi giudizio di sovrastima economica.
 
-L'importo di 12.575,00 € costituirà il *limite massimo di spesa invalicabile* per l'intero ciclo di fornitura del software.
+L'importo di 12.845,00 € costituirà il *limite massimo di spesa invalicabile* per l'intero ciclo di fornitura del software.
 
 == Ripartizione percentuale del monte ore totale
 
 La distribuzione percentuale dell'impegno orario evidenzia la forte impronta realizzativa e qualitativa del piano operativo:
-- *Attività di sviluppo e verifica (Programmatore + Verificatore):* assorbono complessivamente il *50,80%* del monte ore (320 ore su 630), certificando che oltre la metà delle energie del gruppo è destinata alla produzione e al collaudo del codice;
-- *Attività architetturale (Progettista):* rappresenta il *22,70%* delle ore (143 ore), a garanzia di scelte tecnologiche e strutturali ponderate;
-- *Attività di coordinamento e specifica (Responsabile + Amministratore + Analista):* costituiscono il restante *26,50%* delle risorse (167 ore), assicurando una gestione rigorosa del progetto senza disperdere budget.
+- *Attività di sviluppo e verifica (Programmatore + Verificatore):* assorbono complessivamente il *45,56%* del monte ore (287 ore su 630), assicurando la produzione e il collaudo approfondito del codice;
+- *Attività architetturale (Progettista):* rappresenta il *22,22%* delle ore (140 ore), a garanzia di scelte tecnologiche e strutturali ponderate;
+- *Attività di coordinamento e specifica (Responsabile + Amministratore + Analista):* costituiscono il restante *32,22%* delle risorse (203 ore), garantendo una solida base di requisiti e un'amministrazione rigorosa dei processi.
 
 = Pianificazione di massima e macro-periodi
 
@@ -248,7 +248,7 @@ Il gruppo articola lo svolgimento dei lavori in tre macro-periodi sequenziali, c
 
 = Analisi e mitigazione dei rischi
 
-Per prevenire scostamenti rispetto al preventivo economico di 12.575,00 € e alla pianificazione temporale, il gruppo ha mappato i fattori di rischio critici e definito le rispettive strategie di mitigazione:
+Per prevenire scostamenti rispetto al preventivo economico di 12.845,00 € e alla pianificazione temporale, il gruppo ha mappato i fattori di rischio critici e definito le rispettive strategie di mitigazione:
 
 #text(size: 10pt)[
 #table(
@@ -285,5 +285,5 @@ Il gruppo *RickandCommit* si impegna formalmente a realizzare il capitolato d'ap
 
 In particolare, il gruppo dichiara e assume i seguenti impegni contrattuali:
 - *Monte ore complessivo:* **630 ore** produttive totali, garantendo un apporto equamente distribuito di **90 ore per ciascun componente** del team;
-- *Preventivo economico vincolante:* **12.575,00 €** (dodicimilacinquecentosettantacinque euro/00), inteso come tetto massimo insuperabile per la realizzazione della fornitura;
+- *Preventivo economico vincolante:* **12.845,00 €** (dodicimilaottocentoquarantacinque euro/00), inteso come tetto massimo insuperabile per la realizzazione della fornitura;
 - *Data ultima di consegna (Product Baseline - PB):* fissata improrogabilmente entro il **26 marzo 2027** (con completamento della revisione entro la prima metà di aprile 2027, garantendo la conclusione del progetto prima dell'avvio dei tirocini curriculari).
