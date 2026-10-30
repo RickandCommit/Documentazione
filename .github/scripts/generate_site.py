@@ -349,7 +349,7 @@ def build_candidatura_section(site_dir: str, root_dir: str, is_archived: bool = 
             except Exception:
                 pass
         valutazione_href = f"Candidatura/{target_name}"
-        preview_out = os.path.join(assets_docs_dir, "analisi_capitolati_preview.png")
+        preview_out = os.path.join(assets_docs_dir, "valutazione_capitolati_preview.png")
         render_pdf_first_page(valutazione_pdf, preview_out)
 
     # 3. Dichiarazione Impegni
@@ -409,11 +409,11 @@ def build_candidatura_section(site_dir: str, root_dir: str, is_archived: bool = 
         f'            <h3 class="subsection-title">Documenti</h3>\n'
         f'          </div>\n'
         f'          <div class="docs-grid-two">\n'
-        f'            <!-- 1. Analisi dei Capitolati -->\n'
-        f'            <a href="{valutazione_href}" target="_blank" rel="noopener noreferrer" class="doc-compact-card" aria-label="Apri Analisi dei Capitolati PDF">\n'
-        f'              <img src="assets/docs/analisi_capitolati_preview.png" alt="Anteprima Analisi dei Capitolati" class="doc-thumb" loading="lazy">\n'
+        f'            <!-- 1. Valutazione dei Capitolati -->\n'
+        f'            <a href="{valutazione_href}" target="_blank" rel="noopener noreferrer" class="doc-compact-card" aria-label="Apri Valutazione dei Capitolati PDF">\n'
+        f'              <img src="assets/docs/valutazione_capitolati_preview.png" alt="Anteprima Valutazione dei Capitolati" class="doc-thumb" loading="lazy">\n'
         f'              <div class="doc-compact-body">\n'
-        f'                <h4 class="doc-compact-title">Analisi dei Capitolati</h4>\n'
+        f'                <h4 class="doc-compact-title">Valutazione dei Capitolati</h4>\n'
         f'                <span class="doc-format-label">{valutazione_ver} · PDF</span>\n'
         f'              </div>\n'
         f'              <div class="doc-compact-right">\n'

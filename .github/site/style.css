@@ -1150,3 +1150,8 @@ main {
   color: var(--text-muted);
   border: 1px solid rgba(148, 163, 184, 0.2);
 }
+
+/* Utility per impedire andate a capo orfane */
+.nowrap {
+  white-space: nowrap;
+}
