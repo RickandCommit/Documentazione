@@ -202,9 +202,7 @@ Il costo preventivato è calcolato applicando le tariffe orarie ufficiali stabil
 
 Il costo complessivo stimato per la realizzazione del progetto è pari a *12.845,00 €* (dodicimilaottocentoquarantacinque euro/00).
 
-Tale preventivo risulta:
-- *Pienamente conforme alla soglia minima didattica:* per un gruppo di sette componenti, il regolamento impone un costo minimo obbligatorio di 12.000,00 €. L'importo di 12.845,00 € supera tale limite di 845,00 €;
-- *Collocato nella fascia ottimale di mercato didattico:* l'importo si attesta perfettamente entro il range di riferimento ottimale (12.530 € – 12.980 €), garantendo credibilità di pianificazione ed evitando qualsiasi giudizio di sovrastima economica.
+Tale preventivo risulta *pienamente conforme* alla soglia minima didattica: per un gruppo di sette componenti, il regolamento impone un costo minimo obbligatorio di 12.000,00 €.
 
 L'importo di 12.845,00 € costituirà il *limite massimo di spesa invalicabile* per l'intero ciclo di fornitura del software.
 
