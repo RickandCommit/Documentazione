@@ -20,11 +20,18 @@
   ora-fine: "",
   modalita: "Discord",
   redattore: "",
+  redattori: (),
   verificatore: "",
+  verificatori: (),
   destinatari: [Prof. Tullio Vardanega \ Prof. Riccardo Cardin],
   body
 ) = {
-  set document(title: tipo + " " + data + " — RickandCommit", author: "RickandCommit")
+  let doc-title = if titolo != "" {
+    tipo + " (" + titolo + ") " + data + " — RickandCommit"
+  } else {
+    tipo + " " + data + " — RickandCommit"
+  }
+  set document(title: doc-title, author: "RickandCommit")
   set page(
     paper: "a4",
     margin: (x: 2.5cm, y: 2.5cm),
@@ -76,6 +83,16 @@
 
   v(0.5cm)
 
+  // Normalizzazione e formattazione redattori e verificatori (con virgola se multipli)
+  let red-val = if redattori != () { redattori } else { redattore }
+  let ver-val = if verificatori != () { verificatori } else { verificatore }
+
+  let label-red = if type(red-val) == array and red-val.len() > 1 { [*Redattori*] } else { [*Redattore*] }
+  let label-ver = if type(ver-val) == array and ver-val.len() > 1 { [*Verificatori*] } else { [*Verificatore*] }
+
+  let formatted-red = if type(red-val) == array { red-val.join(", ") } else { red-val }
+  let formatted-ver = if type(ver-val) == array { ver-val.join(", ") } else { ver-val }
+
   // ==================== INFORMAZIONI GENERALI ====================
   table(
     columns: (auto, 1fr),
@@ -84,8 +101,8 @@
     [*Data*], [#data],
     [*Ora inizio – Ora fine*], [#ora-inizio – #ora-fine],
     [*Modalità*], [#modalita],
-    [*Redattore*], [#redattore],
-    [*Verificatore*], [#verificatore],
+    [#label-red], [#formatted-red],
+    [#label-ver], [#formatted-ver],
     [*Destinatari*], [#destinatari],
   )
 
@@ -163,6 +180,9 @@
 
   v(0.5cm)
 
+  let label-doc-red = if type(redattori) == array and redattori.len() == 1 { [*Redattore*] } else { [*Redattori*] }
+  let label-doc-ver = if type(verificatori) == array and verificatori.len() == 1 { [*Verificatore*] } else { [*Verificatori*] }
+
   table(
     columns: (auto, 1fr),
     stroke: 0.5pt + rgb("#b5b5b5"),
@@ -171,8 +191,8 @@
     [*Data approvazione*], [#data],
     [*Stato*], [#stato],
     [*Uso*], [#uso],
-    [*Redattori*], [#if type(redattori) == array { redattori.join(" \\ ") } else { redattori }],
-    [*Verificatori*], [#if type(verificatori) == array { verificatori.join(" \\ ") } else { verificatori }],
+    [#label-doc-red], [#if type(redattori) == array { redattori.join(", ") } else { redattori }],
+    [#label-doc-ver], [#if type(verificatori) == array { verificatori.join(", ") } else { verificatori }],
     [*Destinatari*], [#destinatari],
   )
 
