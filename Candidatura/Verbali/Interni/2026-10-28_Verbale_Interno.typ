@@ -84,9 +84,9 @@ Il gruppo ha discusso se ruotare i ruoli durante la settimana corrente o mantene
 
 Il gruppo ha condotto un'analisi comparativa tra *C7* (Ergon) e *C2* (Eggon).
 
-Nonostante la concorrenza su C7 da parte di altri gruppi, il gruppo ritiene di avere una documentazione, un'organizzazione della repository e un rigore metodologico tali da competere per l'assegnazione di C7.
+Nonostante la concorrenza su C2 da parte di altri gruppi, il gruppo ritiene di avere una documentazione, un'organizzazione della repository e un rigore metodologico tali da competere per l'assegnazione di C2.
 
-Per formalizzare la prima scelta tra C7 e C2 verrà aperto un sondaggio rapido su WhatsApp, da concludere entro un paio d'ore, aggiornando poi il foglio di riepilogo delle preferenze.
+Per formalizzare la prima scelta tra C7 e C2 verrà aperto un sondaggio rapido su WhatsApp e aggiornato poi il foglio di riepilogo delle preferenze.
 
 == Revisione del sito web su GitHub Pages
 
@@ -110,7 +110,7 @@ Per il *Diario di Bordo*, verrà aggiornato il template delle slide per l'incont
 // ==================== 5. CONCLUSIONI ====================
 = Conclusioni
 
-La riunione ha definito le priorità in vista della candidatura di venerdì 30 ottobre: la stesura e l'invio del verbale esterno di Sonar, il sondaggio sulla scelta del capitolato, il completamento dei documenti e la consegna della candidatura via e-mail. I ruoli restano invariati fino al 3 novembre.
+La riunione ha definito le priorità in vista della candidatura di venerdì 30 ottobre: la stesura e l'invio del verbale esterno di Halue, il sondaggio sulla scelta del capitolato, il completamento dei documenti e la consegna della candidatura via e-mail. I ruoli restano invariati fino al 3 novembre.
 
 #pagebreak()
 
