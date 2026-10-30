@@ -3,8 +3,16 @@ regole.md
 
 # Typst cache & output
 *.pdf
+!Candidatura/Verbali/Esterni/*_firmato.pdf
+!Diapositive/*.pdf
+!.github/site/assets/**/*.pdf
 _site/
 .typst/
+
+# Python cache & artifacts
+__pycache__/
+*.py[cod]
+*$py.class
 
 # OS specific files
 .DS_Store
@@ -12,9 +20,7 @@ Thumbs.db
 desktop.ini
 
 # Editor & IDE configurations
-.vscode/*
-!.vscode/settings.json
-!.vscode/extensions.json
+.vscode/
 .idea/
 *.swp
 *~

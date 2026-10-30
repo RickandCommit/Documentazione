@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RickandCommit · Documentazione Ingegneria del Software</title>
+  <meta name="description" content="Raccolta ufficiale dei documenti di progetto, verbali e presentazioni del gruppo RickandCommit per il corso di Ingegneria del Software – Università di Padova.">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="RickandCommit · Documentazione Ingegneria del Software">
+  <meta property="og:description" content="Raccolta ufficiale dei documenti di progetto, verbali e presentazioni del gruppo RickandCommit – Università di Padova.">
+  <meta property="og:image" content="assets/logo_completo.png">
+
+  <!-- Favicon Ufficiali (Logo Git) -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#000000">
+
+  <!-- Stili CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       Navigation Bar Ufficiale (Fase: Candidatura)
+       ========================================================================= -->
+  <header class="site-header" id="siteHeader">
+    <div class="nav-container">
+      
+      <!-- Brand & Identità (Logo 62px, Tutto Bianco a riposo -> Verde-Viola su Hover) -->
+      <a href="#" class="nav-brand" aria-label="Torna in cima">
+        <div class="brand-portal">
+          <div class="brand-portal-halo"></div>
+          <img src="assets/logo.png" alt="Logo RickandCommit" class="brand-logo-img">
+        </div>
+        <span class="brand-name">RickandCommit</span>
+      </a>
+
+      <!-- Menu a Destra (Sottolineatura solo al passaggio del mouse) -->
+      <!-- DYNAMIC:NAVBAR_START -->
+      <nav class="nav-menu-wrapper" id="navWrapper" aria-label="Navigazione sezioni">
+        <div class="nav-simple-underline" id="navUnderline"></div>
+        <ul class="nav-menu" id="navMenu">
+          <li>
+            <a href="#candidatura" class="nav-item-link" data-section="candidatura">Candidatura</a>
+          </li>
+          <li>
+            <a href="#diapositive" class="nav-item-link" data-section="diapositive">Diapositive</a>
+          </li>
+          <li>
+            <a href="#about" class="nav-item-link" data-section="about">About</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- DYNAMIC:NAVBAR_END -->
+
+    </div>
+
+    <!-- Barra dinamica di avanzamento scroll in tempo reale -->
+    <div class="nav-scroll-progress" id="scrollProgress"></div>
+  </header>
+
+  <!-- =========================================================================
+       Contenuti Strutturali del Sito
+       ========================================================================= -->
+  <main>
+    <div class="content-container">
+
+      <!-- =====================================================================
+           Hero Section (Sito di Documentazione Ufficiale)
+           ===================================================================== -->
+      <section class="hero-section">
+        <div class="hero-content">
+          <h1 class="hero-main-title">
+            Documentazione Ufficiale<br>
+            <span class="hero-title-accent">Ingegneria del Software</span>
+          </h1>
+
+          <p class="hero-lead-text">
+            Raccolta ufficiale dei documenti di progetto, verbali e presentazioni del gruppo <strong>RickandCommit</strong> – Università di Padova.
+          </p>
+        </div>
+
+        <!-- Sigillo Istituzionale di Sfondo (Watermark Interattivo) -->
+        <div class="hero-seal-wrapper" title="Università di Padova" aria-hidden="true">
+          <img src="assets/unipd_logo.png" alt="Sigillo Università di Padova" class="hero-seal-watermark">
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           Sezione: Candidatura
+           ===================================================================== -->
+      <!-- DYNAMIC:ACTIVE_PHASE_START -->
+      <section id="candidatura" class="content-section">
+        <div class="section-header-block">
+          <h2 class="section-title">Candidatura</h2>
+          <p class="section-subtitle">
+            Documentazione formale per la candidatura all'assegnazione dei capitolati d'appalto.
+          </p>
+        </div>
+
+        <!-- Lettera di Presentazione -->
+        <div class="candidatura-featured">
+          <a href="Candidatura/2026-10-29_Lettera_di_Presentazione.pdf" target="_blank" rel="noopener noreferrer" class="doc-featured-card" aria-label="Apri Lettera di Presentazione PDF">
+            <img src="assets/docs/lettera_presentazione_preview.png" alt="Anteprima Lettera di Presentazione" class="doc-thumb doc-thumb-lg" loading="lazy">
+            <div class="doc-featured-main">
+              <h3 class="doc-featured-title">Lettera di Presentazione</h3>
+              <p class="doc-featured-desc">Contenuti della consegna e stato di avanzamento</p>
+              <span class="doc-format-label">PDF</span>
+            </div>
+            <div class="doc-featured-right">
+              <svg class="doc-open-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v7.5A2.25 2.25 0 004.25 14h7.5A2.25 2.25 0 0014 11.75V8.5a.75.75 0 00-1.5 0v3.25a.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75v-7.5a.75.75 0 01.75-.75H7.5a.75.75 0 000-1.5H4.25zM10.25 2a.75.75 0 000 1.5h2.44L6.97 9.22a.75.75 0 101.06 1.06L13.75 4.56v2.44a.75.75 0 001.5 0V2.75A.75.75 0 0014.5 2h-4.25z"/></svg>
+            </div>
+          </a>
+        </div>
+
+        <!-- Sottosezione: Documenti -->
+        <div class="subsection-block">
+          <div class="subsection-header">
+            <h3 class="subsection-title">Documenti</h3>
+          </div>
+          <div class="docs-grid-two">
+            <!-- 1. Valutazione dei Capitolati -->
+            <a href="Candidatura/Valutazione_dei_Capitolati_v1.0.0.pdf" target="_blank" rel="noopener noreferrer" class="doc-compact-card" aria-label="Apri Valutazione dei Capitolati PDF">
+              <img src="assets/docs/valutazione_capitolati_preview.png" alt="Anteprima Valutazione dei Capitolati" class="doc-thumb" loading="lazy">
+              <div class="doc-compact-body">
+                <h4 class="doc-compact-title">Valutazione dei Capitolati</h4>
+                <span class="doc-format-label">v1.0.0 · PDF</span>
+              </div>
+              <div class="doc-compact-right">
+                <svg class="doc-open-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v7.5A2.25 2.25 0 004.25 14h7.5A2.25 2.25 0 0014 11.75V8.5a.75.75 0 00-1.5 0v3.25a.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75v-7.5a.75.75 0 01.75-.75H7.5a.75.75 0 000-1.5H4.25zM10.25 2a.75.75 0 000 1.5h2.44L6.97 9.22a.75.75 0 101.06 1.06L13.75 4.56v2.44a.75.75 0 001.5 0V2.75A.75.75 0 0014.5 2h-4.25z"/></svg>
+              </div>
+            </a>
+
+            <!-- 2. Preventivo costi e assunzione impegni -->
+            <a href="Candidatura/Dichiarazione_degli_Impegni_v1.0.0.pdf" target="_blank" rel="noopener noreferrer" class="doc-compact-card" aria-label="Apri Preventivo costi e assunzione impegni PDF">
+              <img src="assets/docs/preventivo_impegni_preview.png" alt="Anteprima Preventivo costi e assunzione impegni" class="doc-thumb" loading="lazy">
+              <div class="doc-compact-body">
+                <h4 class="doc-compact-title">Preventivo costi e assunzione impegni</h4>
+                <span class="doc-format-label">v1.0.0 · PDF</span>
+              </div>
+              <div class="doc-compact-right">
+                <svg class="doc-open-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v7.5A2.25 2.25 0 004.25 14h7.5A2.25 2.25 0 0014 11.75V8.5a.75.75 0 00-1.5 0v3.25a.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75v-7.5a.75.75 0 01.75-.75H7.5a.75.75 0 000-1.5H4.25zM10.25 2a.75.75 0 000 1.5h2.44L6.97 9.22a.75.75 0 101.06 1.06L13.75 4.56v2.44a.75.75 0 001.5 0V2.75A.75.75 0 0014.5 2h-4.25z"/></svg>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Sottosezione: Verbali -->
+        <div class="subsection-block">
+          <div class="subsection-header">
+            <h3 class="subsection-title">Verbali</h3>
+          </div>
+          <div class="verbali-container">
+            <!-- Verbali Esterni -->
+            <div class="verbali-subgroup">
+              <h4 class="verbali-subgroup-title">Verbali Esterni</h4>
+              <div class="verbali-list">
+                <a href="Candidatura/Verbali/Esterni/2026-10-28_Verbale_Esterno_Halue_firmato.pdf" target="_blank" rel="noopener noreferrer" class="verbale-row-card" aria-label="Apri Verbale Esterno Halue (Firmato)">
+                  <div class="verbale-row-left">
+                    <span class="verbale-row-date">2026-10-28</span>
+                    <span class="verbale-row-title">Verbale Esterno Halue (Firmato)</span>
+                  </div>
+                  <div class="verbale-row-right">
+                    <span class="doc-format-label">v1.0.0 · PDF</span>
+                    <svg class="verbale-row-icon" viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v7.5A2.25 2.25 0 004.25 14h7.5A2.25 2.25 0 0014 11.75V8.5a.75.75 0 00-1.5 0v3.25a.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75v-7.5a.75.75 0 01.75-.75H7.5a.75.75 0 000-1.5H4.25zM10.25 2a.75.75 0 000 1.5h2.44L6.97 9.22a.75.75 0 101.06 1.06L13.75 4.56v2.44a.75.75 0 001.5 0V2.75A.75.75 0 0014.5 2h-4.25z"/></svg>
+                  </div>
+                </a>
+                <a href="Candidatura/Verbali/Esterni/2026-10-26_Verbale_Esterno_Eggon_firmato.pdf" target="_blank" rel="noopener noreferrer" class="verbale-row-card" aria-label="Apri Verbale Esterno Eggon (Firmato)">
+                  <div class="verbale-row-left">
+                    <span class="verbale-row-date">2026-10-26</span>
+                    <span class="verbale-row-title">Verbale Esterno Eggon (Firmato)</span>
+                  </div>
+                  <div class="verbale-row-right">
+                    <span class="doc-format-label">v0.1.0 · PDF</span>
+                    <svg class="verbale-row-icon" viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v7.5A2.25 2.25 0 004.25 14h7.5A2.25 2.25 0 0014 11.75V8.5a.75.75 0 00-1.5 0v3.25a.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75v-7.5a.75.75 0 01.75-.75H7.5a.75.75 0 000-1.5H4.25zM10.25 2a.75.75 0 000 1.5h2.44L6.97 9.22a.75.75 0 101.06 1.06L13.75 4.56v2.44a.75.75 0 001.5 0V2.75A.75.75 0 0014.5 2h-4.25z"/></svg>
+                  </div>
+                </a>
+                <a href="Candidatura/Verbali/Esterni/2026-10-22_Verbale_Esterno_Ergon_firmato.pdf" target="_blank" rel="noopener noreferrer" class="verbale-row-card" aria-label="Apri Verbale Esterno Ergon (Firmato)">
+                  <div class="verbale-row-left">
+                    <span class="verbale-row-date">2026-10-22</span>
+                    <span class="verbale-row-title">Verbale Esterno Ergon (Firmato)</span>
+                  </div>
+                  <div class="verbale-row-right">
+                    <span class="doc-format-label">v1.0.0 · PDF</span>
+                    <svg class="verbale-row-icon" viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v7.5A2.25 2.25 0 004.25 14h7.5A2.25 2.25 0 0014 11.75V8.5a.75.75 0 00-1.5 0v3.25a.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75v-7.5a.75.75 0 01.75-.75H7.5a.75.75 0 000-1.5H4.25zM10.25 2a.75.75 0 000 1.5h2.44L6.97 9.22a.75.75 0 101.06 1.06L13.75 4.56v2.44a.75.75 0 001.5 0V2.75A.75.75 0 0014.5 2h-4.25z"/></svg>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- Verbali Interni -->
+            <div class="verbali-subgroup">
+              <h4 class="verbali-subgroup-title">Verbali Interni</h4>
+              <div class="verbali-list">
+                <a href="Candidatura/Verbali/Interni/2026-10-28_Verbale_Interno.pdf" target="_blank" rel="noopener noreferrer" class="verbale-row-card" aria-label="Apri Verbale Interno 2026-10-28">
+                  <div class="verbale-row-left">
+                    <span class="verbale-row-date">2026-10-28</span>
+                    <span class="verbale-row-title">Verbale Interno 2026-10-28</span>
+                  </div>
+                  <div class="verbale-row-right">
+                    <span class="doc-format-label">v1.0.0 · PDF</span>
+                    <svg class="verbale-row-icon" viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v7.5A2.25 2.25 0 004.25 14h7.5A2.25 2.25 0 0014 11.75V8.5a.75.75 0 00-1.5 0v3.25a.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75v-7.5a.75.75 0 01.75-.75H7.5a.75.75 0 000-1.5H4.25zM10.25 2a.75.75 0 000 1.5h2.44L6.97 9.22a.75.75 0 101.06 1.06L13.75 4.56v2.44a.75.75 0 001.5 0V2.75A.75.75 0 0014.5 2h-4.25z"/></svg>
+                  </div>
+                </a>
+                <a href="Candidatura/Verbali/Interni/2026-10-21_Verbale_Interno.pdf" target="_blank" rel="noopener noreferrer" class="verbale-row-card" aria-label="Apri Verbale Interno 2026-10-21">
+                  <div class="verbale-row-left">
+                    <span class="verbale-row-date">2026-10-21</span>
+                    <span class="verbale-row-title">Verbale Interno 2026-10-21</span>
+                  </div>
+                  <div class="verbale-row-right">
+                    <span class="doc-format-label">v1.1.0 · PDF</span>
+                    <svg class="verbale-row-icon" viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v7.5A2.25 2.25 0 004.25 14h7.5A2.25 2.25 0 0014 11.75V8.5a.75.75 0 00-1.5 0v3.25a.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75v-7.5a.75.75 0 01.75-.75H7.5a.75.75 0 000-1.5H4.25zM10.25 2a.75.75 0 000 1.5h2.44L6.97 9.22a.75.75 0 101.06 1.06L13.75 4.56v2.44a.75.75 0 001.5 0V2.75A.75.75 0 0014.5 2h-4.25z"/></svg>
+                  </div>
+                </a>
+                <a href="Candidatura/Verbali/Interni/2026-10-15_Verbale_Interno.pdf" target="_blank" rel="noopener noreferrer" class="verbale-row-card" aria-label="Apri Verbale Interno 2026-10-15">
+                  <div class="verbale-row-left">
+                    <span class="verbale-row-date">2026-10-15</span>
+                    <span class="verbale-row-title">Verbale Interno 2026-10-15</span>
+                  </div>
+                  <div class="verbale-row-right">
+                    <span class="doc-format-label">v1.1.0 · PDF</span>
+                    <svg class="verbale-row-icon" viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v7.5A2.25 2.25 0 004.25 14h7.5A2.25 2.25 0 0014 11.75V8.5a.75.75 0 00-1.5 0v3.25a.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75v-7.5a.75.75 0 01.75-.75H7.5a.75.75 0 000-1.5H4.25zM10.25 2a.75.75 0 000 1.5h2.44L6.97 9.22a.75.75 0 101.06 1.06L13.75 4.56v2.44a.75.75 0 001.5 0V2.75A.75.75 0 0014.5 2h-4.25z"/></svg>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- DYNAMIC:ACTIVE_PHASE_END -->
+
+      <!-- =====================================================================
+           Sezione: Diapositive
+           ===================================================================== -->
+      <section id="diapositive" class="content-section">
+        <div class="section-header-block">
+          <h2 class="section-title">Diapositive</h2>
+          <p class="section-subtitle">
+            Presentazioni ufficiali e diari di bordo periodici redatti per gli incontri di avanzamento.
+          </p>
+        </div>
+
+        <!-- Sottosezione: Diari di bordo -->
+        <div class="diapositive-group">
+          <div class="subsection-header">
+            <h3 class="subsection-title">Diari di bordo</h3>
+          </div>
+
+          <div class="slides-horizontal-list">
+            <!-- DYNAMIC:DIAPOSITIVE_START -->
+            <a href="Diapositive/2026-10-26_Diario_di_Bordo.pdf" target="_blank" rel="noopener noreferrer" class="slide-h-card" aria-label="Apri PDF del Diario di Bordo 2026-10-26">
+              <div class="slide-h-preview">
+                <img src="assets/diapositive/ddb_2026-10-26_preview.png" alt="Anteprima slide Diario di Bordo 2026-10-26" class="slide-h-img" loading="lazy">
+              </div>
+
+              <div class="slide-h-body">
+                <div class="slide-h-header">
+                  <h4 class="slide-h-title">Diario di Bordo 2026-10-26</h4>
+                  <svg class="slide-h-open-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v7.5A2.25 2.25 0 004.25 14h7.5A2.25 2.25 0 0014 11.75V8.5a.75.75 0 00-1.5 0v3.25a.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75v-7.5a.75.75 0 01.75-.75H7.5a.75.75 0 000-1.5H4.25zM10.25 2a.75.75 0 000 1.5h2.44L6.97 9.22a.75.75 0 101.06 1.06L13.75 4.56v2.44a.75.75 0 001.5 0V2.75A.75.75 0 0014.5 2h-4.25z"/></svg>
+                </div>
+                <p class="slide-h-desc">
+                  Retrospettiva e diario di bordo periodico dell'incontro di avanzamento.
+                </p>
+              </div>
+            </a>
+      <!-- DYNAMIC:DIAPOSITIVE_END -->
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           Sezione: About
+           ===================================================================== -->
+      
+      <!-- DYNAMIC:ARCHIVIO_START -->
+<!-- Nessuna fase archiviata al momento -->
+      <!-- DYNAMIC:ARCHIVIO_END -->
+      <section id="about" class="content-section">
+        <div class="section-header-block">
+          <h2 class="section-title">About</h2>
+          <p class="section-subtitle">
+            Componenti del gruppo RickandCommit per il corso di Ingegneria del Software <span class="nowrap">(A.A.&nbsp;2026/2027)</span>, Università di Padova.
+          </p>
+        </div>
+
+        <!-- Griglia Compatta ed Essenziale dei 7 Membri -->
+        <div class="team-simple-grid">
+          <!-- 1. Jatin Bajaj -->
+          <a href="https://github.com/BAJ123Z" target="_blank" rel="noopener noreferrer" class="member-simple-card" aria-label="Profilo GitHub di Jatin Bajaj">
+            <img src="https://github.com/BAJ123Z.png?size=100" alt="Jatin Bajaj" class="member-simple-avatar" loading="lazy" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Jatin+Bajaj&background=0a0d13&color=00ff88';">
+            <div class="member-simple-info">
+              <span class="member-simple-name">Jatin Bajaj</span>
+              <span class="member-simple-gh">@BAJ123Z</span>
+            </div>
+            <svg class="member-simple-arrow" viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true">
+              <path d="M4.5 1.75a.75.75 0 000 1.5h7.19L1.97 12.97a.75.75 0 101.06 1.06L12.75 4.31v7.19a.75.75 0 001.5 0V2a.25.25 0 00-.25-.25h-9.5z"/>
+            </svg>
+          </a>
+
+          <!-- 2. Dorde Blagojevic -->
+          <a href="https://github.com/youngdord3" target="_blank" rel="noopener noreferrer" class="member-simple-card" aria-label="Profilo GitHub di Dorde Blagojevic">
+            <img src="https://github.com/youngdord3.png?size=100" alt="Dorde Blagojevic" class="member-simple-avatar" loading="lazy" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Dorde+Blagojevic&background=0a0d13&color=00ff88';">
+            <div class="member-simple-info">
+              <span class="member-simple-name">Dorde Blagojevic</span>
+              <span class="member-simple-gh">@youngdord3</span>
+            </div>
+            <svg class="member-simple-arrow" viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true">
+              <path d="M4.5 1.75a.75.75 0 000 1.5h7.19L1.97 12.97a.75.75 0 101.06 1.06L12.75 4.31v7.19a.75.75 0 001.5 0V2a.25.25 0 00-.25-.25h-9.5z"/>
+            </svg>
+          </a>
+
+          <!-- 3. Nicola Bonetto -->
+          <a href="https://github.com/nic-bone" target="_blank" rel="noopener noreferrer" class="member-simple-card" aria-label="Profilo GitHub di Nicola Bonetto">
+            <img src="https://github.com/nic-bone.png?size=100" alt="Nicola Bonetto" class="member-simple-avatar" loading="lazy" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Nicola+Bonetto&background=0a0d13&color=00ff88';">
+            <div class="member-simple-info">
+              <span class="member-simple-name">Nicola Bonetto</span>
+              <span class="member-simple-gh">@nic-bone</span>
+            </div>
+            <svg class="member-simple-arrow" viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true">
+              <path d="M4.5 1.75a.75.75 0 000 1.5h7.19L1.97 12.97a.75.75 0 101.06 1.06L12.75 4.31v7.19a.75.75 0 001.5 0V2a.25.25 0 00-.25-.25h-9.5z"/>
+            </svg>
+          </a>
+
+          <!-- 4. Francesco Furin -->
+          <a href="https://github.com/frafurin" target="_blank" rel="noopener noreferrer" class="member-simple-card" aria-label="Profilo GitHub di Francesco Furin">
+            <img src="https://github.com/frafurin.png?size=100" alt="Francesco Furin" class="member-simple-avatar" loading="lazy" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Francesco+Furin&background=0a0d13&color=00ff88';">
+            <div class="member-simple-info">
+              <span class="member-simple-name">Francesco Furin</span>
+              <span class="member-simple-gh">@frafurin</span>
+            </div>
+            <svg class="member-simple-arrow" viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true">
+              <path d="M4.5 1.75a.75.75 0 000 1.5h7.19L1.97 12.97a.75.75 0 101.06 1.06L12.75 4.31v7.19a.75.75 0 001.5 0V2a.25.25 0 00-.25-.25h-9.5z"/>
+            </svg>
+          </a>
+
+          <!-- 5. Luka Lacic -->
+          <a href="https://github.com/luka-lacic" target="_blank" rel="noopener noreferrer" class="member-simple-card" aria-label="Profilo GitHub di Luka Lacic">
+            <img src="https://github.com/luka-lacic.png?size=100" alt="Luka Lacic" class="member-simple-avatar" loading="lazy" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Luka+Lacic&background=0a0d13&color=00ff88';">
+            <div class="member-simple-info">
+              <span class="member-simple-name">Luka Lacic</span>
+              <span class="member-simple-gh">@luka-lacic</span>
+            </div>
+            <svg class="member-simple-arrow" viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true">
+              <path d="M4.5 1.75a.75.75 0 000 1.5h7.19L1.97 12.97a.75.75 0 101.06 1.06L12.75 4.31v7.19a.75.75 0 001.5 0V2a.25.25 0 00-.25-.25h-9.5z"/>
+            </svg>
+          </a>
+
+          <!-- 6. Alessandro Rasia dal Polo -->
+          <a href="https://github.com/RasiadalPoloAlessandro" target="_blank" rel="noopener noreferrer" class="member-simple-card" aria-label="Profilo GitHub di Alessandro Rasia dal Polo">
+            <img src="https://github.com/RasiadalPoloAlessandro.png?size=100" alt="Alessandro Rasia dal Polo" class="member-simple-avatar" loading="lazy" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Alessandro+Rasia+dal+Polo&background=0a0d13&color=00ff88';">
+            <div class="member-simple-info">
+              <span class="member-simple-name">Alessandro Rasia dal Polo</span>
+              <span class="member-simple-gh">@RasiadalPoloAlessandro</span>
+            </div>
+            <svg class="member-simple-arrow" viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true">
+              <path d="M4.5 1.75a.75.75 0 000 1.5h7.19L1.97 12.97a.75.75 0 101.06 1.06L12.75 4.31v7.19a.75.75 0 001.5 0V2a.25.25 0 00-.25-.25h-9.5z"/>
+            </svg>
+          </a>
+
+          <!-- 7. Sara Stefani -->
+          <a href="https://github.com/SaraSte6" target="_blank" rel="noopener noreferrer" class="member-simple-card" aria-label="Profilo GitHub di Sara Stefani">
+            <img src="https://github.com/SaraSte6.png?size=100" alt="Sara Stefani" class="member-simple-avatar" loading="lazy" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Sara+Stefani&background=0a0d13&color=00ff88';">
+            <div class="member-simple-info">
+              <span class="member-simple-name">Sara Stefani</span>
+              <span class="member-simple-gh">@SaraSte6</span>
+            </div>
+            <svg class="member-simple-arrow" viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true">
+              <path d="M4.5 1.75a.75.75 0 000 1.5h7.19L1.97 12.97a.75.75 0 101.06 1.06L12.75 4.31v7.19a.75.75 0 001.5 0V2a.25.25 0 00-.25-.25h-9.5z"/>
+            </svg>
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       Footer Unificato (Logo Pulito Senza Neon, Copia Email & Solo GitHub)
+       ========================================================================= -->
+  <footer class="site-footer" id="contatti">
+    <div class="content-container">
+      
+      <div class="footer-unified-card">
+        <!-- Sinistra: Logo Intero Naturale (Senza Neon) + Dicitura Ufficiale -->
+        <div class="footer-brand-side">
+          <div class="footer-logo-wrap">
+            <img src="assets/logo_completo.png" alt="Logo Ufficiale RickandCommit" class="footer-full-logo">
+          </div>
+          <div class="footer-text-group">
+            <div class="footer-brand-title">RickandCommit</div>
+            <div class="footer-course-text">Ingegneria del Software · Università di Padova · A.A. 2026/2027</div>
+          </div>
+        </div>
+
+        <!-- Destra: Azioni Rapide con Email Copiabile al Click e solo "GitHub" -->
+        <div class="footer-actions-group">
+          <!-- Bottone Email con copia automatica negli appunti e feedback visivo -->
+          <button type="button" class="footer-action-btn" id="copyEmailBtn" aria-label="Copia indirizzo email negli appunti">
+            <svg id="emailSvg" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"/>
+              <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"/>
+            </svg>
+            <span id="emailBtnText">rickandcommit@gmail.com</span>
+          </button>
+
+          <!-- GitHub (solo GitHub) -->
+          <a href="https://github.com/RickandCommit/Documentazione" target="_blank" rel="noopener noreferrer" class="footer-action-btn" aria-label="GitHub RickandCommit">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            <span>GitHub</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Barra di Chiusura Footer: Timestamp Ufficiale Ultimo Rilascio -->
+      <!-- DYNAMIC:LAST_UPDATE_START -->
+        <div class="footer-bottom-bar">
+          <span class="footer-updated-badge">Ultimo aggiornamento: 30/10/2026</span>
+        </div>
+      <!-- DYNAMIC:LAST_UPDATE_END -->
+
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       Script Interazioni: Sottolineatura Hover & Copia Email
+       ========================================================================= -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const header = document.getElementById('siteHeader');
+      const progress = document.getElementById('scrollProgress');
+      const underline = document.getElementById('navUnderline');
+      const navWrapper = document.getElementById('navWrapper');
+      const links = document.querySelectorAll('.nav-item-link');
+
+      // 1. Sposta e mostra la linea al passaggio mouse o focus da tastiera
+      function showUnderlineOn(element) {
+        if (!element || !underline || !navWrapper) return;
+        const rect = element.getBoundingClientRect();
+        const parentRect = navWrapper.getBoundingClientRect();
+        
+        const left = rect.left - parentRect.left;
+        const width = rect.width;
+        
+        underline.style.transform = `translateX(${left}px)`;
+        underline.style.width = `${width}px`;
+        underline.classList.add('active');
+      }
+
+      links.forEach(link => {
+        link.addEventListener('mouseenter', () => showUnderlineOn(link));
+        link.addEventListener('focus', () => showUnderlineOn(link));
+        link.addEventListener('blur', () => underline.classList.remove('active'));
+      });
+
+      navWrapper.addEventListener('mouseleave', () => {
+        underline.classList.remove('active');
+      });
+
+      // 2. Scroll Listener: Elevation Header e Barra di Avanzamento
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        
+        if (scrollY > 20) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (totalHeight > 0) {
+          const progressPercent = Math.min(100, Math.max(0, (scrollY / totalHeight) * 100));
+          progress.style.width = `${progressPercent}%`;
+        }
+      }, { passive: true });
+
+      // 3. Click su Email: Copia istantanea negli appunti con feedback visivo
+      const copyBtn = document.getElementById('copyEmailBtn');
+      const emailText = document.getElementById('emailBtnText');
+      const emailAddress = 'rickandcommit@gmail.com';
+      let copyTimeout;
+
+      if (copyBtn && emailText) {
+        copyBtn.addEventListener('click', async () => {
+          let copied = false;
+          try {
+            if (navigator.clipboard && window.isSecureContext) {
+              await navigator.clipboard.writeText(emailAddress);
+              copied = true;
+            }
+          } catch (e) {
+            copied = false;
+          }
+
+          if (!copied) {
+            try {
+              const textArea = document.createElement('textarea');
+              textArea.value = emailAddress;
+              textArea.style.position = 'fixed';
+              textArea.style.left = '-9999px';
+              document.body.appendChild(textArea);
+              textArea.focus();
+              textArea.select();
+              copied = document.execCommand('copy');
+              document.body.removeChild(textArea);
+            } catch (e) {
+              copied = false;
+            }
+          }
+
+          clearTimeout(copyTimeout);
+          copyBtn.classList.add('copied');
+          emailText.textContent = copied ? 'Email copiata! ✓' : 'Copia fallita';
+
+          copyTimeout = setTimeout(() => {
+            copyBtn.classList.remove('copied');
+            emailText.textContent = emailAddress;
+          }, 2200);
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
