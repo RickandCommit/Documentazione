@@ -58,7 +58,7 @@
   #v(0.6cm)
   #text(size: 26pt, weight: "bold")[Valutazione dei capitolati]
   #v(0.25cm)
-  #text(size: 10pt, style: "italic")[Versione v0.3.0 · Ultima modifica: 2026-10-29]
+  #text(size: 10pt, style: "italic")[Versione v1.0.0 · Ultima modifica: 2026-10-30]
 ]
 
 #v(0.5cm)
