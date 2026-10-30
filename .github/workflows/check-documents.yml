@@ -1,0 +1,46 @@
+name: Verifica Documenti e Struttura
+
+on:
+  push:
+    paths:
+      - 'Candidatura/**'
+      - 'RTB/**'
+      - 'PB/**'
+      - 'Diapositive/**'
+      - '.github/template/**'
+      - '.github/scripts/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'Candidatura/**'
+      - 'RTB/**'
+      - 'PB/**'
+      - 'Diapositive/**'
+      - '.github/template/**'
+      - '.github/scripts/**'
+  workflow_dispatch:
+
+concurrency:
+  group: "check-docs-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  check-documents:
+    name: Verifica Naming e Compilazione Typst
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Typst
+        uses: typst-community/setup-typst@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Esegui controllo struttura e compilazione documenti
+        run: |
+          python .github/scripts/validate_structure.py --root-dir .

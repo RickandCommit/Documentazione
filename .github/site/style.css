@@ -1,5 +1,5 @@
 /* ==========================================================================
-   RickandCommit · Portale Documentazione SWE
+   RickandCommit · Sito Documentazione SWE
    Design Ispirato al Diario di Bordo (DDB) - Versione Pulita e Calibrata
    Palette: Deep Black (#000000), Portal Green (#00ff88), Cosmic Purple (#7c3aed)
    ========================================================================== */
@@ -20,7 +20,7 @@
   --border-card: rgba(255, 255, 255, 0.09);
   --border-hover: rgba(0, 255, 136, 0.35);
   
-  /* Palette Tematica Sci-Fi (Verde Portale puro -> Viola Cosmico profondo, zero toni rossi) */
+  /* Palette Tematica Sci-Fi (Verde Neon puro -> Viola Cosmico profondo, zero toni rossi) */
   --portal-green: #00ff88;
   --portal-green-hover: #38ef7d;
   --portal-glow: 0 0 14px rgba(0, 255, 136, 0.4);
@@ -295,7 +295,7 @@ main {
 }
 
 /* ==========================================================================
-   Hero Section (Portale di Documentazione Ufficiale)
+   Hero Section (Sito di Documentazione Ufficiale)
    ========================================================================== */
 
 .hero-section {
@@ -1107,4 +1107,46 @@ main {
     align-items: flex-start;
     gap: 1rem;
   }
+}
+
+
+/* =========================================================================
+   Sezione Archivio Fasi Concluse & Phase Stack
+   ========================================================================= */
+.archive-phase-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2rem;
+  transition: border-color 0.2s var(--ease-spring);
+}
+
+.archive-phase-card:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.archive-phase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.archive-phase-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-white);
+}
+
+.archive-phase-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  background: rgba(148, 163, 184, 0.1);
+  color: var(--text-muted);
+  border: 1px solid rgba(148, 163, 184, 0.2);
 }
