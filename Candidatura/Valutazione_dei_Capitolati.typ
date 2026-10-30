@@ -81,9 +81,8 @@
 
 #text(size: 10pt)[
 #table(
-  columns: (1.9cm, 2.0cm, 2.0cm, 2.5cm, 2.5cm, 1fr),
+  columns: (1.9cm, 2.0cm, 2.0cm, 2.5cm, 1fr),
   align: (
-    center + horizon,
     center + horizon,
     center + horizon,
     center + horizon,
@@ -98,28 +97,30 @@
   table.cell(align: center + horizon)[*Data*],
   table.cell(align: center + horizon)[*Autore*],
   table.cell(align: center + horizon)[*Verificatore*],
-  table.cell(align: center + horizon)[*Approvatore*],
   table.cell(align: center + horizon)[*Descrizione*],
-
+  [1.0.0],
+  [2026-10-29],
+  [Francesco Furin],
+  [Alessandro Rasia dal Polo],
+  [Ristrutturazione del registro delle modifiche],
+  
   [0.3.0],
   [2026-10-29],
   [Luka Lacic],
-  [],
-  [],
+  [Alessandro Rasia dal Polo],
   [Integrazione delle valutazioni di C2, C7 e C8 a seguito dei colloqui con i proponenti],
   
   [0.2.0],
   [2026-10-28],
   [Luka Lacic],
   [Alessandro Rasia dal Polo],
-  [Dorde \ Blagojevic],
+
   [Modifica delle preferenze del gruppo],
   
   [0.1.0],
   [2026-10-23],
   [Luka Lacic],
   [Alessandro Rasia dal Polo],
-  [Dorde \ Blagojevic],
   [Prima stesura del documento],
 )
 ]
@@ -127,7 +128,6 @@
 #pagebreak()
 #outline(title: "Indice")
 #pagebreak()
-
 = Introduzione
 
 
