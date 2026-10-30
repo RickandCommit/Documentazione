@@ -33,9 +33,9 @@
 )
 ]
 
-#pagebreak()
+#pagebreak(weak: true)
 #outline(title: "Indice")
-#pagebreak()
+#pagebreak(weak: true)
 
 // ==================== 2. PARTECIPANTI ====================
 = Partecipanti
@@ -89,7 +89,7 @@ Il gruppo ha stabilito di lavorare secondo *sprint bisettimanali*. La rotazione 
 
 Nella fase preliminare attuale i ruoli restano flessibili; il conteggio rigoroso delle ore e dei costi sul foglio di calcolo condiviso partirà con la presentazione della candidatura e l'eventuale approvazione dell'appalto.
 
-#pagebreak()
+#pagebreak(weak: true)
 == Ambiente di lavoro su GitHub
 
 La struttura delle cartelle del repository è stata discussa collegialmente e confermata.
@@ -125,7 +125,7 @@ Il documento verrà completato con le considerazioni finali al termine dei collo
 
 La riunione ha fornito al gruppo un assetto organizzativo solido ed efficace: sono stati formalizzati il ruolo di Responsabile e la cadenza degli sprint, definito il flusso di lavoro su GitHub e consolidati gli strumenti documentali. Restano da svolgere gli incontri con le aziende proponenti, a partire da quello con Ergon Informatica, per completare la valutazione dei capitolati in vista della candidatura ufficiale.
 
-#pagebreak()
+#pagebreak(weak: true)
 // ==================== 6. DECISIONI E AZIONI NEL BACKLOG ====================
 = Decisioni e azioni nel Backlog
 

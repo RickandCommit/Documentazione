@@ -1,22 +1,18 @@
-name: Deploy GitHub Pages
+name: Verifica Build Sito
 
 on:
-  push:
+  pull_request:
     branches:
       - main
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: "check-site-${{ github.ref }}"
+  cancel-in-progress: true
 
 jobs:
-  build:
+  check-site-build:
+    name: Verifica Compilazione e Generazione Sito
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -25,7 +21,15 @@ jobs:
       - name: Setup Typst
         uses: typst-community/setup-typst@v3
 
-      - name: Compile Typst and Assemble Site
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python dependencies
+        run: pip install pymupdf
+
+      - name: Compilazione Typst e Assemblaggio Test Sito
         run: |
           mkdir -p _site/Candidatura/Verbali/Interni
           mkdir -p _site/Candidatura/Verbali/Esterni
@@ -34,18 +38,18 @@ jobs:
           # Compila Documenti Principali di Candidatura (se presenti)
           if [ -f "Candidatura/Valutazione_dei_Capitolati.typ" ]; then
             echo "Compilazione Valutazione dei Capitolati..."
-            typst compile --root . Candidatura/Valutazione_dei_Capitolati.typ _site/Candidatura/Valutazione_dei_Capitolati_v1.0.0.pdf
+            typst compile --root . Candidatura/Valutazione_dei_Capitolati.typ _site/Candidatura/Valutazione_dei_Capitolati.pdf
           fi
           if [ -f "Candidatura/Dichiarazione_degli_Impegni.typ" ]; then
             echo "Compilazione Dichiarazione degli Impegni..."
-            typst compile --root . Candidatura/Dichiarazione_degli_Impegni.typ _site/Candidatura/Dichiarazione_degli_Impegni_v1.0.0.pdf
+            typst compile --root . Candidatura/Dichiarazione_degli_Impegni.typ _site/Candidatura/Dichiarazione_degli_Impegni.pdf
           fi
           if [ -f "Candidatura/2026-10-29_Lettera_di_Presentazione.typ" ]; then
             echo "Compilazione Lettera di Presentazione..."
             typst compile --root . Candidatura/2026-10-29_Lettera_di_Presentazione.typ _site/Candidatura/2026-10-29_Lettera_di_Presentazione.pdf
           fi
 
-          # Compila Verbali Interni
+          # Compila Verbali Interni Candidatura
           if [ -d "Candidatura/Verbali/Interni" ]; then
             for f in Candidatura/Verbali/Interni/*.typ; do
               if [ -f "$f" ]; then
@@ -56,7 +60,7 @@ jobs:
             done
           fi
 
-          # Compila Verbali Esterni Typst (se presenti)
+          # Compila Verbali Esterni Candidatura (se presenti)
           if [ -d "Candidatura/Verbali/Esterni" ]; then
             for f in Candidatura/Verbali/Esterni/*.typ; do
               if [ -f "$f" ]; then
@@ -80,22 +84,13 @@ jobs:
           # Copia sorgenti sito web statico (.github/site) nella radice di _site
           cp -r .github/site/* _site/
 
-          # Assicura fallback assets per le slide
-          mkdir -p _site/assets/diapositive
-          cp -v _site/Diapositive/*.pdf _site/assets/diapositive/ 2>/dev/null || true
+          # Generazione dinamica: estrazione versioni, anteprime e compilazione card LIFO
+          python .github/scripts/generate_site.py --site-dir _site --root-dir .
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Verifica integrita index.html generato
+        run: |
+          if [ ! -f "_site/index.html" ]; then
+            echo "ERRORE: _site/index.html non generato!"
+            exit 1
+          fi
+          echo "Verifica completata: sito compilato correttamente senza errori."
