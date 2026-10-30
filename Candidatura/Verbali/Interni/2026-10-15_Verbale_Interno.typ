@@ -107,9 +107,9 @@ Il gruppo ha svolto un esame comparativo iniziale dei capitolati d'appalto prese
 
 A valle della discussione, il gruppo ha concordato un orientamento iniziale, definendo la seguente *graduatoria preliminare di interesse*:
 
-+ *C7* &mdash; Smart Dashboard: Piattaforma di Business Intelligence potenziata da AI (Ergon Informatica S.r.l.) &bull; *1º interesse*
-+ *C2* &mdash; Concierge NEXUM (Eggon S.r.l.) &bull; *2º interesse*
-+ *C8* &mdash; Sonar: Documentazione vivente di uno store Shopify (Halue S.r.l.) &bull; *3º interesse*
++ *C7* &mdash; Smart Dashboard: Piattaforma di Business Intelligence potenziata da AI (Ergon Informatica S.r.l.); *1º interesse*
++ *C2* &mdash; Concierge NEXUM (Eggon S.r.l.); *2º interesse*
++ *C8* &mdash; Sonar: Documentazione vivente di uno store Shopify (Halue S.r.l.); *3º interesse*
 
 Tale graduatoria costituisce un'indicazione iniziale e sarà approfondita e confermata a valle dei colloqui tecnici con i referenti aziendali.
 
