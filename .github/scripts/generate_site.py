@@ -505,18 +505,25 @@ def build_generic_phase_section(phase_id: str, site_dir: str, root_dir: str, is_
     int_metas.sort(key=lambda x: x["date"], reverse=True)
     int_html = build_verbali_html(int_metas, folder, "Interni")
 
-    # Documenti principali della fase
-    doc_files = []
-    if os.path.isdir(phase_root):
-        for f in os.listdir(phase_root):
-            if f.endswith((".pdf", ".typ")) and not f.startswith("."):
-                doc_files.append(os.path.join(phase_root, f))
+    # Documenti principali della fase (LIFO e deduplicati tra .pdf e .typ)
+    doc_search_dirs = [
+        os.path.join(site_dir, folder),
+        phase_root,
+    ]
+    raw_doc_paths = list_documents_in_dirs(doc_search_dirs)
+    doc_paths = [
+        p for p in raw_doc_paths
+        if "Verbali" not in os.path.normpath(p).split(os.sep) and not os.path.basename(p).startswith(".")
+    ]
+    doc_metas = [extract_metadata(p) for p in doc_paths]
+    doc_metas.sort(key=lambda x: (x["date"], x["version"]), reverse=True)
 
     docs_cards = []
-    for df in doc_files:
-        meta_d = extract_metadata(df)
+    for meta_d in doc_metas:
         fname = meta_d["filename"]
-        title = fname[:-4].replace("_", " ")
+        if fname.endswith(".typ"):
+            fname = fname[:-4] + ".pdf"
+        title = meta_d["title"] if meta_d["title"] != "Documento" else fname[:-4].replace("_", " ")
         card = (
             f'            <a href="{folder}/{fname}" target="_blank" rel="noopener noreferrer" class="doc-compact-card" aria-label="Apri {title} PDF">\n'
             f'              <div class="doc-compact-body">\n'

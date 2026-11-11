@@ -9,6 +9,7 @@ on:
       - 'Diapositive/**'
       - '.github/template/**'
       - '.github/scripts/**'
+      - '.github/workflows/**'
   pull_request:
     branches:
       - main
@@ -19,6 +20,7 @@ on:
       - 'Diapositive/**'
       - '.github/template/**'
       - '.github/scripts/**'
+      - '.github/workflows/**'
   workflow_dispatch:
 
 concurrency:

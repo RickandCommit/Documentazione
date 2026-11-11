@@ -19,10 +19,14 @@
   ora-inizio: "",
   ora-fine: "",
   modalita: "Discord",
+  stato: "Approvato",
   redattore: "",
   redattori: (),
   verificatore: "",
   verificatori: (),
+  esito-verifica: "Positivo",
+  approvatore: "",
+  approvatori: (),
   destinatari: [Prof. Tullio Vardanega \ Prof. Riccardo Cardin],
   body
 ) = {
@@ -55,10 +59,10 @@
   set heading(numbering: "1.1")
   set par(justify: true, leading: 0.68em)
 
-  show heading.where(level: 1): it => block(above: 1.8em, below: 1em)[
+  show heading.where(level: 1): it => block(above: 1.5em, below: 0.8em)[
     #text(size: 15pt, weight: "bold")[#it]
   ]
-  show heading.where(level: 2): it => block(above: 1.4em, below: 0.8em)[
+  show heading.where(level: 2): it => block(above: 1.3em, below: 0.7em)[
     #text(size: 13pt, weight: "bold")[#it]
   ]
 
@@ -68,59 +72,95 @@
       columns: (auto, auto),
       column-gutter: 2cm,
       align: horizon,
-      [#logo-completo(width: 5.5cm)],
-      [#logo-unipd(width: 3.5cm)],
+      [#logo-completo(width: 5.0cm)],
+      [#logo-unipd(width: 3.2cm)],
     )
-    #v(0.3cm)
+    #v(0.2cm)
     #text(size: 11pt)[Università di Padova]
-    #v(0.05cm)
+    #v(0.04cm)
     #text(size: 10.5pt)[Corso di Ingegneria del Software · A.A. 2026/2027]
-    #v(0.6cm)
-    #text(size: 26pt, weight: "bold")[#titolo]
-    #v(0.25cm)
+    #v(0.35cm)
+    #text(size: 24pt, weight: "bold")[#titolo]
+    #v(0.15cm)
     #text(size: 10pt, style: "italic")[Versione #versione · Ultima modifica: #ultima-modifica]
   ]
 
-  v(0.5cm)
+  v(0.25cm)
 
-  // Normalizzazione e formattazione redattori e verificatori (con virgola se multipli)
+  // Normalizzazione e formattazione redattori, verificatori e approvatori
   let red-val = if redattori != () { redattori } else { redattore }
   let ver-val = if verificatori != () { verificatori } else { verificatore }
+  let app-val = if approvatori != () { approvatori } else { approvatore }
 
   let label-red = if type(red-val) == array and red-val.len() > 1 { [*Redattori*] } else { [*Redattore*] }
   let label-ver = if type(ver-val) == array and ver-val.len() > 1 { [*Verificatori*] } else { [*Verificatore*] }
+  let label-app = if type(app-val) == array and app-val.len() > 1 { [*Approvatori (Responsabili)*] } else { [*Approvazione per il rilascio*] }
 
   let formatted-red = if type(red-val) == array { red-val.join(", ") } else { red-val }
   let formatted-ver = if type(ver-val) == array { ver-val.join(", ") } else { ver-val }
+  let formatted-app = if type(app-val) == array { app-val.join(", ") } else if app-val != "" { app-val } else { [—] }
+
+  let table-rows = (
+    [*Data*], [#data],
+    [*Ora inizio – Ora fine*], [#ora-inizio – #ora-fine],
+    [*Modalità*], [#modalita],
+    [*Stato*], [#stato],
+    [#label-red], [#formatted-red],
+    [#label-ver], [#formatted-ver],
+    [*Esito verifica*], [#esito-verifica],
+  )
+
+  if app-val != "" and app-val != () {
+    table-rows += ([#label-app], [#formatted-app])
+  }
+
+  table-rows += ([*Destinatari*], [#destinatari])
 
   // ==================== INFORMAZIONI GENERALI ====================
   table(
     columns: (auto, 1fr),
     stroke: 0.5pt + rgb("#b5b5b5"),
-    inset: 7pt,
-    [*Data*], [#data],
-    [*Ora inizio – Ora fine*], [#ora-inizio – #ora-fine],
-    [*Modalità*], [#modalita],
-    [#label-red], [#formatted-red],
-    [#label-ver], [#formatted-ver],
-    [*Destinatari*], [#destinatari],
+    inset: 6pt,
+    ..table-rows,
   )
 
-  v(0.4cm)
+  v(0.25cm)
 
   body
+}
+
+// Helper standard per il Registro delle Modifiche nei verbali
+#let registro-modifiche(..righe) = {
+  heading(level: 1, numbering: none, outlined: false)[Registro delle modifiche]
+  text(size: 8.5pt)[
+    #table(
+      columns: (1.9cm, 2.1cm, 1fr, 2.9cm, 2.9cm),
+      stroke: 0.5pt + rgb("#b5b5b5"),
+      inset: 5pt,
+      fill: (col, row) => if row == 0 { rgb("#e5e7eb") } else { none },
+      table.cell(align: center)[*Versione*],
+      table.cell(align: center)[*Data*],
+      table.cell(align: center)[*Descrizione*],
+      table.cell(align: center)[*Autore*],
+      table.cell(align: center)[*Verificatore*],
+      ..righe,
+    )
+  ]
 }
 
 // ==================== TEMPLATE DOCUMENTO GENERALE ====================
 #let documento(
   titolo: "",
   sottotitolo: "",
-  versione: "v1.0.0",
+  versione: "v0.1.0",
   data: "",
-  stato: "Approvato",
+  stato: "In lavorazione",
   uso: "Esterno",
   redattori: (),
   verificatori: (),
+  esito-verifica: "In attesa",
+  approvatore: "",
+  approvatori: (),
   destinatari: [Prof. Tullio Vardanega \ Prof. Riccardo Cardin],
   body
 ) = {
@@ -180,20 +220,36 @@
 
   v(0.5cm)
 
+  let app-val = if approvatori != () { approvatori } else { approvatore }
   let label-doc-red = if type(redattori) == array and redattori.len() == 1 { [*Redattore*] } else { [*Redattori*] }
   let label-doc-ver = if type(verificatori) == array and verificatori.len() == 1 { [*Verificatore*] } else { [*Verificatori*] }
+  let label-doc-app = if type(app-val) == array and app-val.len() > 1 { [*Approvatori (Responsabili)*] } else { [*Approvazione per il rilascio*] }
+
+  let formatted-red = if type(redattori) == array { redattori.join(", ") } else { redattori }
+  let formatted-ver = if type(verificatori) == array { verificatori.join(", ") } else { verificatori }
+  let formatted-app = if type(app-val) == array { app-val.join(", ") } else if app-val != "" { app-val } else { [—] }
+
+  let doc-table-rows = (
+    [*Versione*], [#versione],
+    [*Data approvazione*], [#data],
+    [*Stato*], [#stato],
+    [*Uso*], [#uso],
+    [#label-doc-red], [#formatted-red],
+    [#label-doc-ver], [#formatted-ver],
+    [*Esito verifica*], [#esito-verifica],
+  )
+
+  if app-val != "" and app-val != () {
+    doc-table-rows += ([#label-doc-app], [#formatted-app])
+  }
+
+  doc-table-rows += ([*Destinatari*], [#destinatari])
 
   table(
     columns: (auto, 1fr),
     stroke: 0.5pt + rgb("#b5b5b5"),
     inset: 7pt,
-    [*Versione*], [#versione],
-    [*Data approvazione*], [#data],
-    [*Stato*], [#stato],
-    [*Uso*], [#uso],
-    [#label-doc-red], [#if type(redattori) == array { redattori.join(", ") } else { redattori }],
-    [#label-doc-ver], [#if type(verificatori) == array { verificatori.join(", ") } else { verificatori }],
-    [*Destinatari*], [#destinatari],
+    ..doc-table-rows,
   )
 
   v(0.4cm)
@@ -283,4 +339,3 @@
 
   body
 }
-
