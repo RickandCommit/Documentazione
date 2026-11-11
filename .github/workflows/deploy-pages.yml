@@ -36,55 +36,52 @@ jobs:
 
       - name: Compilazione Typst e Assemblaggio Sito
         run: |
-          mkdir -p _site/Candidatura/Verbali/Interni
-          mkdir -p _site/Candidatura/Verbali/Esterni
-          mkdir -p _site/Diapositive
+          # Supporto dinamico a tutte le fasi: Candidatura, RTB, PB
+          for phase in Candidatura RTB PB; do
+            if [ -d "$phase" ]; then
+              mkdir -p "_site/$phase/Verbali/Interni"
+              mkdir -p "_site/$phase/Verbali/Esterni"
 
-          # Compila Documenti Principali di Candidatura (se presenti)
-          if [ -f "Candidatura/Valutazione_dei_Capitolati.typ" ]; then
-            echo "Compilazione Valutazione dei Capitolati..."
-            typst compile --root . Candidatura/Valutazione_dei_Capitolati.typ _site/Candidatura/Valutazione_dei_Capitolati.pdf
-          fi
-          if [ -f "Candidatura/Dichiarazione_degli_Impegni.typ" ]; then
-            echo "Compilazione Dichiarazione degli Impegni..."
-            typst compile --root . Candidatura/Dichiarazione_degli_Impegni.typ _site/Candidatura/Dichiarazione_degli_Impegni.pdf
-          fi
-          # Compila Lettera di Presentazione
-          lettera=$(find Candidatura -maxdepth 1 -name "*_Lettera_di_Presentazione.typ" 2>/dev/null | head -n 1)
-          if [ -n "$lettera" ] && [ -f "$lettera" ]; then
-            base=$(basename "$lettera" .typ)
-            echo "Compilazione Lettera di Presentazione ($base)..."
-            typst compile --root . "$lettera" "_site/Candidatura/${base}.pdf"
-          fi
+              # 1. Compila Documenti Principali di baseline (*.typ nella root della fase)
+              for f in "$phase"/*.typ; do
+                if [ -f "$f" ]; then
+                  base=$(basename "$f" .typ)
+                  echo "Compilazione documento $base ($phase)..."
+                  typst compile --root . "$f" "_site/$phase/${base}.pdf"
+                fi
+              done
 
-          # Compila Verbali Interni Candidatura
-          if [ -d "Candidatura/Verbali/Interni" ]; then
-            for f in Candidatura/Verbali/Interni/*.typ; do
-              if [ -f "$f" ]; then
-                base=$(basename "$f" .typ)
-                echo "Compilazione verbale $base..."
-                typst compile --root . "$f" "_site/Candidatura/Verbali/Interni/${base}.pdf"
+              # 2. Compila Verbali Interni
+              if [ -d "$phase/Verbali/Interni" ]; then
+                for f in "$phase/Verbali/Interni"/*.typ; do
+                  if [ -f "$f" ]; then
+                    base=$(basename "$f" .typ)
+                    echo "Compilazione verbale interno $base ($phase)..."
+                    typst compile --root . "$f" "_site/$phase/Verbali/Interni/${base}.pdf"
+                  fi
+                done
               fi
-            done
-          fi
 
-          # Compila Verbali Esterni Candidatura (se presenti)
-          if [ -d "Candidatura/Verbali/Esterni" ]; then
-            for f in Candidatura/Verbali/Esterni/*.typ; do
-              if [ -f "$f" ]; then
-                base=$(basename "$f" .typ)
-                echo "Compilazione verbale esterno $base..."
-                typst compile --root . "$f" "_site/Candidatura/Verbali/Esterni/${base}.pdf"
+              # 3. Compila Verbali Esterni (se sorgenti .typ)
+              if [ -d "$phase/Verbali/Esterni" ]; then
+                for f in "$phase/Verbali/Esterni"/*.typ; do
+                  if [ -f "$f" ]; then
+                    base=$(basename "$f" .typ)
+                    echo "Compilazione verbale esterno $base ($phase)..."
+                    typst compile --root . "$f" "_site/$phase/Verbali/Esterni/${base}.pdf"
+                  fi
+                done
               fi
-            done
-          fi
 
-          # Copia Verbali Esterni firmati esistenti (.pdf)
-          if [ -d "Candidatura/Verbali/Esterni" ]; then
-            cp -v Candidatura/Verbali/Esterni/*.pdf _site/Candidatura/Verbali/Esterni/ 2>/dev/null || true
-          fi
+              # 4. Copia Verbali Esterni firmati esistenti (.pdf)
+              if [ -d "$phase/Verbali/Esterni" ]; then
+                cp -v "$phase/Verbali/Esterni"/*.pdf "_site/$phase/Verbali/Esterni/" 2>/dev/null || true
+              fi
+            fi
+          done
 
           # Copia Diapositive / Diari di bordo (.pdf)
+          mkdir -p _site/Diapositive
           if [ -d "Diapositive" ]; then
             cp -v Diapositive/*.pdf _site/Diapositive/ 2>/dev/null || true
           fi
