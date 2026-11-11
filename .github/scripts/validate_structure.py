@@ -44,32 +44,55 @@ def check_forbidden_characters(root_dir: str) -> list[str]:
 def check_directory_structure(root_dir: str) -> list[str]:
     """Verifica la corretta alberatura e nomenclatura dei file nelle cartelle formali."""
     errors = []
+    phases = ["Candidatura", "RTB", "PB"]
 
-    # 1. Candidatura - Verbali Interni
-    int_dir = os.path.join(root_dir, "Candidatura", "Verbali", "Interni")
-    if os.path.isdir(int_dir):
-        for f in os.listdir(int_dir):
-            if f.startswith(".") or f == ".gitkeep":
+    for phase in phases:
+        phase_dir = os.path.join(root_dir, phase)
+        if not os.path.isdir(phase_dir):
+            continue
+
+        # 1. Verbali Interni
+        int_dir = os.path.join(phase_dir, "Verbali", "Interni")
+        if os.path.isdir(int_dir):
+            for f in os.listdir(int_dir):
+                if f.startswith(".") or f == ".gitkeep":
+                    continue
+                if not REGEX_VERBALE_INTERNO.match(f):
+                    errors.append(
+                        f"[NAMING ERRATO] File verbale interno non conforme in {phase}: '{f}'. "
+                        f"Formato atteso: 'AAAA-MM-GG_Verbale_Interno.typ'"
+                    )
+
+        # 2. Verbali Esterni
+        ext_dir = os.path.join(phase_dir, "Verbali", "Esterni")
+        if os.path.isdir(ext_dir):
+            for f in os.listdir(ext_dir):
+                if f.startswith(".") or f == ".gitkeep":
+                    continue
+                if not REGEX_VERBALE_ESTERNO.match(f):
+                    errors.append(
+                        f"[NAMING ERRATO] File verbale esterno non conforme in {phase}: '{f}'. "
+                        f"Formato atteso: 'AAAA-MM-GG_Verbale_Esterno_<Azienda>_firmato.pdf'"
+                    )
+
+        # 3. Documenti Principali della fase
+        for f in os.listdir(phase_dir):
+            if f in ("Verbali", ".gitkeep") or os.path.isdir(os.path.join(phase_dir, f)):
                 continue
-            if not REGEX_VERBALE_INTERNO.match(f):
-                errors.append(
-                    f"[NAMING ERRATO] File verbale interno non conforme: '{f}'. "
-                    f"Formato atteso: 'AAAA-MM-GG_Verbale_Interno.typ'"
-                )
+            if f.endswith("Lettera_di_Presentazione.typ"):
+                if not REGEX_LETTERA_PRESENTAZIONE.match(f):
+                    errors.append(
+                        f"[NAMING ERRATO] Lettera di Presentazione non conforme in {phase}: '{f}'. "
+                        f"Formato atteso: 'AAAA-MM-GG_Lettera_di_Presentazione.typ'"
+                    )
+            elif f.endswith(".typ"):
+                if not REGEX_DOC_BASELINE.match(f):
+                    errors.append(
+                        f"[NAMING ERRATO] Documento di baseline non conforme in {phase}: '{f}'. "
+                        f"Formato atteso: 'Nome_Documento.typ' (senza versione nel nome file sorgente)"
+                    )
 
-    # 2. Candidatura - Verbali Esterni
-    ext_dir = os.path.join(root_dir, "Candidatura", "Verbali", "Esterni")
-    if os.path.isdir(ext_dir):
-        for f in os.listdir(ext_dir):
-            if f.startswith(".") or f == ".gitkeep":
-                continue
-            if not REGEX_VERBALE_ESTERNO.match(f):
-                errors.append(
-                    f"[NAMING ERRATO] File verbale esterno non conforme: '{f}'. "
-                    f"Formato atteso: 'AAAA-MM-GG_Verbale_Esterno_<Azienda>_firmato.pdf'"
-                )
-
-    # 3. Diapositive
+    # 4. Diapositive
     diap_dir = os.path.join(root_dir, "Diapositive")
     if os.path.isdir(diap_dir):
         for f in os.listdir(diap_dir):
@@ -80,25 +103,6 @@ def check_directory_structure(root_dir: str) -> list[str]:
                     f"[NAMING ERRATO] File diario di bordo non conforme: '{f}'. "
                     f"Formato atteso: 'AAAA-MM-GG_Diario_di_Bordo.pdf'"
                 )
-
-    # 4. Candidatura - Documenti Principali
-    cand_dir = os.path.join(root_dir, "Candidatura")
-    if os.path.isdir(cand_dir):
-        for f in os.listdir(cand_dir):
-            if f in ("Verbali", ".gitkeep") or os.path.isdir(os.path.join(cand_dir, f)):
-                continue
-            if f.endswith("Lettera_di_Presentazione.typ"):
-                if not REGEX_LETTERA_PRESENTAZIONE.match(f):
-                    errors.append(
-                        f"[NAMING ERRATO] Lettera di Presentazione non conforme: '{f}'. "
-                        f"Formato atteso: 'AAAA-MM-GG_Lettera_di_Presentazione.typ'"
-                    )
-            elif f.endswith(".typ"):
-                if not REGEX_DOC_BASELINE.match(f):
-                    errors.append(
-                        f"[NAMING ERRATO] Documento di baseline non conforme: '{f}'. "
-                        f"Formato atteso: 'Nome_Documento.typ' (senza versione nel nome file sorgente)"
-                    )
 
     return errors
 
