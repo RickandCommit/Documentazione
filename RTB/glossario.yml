@@ -48,8 +48,7 @@ D:
   "Dipendente (Personale)": "Utente finale autenticato che interagisce con il Concierge per ottenere chiarimenti sulle regole aziendali, consultare la propria situazione o registrare ferie e permessi."
   "Distillazione": "Processo di elaborazione e sintesi di informazioni non strutturate estratte dalle fonti primarie per produrre unità di conoscenza strutturate, preservandone vincoli e significato."
 E:
-  "Eggon (Eggon S.r.l.)": "Software house italiana con sede a Padova, proponente del capitolato d'appalto"
-  "C2 \"NEXUM": "Concierge per il dipendente\"."
+  "Eggon (Eggon S.r.l.)": "Software house italiana con sede a Padova, proponente del capitolato d'appalto C2 \"NEXUM: Concierge per il dipendente\"."
   "Embedding": "Mappatura matematica di parole, frasi o paragrafi in vettori numerici a molte dimensioni, tale che la vicinanza geometrica rappresenti l'affinità semantica."
   "End-to-End (E2E)": "Modalità di esecuzione o test che attraversa l'intero flusso architetturale del sistema, dall'interfaccia utente iniziale fino alla persistenza e risposta dei servizi di backend."
 F:
@@ -77,8 +76,7 @@ M:
   "Manuale Utente": "Documento di prodotto destinato agli utenti finali per illustrare in modo chiaro e guidato le funzionalità del sistema, le schermate e le modalità operative."
   "Metrica di Qualità": "Misura quantitativa e oggettiva del grado in cui un processo o un prodotto software soddisfa un requisito o uno standard di qualità prestabilito."
   "Milestone": "Traguardo temporale o evento significativo nel calendario di progetto che segna la conclusione di una fase o il raggiungimento di un obiettivo chiave."
-  "Minimum Viable Product (MVP)": "Versione minima ma completa e funzionante del software, provvista del set"
-  "essenziale di capacità concordate (per C2": "gestione ferie e permessi), idonea alla validazione sul campo e all'accettazione finale."
+  "Minimum Viable Product (MVP)": "Versione minima ma completa e funzionante del software, provvista del set essenziale di capacità concordate (per C2: gestione ferie e permessi), idonea alla validazione sul campo e all'accettazione finale."
   "Mock (Simulatore)": "Componente software che emula fedelmente le interfacce, le risposte e il contratto di un servizio reale (es. backend NEXUM) a scopi di test o sviluppo."
 N:
   "NEXUM": "Piattaforma digitale proprietaria di Eggon focalizzata sui processi di comunicazione interna e sulle relazioni tra aziende, dipendenti e professionisti paghe."
@@ -123,8 +121,6 @@ S:
   "Saldo Residuo": "Quantità di ferie o permessi ancora spettanti al lavoratore, che il sistema deve recuperare da fonti autorizzate ufficiali senza effettuare deduzioni arbitrarie."
   "Scrum": "Framework operativo di stampo agile basato su cicli iterativi e incrementali di sviluppo (sprint), ruoli definiti e momenti periodici di allineamento e verifica."
   "Semantic Versioning (SemVer)": "Convenzione formale di versionamento basata su tre cifre (MAJOR.MINOR.PATCH) utilizzata per tracciare lo stato di maturità di documenti e codice."
-  "Simulatore": "Vedi \"Mock\"."
-  "Skill": "Vedi \"Abilità\"."
   "Sprint": "Intervallo temporale a durata fissa (es. 2 settimane) durante il quale il team si impegna a realizzare un insieme prefissato di attività dal backlog."
   "Stakeholder": "Qualsiasi individuo, gruppo o organizzazione che ha un interesse attivo o può influenzare/essere influenzato dalle decisioni e dagli esiti del progetto."
 T:

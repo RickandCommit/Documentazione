@@ -6,35 +6,35 @@
   versione: "v0.1.0",
   data: "2026-11-09",
   stato: "In redazione",
+  uso: "Esterno",
   redattori: ("Jatin Bajaj",),
   verificatori: ("Sara Stefani",),
+  esito-verifica: "Approvato",
+  approvatori: ("Francesco Funin"),
   destinatari: [Prof. Tullio Vardanega \ Prof. Riccardo Cardin \ Eggon S.r.l.],
 )
 
-// ==================== 1. REGISTRO DELLE MODIFICHE ====================
-= Registro delle modifiche
 
-#text(size: 8.5pt)[
-#table(
-  columns: (1.8cm, 2.1cm, 1fr, 2.8cm, 2.8cm),
-  stroke: 0.5pt + rgb("#b5b5b5"),
-  inset: 5.5pt,
-  fill: (col, row) => if row == 0 { rgb("#e5e7eb") } else { none },
-  table.cell(align: center)[*Versione*],
-  table.cell(align: center)[*Data*],
-  [*Descrizione*],
-  table.cell(align: center)[*Autore*],
-  table.cell(align: center)[*Verificatore*],
+#set heading(numbering: none)
 
-  [0.1.0], [2026-11-09], [Prima stesura del Glossario con i termini di capitolato C2, tecnologie AI e concetti di Ingegneria del Software], [Jatin Bajaj], [Sara Stefani],
+
+#pagebreak()
+
+// ==================== REGISTRO DELLE MODIFICHE ====================
+
+#registro-modifiche(
+  table.cell(align: center)[0.1.0],
+  table.cell(align: center)[2026-11-09],
+  [Prima stesura del Glossario con i termini del capitolato C2, tecnologie AI e concetti di Ingegneria del Software],
+  [Jatin Bajaj],
+  [Sara Stefani],
 )
-]
 
 #pagebreak()
 #outline(title: "Indice")
 #pagebreak()
 
-// ==================== 2. INTRODUZIONE ====================
+// ==================== INTRODUZIONE ====================
 = Introduzione
 
 == Finalità del documento
@@ -54,13 +54,13 @@ La marcatura è limitata alla sola prima comparsa del termine all'interno di cia
 
 #pagebreak()
 
-// ==================== 3. SEZIONI ALFABETICHE ====================
+// ==================== SEZIONI ALFABETICHE ====================
 #let data-glossario = yaml("glossario.yml")
 
 #for (lettera, termini) in data-glossario [
-  = #lettera
+  #heading(level: 1, numbering: none)[#lettera]
   #v(0.2cm)
-  
+
   #if termini != none and termini.len() > 0 [
     #for (parola, definizione) in termini [
       #block(width: 100%, breakable: false, inset: (bottom: 0.8em))[
@@ -74,7 +74,8 @@ La marcatura è limitata alla sola prima comparsa del termine all'interno di cia
     #text(style: "italic", fill: rgb("#777777"))[Nessun termine registrato al momento per questa sezione.]
   ]
 
+
   #if lettera != "Z" [
-    #pagebreak()
+    #pagebreak(weak: true)
   ]
 ]
