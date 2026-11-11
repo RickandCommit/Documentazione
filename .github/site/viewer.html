@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visualizzatore · RickandCommit</title>
+  <meta name="description" content="Visualizzatore dei documenti ufficiali del gruppo RickandCommit – Università di Padova.">
+  <meta name="robots" content="noindex">
+
+  <!-- Favicon Ufficiali -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#000000">
+
+  <!-- Stili: PDF.js (solo text layer) + tema del sito -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/web/pdf_viewer.min.css">
+  <link rel="stylesheet" href="viewer.css">
+</head>
+<body class="viewer-body">
+
+  <!-- =========================================================================
+       Barra superiore del visualizzatore (coerente con la navbar del sito)
+       ========================================================================= -->
+  <header class="viewer-header" id="viewerHeader">
+    <div class="viewer-header-inner">
+
+      <!-- Brand: torna al sito (ancorato a sinistra come nella home) -->
+      <a href="./" class="viewer-brand" aria-label="Torna al sito RickandCommit">
+        <span class="viewer-brand-logo">
+          <img src="assets/logo.png" alt="" aria-hidden="true">
+        </span>
+        <span class="viewer-brand-name">RickandCommit</span>
+      </a>
+
+      <span class="viewer-divider" aria-hidden="true"></span>
+
+      <!-- Titolo documento (pulito, senza metadati sotto) -->
+      <div class="viewer-doc-info">
+        <h1 class="viewer-doc-title" id="docTitle">Caricamento documento…</h1>
+      </div>
+
+      <!-- Controlli (tutti raggruppati coerentemente a destra, allineati con la barra laterale) -->
+      <div class="viewer-controls" role="toolbar" aria-label="Controlli documento">
+        <button type="button" class="vbtn vbtn-sidebar" id="btnSidebar" aria-label="Mostra/nascondi miniature" aria-pressed="false" title="Miniature (T)">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="16" rx="2"/>
+            <path d="M15 4v16"/>
+          </svg>
+          <span class="vbtn-text">Miniature</span>
+        </button>
+
+        <div class="vgroup" aria-label="Navigazione pagine">
+          <button type="button" class="vbtn" id="btnPrev" aria-label="Pagina precedente" title="Pagina precedente (←)">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <label class="vpage">
+            <span class="sr-only">Pagina corrente</span>
+            <input type="text" inputmode="numeric" id="pageInput" value="1" autocomplete="off" aria-describedby="pageTotal">
+            <span class="vpage-total" id="pageTotal">/ –</span>
+          </label>
+          <button type="button" class="vbtn" id="btnNext" aria-label="Pagina successiva" title="Pagina successiva (→)">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+
+        <div class="vgroup" aria-label="Zoom">
+          <button type="button" class="vbtn" id="btnZoomOut" aria-label="Riduci zoom" title="Riduci (−)">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
+          </button>
+          <button type="button" class="vzoom-label" id="btnZoomFit" aria-label="Adatta alla larghezza" title="Adatta alla larghezza (0)">100%</button>
+          <button type="button" class="vbtn" id="btnZoomIn" aria-label="Aumenta zoom" title="Aumenta (+)">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+        </div>
+
+        <a class="vbtn vbtn-accent" id="btnDownload" href="#" download aria-label="Scarica PDF" title="Scarica PDF">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+          <span class="vbtn-text">Scarica</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Barra di avanzamento lettura (stessa del sito) -->
+    <div class="viewer-progress" id="readProgress" aria-hidden="true"></div>
+  </header>
+
+  <!-- =========================================================================
+       Area documento
+       ========================================================================= -->
+  <div class="viewer-layout">
+    <!-- Area principale del PDF (a sinistra / centro) -->
+    <main class="viewer-stage" id="stage" tabindex="-1">
+      <!-- Stato di caricamento -->
+      <div class="viewer-state" id="stateLoading" role="status" aria-live="polite">
+        <div class="portal-loader" aria-hidden="true"><span></span></div>
+        <p class="viewer-state-title">Apertura del portale…</p>
+        <p class="viewer-state-sub" id="loadingPercent">Caricamento del documento</p>
+      </div>
+
+      <!-- Stato di errore -->
+      <div class="viewer-state viewer-state-error" id="stateError" role="alert" hidden>
+        <p class="viewer-state-title">Impossibile visualizzare il documento</p>
+        <p class="viewer-state-sub" id="errorMessage">Il file richiesto non è disponibile.</p>
+        <div class="viewer-state-actions">
+          <a href="./" class="vlink">← Torna al sito</a>
+          <a href="#" class="vlink vlink-accent" id="errorRawLink" target="_blank" rel="noopener noreferrer" hidden>Apri il PDF originale</a>
+        </div>
+      </div>
+
+      <div class="viewer-pages" id="pages"></div>
+    </main>
+
+    <!-- Barra laterale miniature (a DESTRA, coerente con il pulsante nella toolbar) -->
+    <aside class="viewer-sidebar collapsed" id="sidebar" aria-label="Miniature delle pagine">
+      <div class="viewer-sidebar-inner">
+        <div class="viewer-sidebar-header">
+          <span class="viewer-sidebar-title">Miniature</span>
+          <button type="button" class="vsidebar-close" id="btnCloseSidebar" aria-label="Chiudi miniature" title="Chiudi (Esc)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <div class="viewer-thumbs" id="thumbs"></div>
+      </div>
+    </aside>
+  </div>
+
+  <script type="module" src="viewer.js"></script>
+</body>
+</html>
