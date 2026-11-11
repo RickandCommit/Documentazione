@@ -1,79 +1,21 @@
-#set document(title: "Glossario — RickandCommit", author: "RickandCommit")
-#set page(
-  paper: "a4",
-  margin: (x: 2.5cm, y: 2.5cm),
-  footer: context [
-    #line(length: 100%, stroke: 0.5pt + rgb("#b5b5b5"))
-    #v(-0.2cm)
-    #grid(
-      columns: (1fr, 1fr, 1fr),
-      align: (left + horizon, center + horizon, right + horizon),
-      [
-        #box(height: 11pt, baseline: 15%)[#image("neon_logo.png")]
-        #h(4pt)
-        #text(size: 9pt, weight: "bold")[RickandCommit]
-      ],
-      [#text(size: 9pt)[#counter(page).display()]],
-      [#text(size: 9pt)[Glossario v0.1.0]],
-    )
-  ],
-)
-#set text(font: "Libertinus Serif", size: 12pt, lang: "it")
+#import "../.github/template/template.typ": *
 
-#set heading(numbering: none)
-#set par(justify: true, leading: 0.68em)
-
-#show heading.where(level: 1): it => block(above: 1.8em, below: 1em)[
-  #text(size: 16pt, weight: "bold")[#it]
-]
-#show heading.where(level: 2): it => block(above: 1.4em, below: 0.8em)[
-  #text(size: 13pt, weight: "bold")[#it]
-]
-
-#let issue(n) = link("https://github.com/RickandCommit/Documentazione/issues/" + str(n))[#text(fill: rgb("#0969da"))[#underline[\##n]]]
-
-// ==================== FRONTESPIZIO ====================
-#align(center)[
-  #grid(
-    columns: (auto, auto),
-    column-gutter: 2cm,
-    align: horizon,
-    [#image("neon_completo.png", width: 5.5cm)],
-    [#image("unipd_logo.png", width: 3.5cm)],
-  )
-  #v(0.3cm)
-  #text(size: 11pt)[Università di Padova]
-  #v(0.05cm)
-  #text(size: 10.5pt)[Corso di Ingegneria del Software · A.A. 2026/2027]
-  #v(0.6cm)
-  #text(size: 26pt, weight: "bold")[Glossario]
-  #v(0.25cm)
-  #text(size: 10pt, style: "italic")[Versione v0.1.0 · Ultima modifica: 2026-11-09]
-]
-
-#v(0.5cm)
-
-// ==================== INFORMAZIONI GENERALI ====================
-#table(
-  columns: (auto, 1fr),
-  stroke: 0.5pt + rgb("#b5b5b5"),
-  inset: 7pt,
-  [*Data*], [2026-11-09],
-  [*Stato*], [In redazione],
-  [*Redattore*], [Jatin Bajaj],
-  [*Verificatore*], [Sara Stefani],
-  [*Responsabile*], [Francesco Furin],
-  [*Destinatari*], [Prof. Tullio Vardanega \ Prof. Riccardo Cardin \ Eggon S.r.l.],
+#show: documento.with(
+  titolo: "Glossario",
+  sottotitolo: "Definizione univoca dei termini e della terminologia di dominio",
+  versione: "v0.1.0",
+  data: "2026-11-09",
+  stato: "In redazione",
+  redattori: ("Jatin Bajaj",),
+  verificatori: ("Sara Stefani",),
+  destinatari: [Prof. Tullio Vardanega \ Prof. Riccardo Cardin \ Eggon S.r.l.],
 )
 
-#v(0.4cm)
-
-// ==================== REGISTRO DELLE MODIFICHE ====================
-#heading(level: 1, outlined: false)[Registro delle modifiche]
+// ==================== 1. REGISTRO DELLE MODIFICHE ====================
+= Registro delle modifiche
 
 #text(size: 8.5pt)[
 #table(
-  // 1.8cm garantisce che "Versione" rimanga tutto su una riga
   columns: (1.8cm, 2.1cm, 1fr, 2.8cm, 2.8cm),
   stroke: 0.5pt + rgb("#b5b5b5"),
   inset: 5.5pt,
@@ -92,7 +34,7 @@
 #outline(title: "Indice")
 #pagebreak()
 
-// ==================== 1. INTRODUZIONE ====================
+// ==================== 2. INTRODUZIONE ====================
 = Introduzione
 
 == Finalità del documento
@@ -112,7 +54,7 @@ La marcatura è limitata alla sola prima comparsa del termine all'interno di cia
 
 #pagebreak()
 
-// ==================== 2. SEZIONI ALFABETICHE ====================
+// ==================== 3. SEZIONI ALFABETICHE ====================
 #let data-glossario = yaml("glossario.yml")
 
 #for (lettera, termini) in data-glossario [
