@@ -1,0 +1,592 @@
+/* ==========================================================================
+   RickandCommit · Visualizzatore PDF
+   Stesso linguaggio visivo del sito: Deep Black, Portal Green, Cosmic Purple
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg-pitch-black: #000000;
+  --bg-page: #030407;
+  --bg-card: #0a0d13;
+  --bg-card-hover: #0f141d;
+  --bg-navbar: rgba(3, 4, 7, 0.92);
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-card: rgba(255, 255, 255, 0.09);
+  --border-hover: rgba(0, 255, 136, 0.35);
+
+  --portal-green: #00ff88;
+  --portal-green-hover: #38ef7d;
+  --rick-purple: #7c3aed;
+  --rick-purple-neon: #c084fc;
+
+  --text-white: #ffffff;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --header-h: 68px;
+  --sidebar-w: 200px;
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+/* Scrollbar coerente stile RickandCommit (Webkit + standard) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 255, 136, 0.35) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--portal-green);
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.viewer-body {
+  font-family: var(--font-sans);
+  background: var(--bg-pitch-black);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+/* Sfondo atmosferico radiale (come la home) */
+.viewer-body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 650px;
+  background: radial-gradient(circle 650px at 50% -120px, rgba(0, 255, 136, 0.05) 0%, rgba(124, 58, 237, 0.035) 45%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--portal-green);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.viewer-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--header-h);
+  z-index: 100;
+  background: var(--bg-navbar);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.viewer-header-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.25rem;
+}
+
+.viewer-progress {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--portal-green), var(--rick-purple));
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.65);
+  transition: width 0.08s linear;
+  pointer-events: none;
+}
+
+/* Brand */
+.viewer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: transform 0.28s var(--ease-spring);
+}
+
+.viewer-brand:hover { transform: scale(1.04); }
+
+.viewer-brand-logo {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+}
+
+.viewer-brand-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 4px rgba(0, 255, 136, 0.25));
+  transition: filter 0.3s ease;
+}
+
+.viewer-brand:hover .viewer-brand-logo img {
+  filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.5));
+}
+
+.viewer-brand-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 22%, var(--portal-green) 48%, #8b5cf6 75%, var(--rick-purple-neon) 100%);
+  background-size: 160% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.2));
+  transition: filter 0.3s ease, background-position 0.4s ease;
+}
+
+.viewer-brand:hover .viewer-brand-name {
+  background-position: right center;
+  filter: drop-shadow(0 0 14px rgba(0, 255, 136, 0.6));
+}
+
+.viewer-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border-subtle);
+  flex-shrink: 0;
+}
+
+/* Info documento */
+.viewer-doc-info {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  flex: 1;
+}
+
+.viewer-doc-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.015em;
+}
+
+/* Controlli */
+.viewer-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.vgroup {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 10px;
+}
+
+.vbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 0.5rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font: 600 0.85rem var(--font-sans);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vbtn:hover:not(:disabled) {
+  color: var(--portal-green);
+  background: rgba(0, 255, 136, 0.06);
+}
+
+.vbtn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.vbtn[aria-pressed="true"] {
+  color: var(--portal-green);
+  background: rgba(0, 255, 136, 0.08);
+  border-color: rgba(0, 255, 136, 0.25);
+}
+
+.vbtn-accent {
+  height: 36px;
+  padding: 0 0.85rem;
+  color: var(--portal-green);
+  border-color: rgba(0, 255, 136, 0.35);
+  background: rgba(0, 255, 136, 0.05);
+}
+
+.vbtn-accent:hover {
+  color: #000 !important;
+  background: var(--portal-green) !important;
+  box-shadow: 0 0 14px rgba(0, 255, 136, 0.45);
+}
+
+.vpage {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.vpage input {
+  width: 2.6rem;
+  height: 28px;
+  text-align: center;
+  background: var(--bg-pitch-black);
+  border: 1px solid var(--border-card);
+  border-radius: 6px;
+  color: var(--text-white);
+  font: 600 0.8rem var(--font-mono);
+  transition: border-color 0.2s ease;
+}
+
+.vpage input:focus { border-color: var(--border-hover); outline: none; }
+
+.vzoom-label {
+  min-width: 3.6rem;
+  height: 34px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: var(--text-primary);
+  font: 600 0.78rem var(--font-mono);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.vzoom-label:hover { color: var(--portal-green); }
+
+/* ==========================================================================
+   Layout area documento
+   ========================================================================== */
+
+.viewer-layout {
+  position: fixed;
+  inset: var(--header-h) 0 0 0;
+  display: flex;
+  z-index: 1;
+}
+
+.viewer-sidebar {
+  position: relative;
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  height: 100%;
+  background: rgba(3, 4, 7, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-left: 1px solid var(--border-subtle);
+  transition: margin-right 0.28s var(--ease-spring);
+  z-index: 10;
+}
+
+.viewer-sidebar.collapsed {
+  margin-right: calc(-1 * var(--sidebar-w));
+}
+
+.vbtn-sidebar {
+  gap: 0.45rem;
+}
+
+.vbtn-sidebar[aria-pressed="true"] {
+  color: var(--portal-green);
+  background: rgba(0, 255, 136, 0.08);
+  border-color: rgba(0, 255, 136, 0.3);
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.15);
+}
+
+.viewer-sidebar-inner {
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem 0.9rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 255, 136, 0.35) transparent;
+}
+
+.viewer-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.viewer-sidebar-title {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.vsidebar-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.vsidebar-close:hover {
+  color: var(--portal-green);
+  background: rgba(0, 255, 136, 0.08);
+  border-color: rgba(0, 255, 136, 0.25);
+}
+
+.viewer-thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.vthumb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font: 500 0.72rem var(--font-mono);
+}
+
+.vthumb-frame {
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #0b0f19;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s var(--ease-spring);
+}
+
+.vthumb-frame canvas { display: block; width: 100%; height: auto; }
+
+.vthumb:hover .vthumb-frame { border-color: rgba(0, 255, 136, 0.45); transform: scale(1.02); }
+
+.vthumb.active { color: var(--portal-green); }
+
+.vthumb.active .vthumb-frame {
+  border-color: var(--portal-green);
+  box-shadow: 0 0 0 1px var(--portal-green), 0 0 16px rgba(0, 255, 136, 0.25);
+}
+
+.viewer-stage {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+  outline: none;
+  scrollbar-color: rgba(0, 255, 136, 0.35) transparent;
+}
+
+.viewer-pages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem 1.5rem 4rem;
+  min-width: min-content;
+}
+
+.vpage-wrap {
+  position: relative;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 14px 40px rgba(0, 0, 0, 0.7);
+  transition: box-shadow 0.3s ease;
+  flex-shrink: 0;
+}
+
+.vpage-wrap:hover {
+  box-shadow: 0 0 0 1px rgba(0, 255, 136, 0.3), 0 14px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 255, 136, 0.08);
+}
+
+.vpage-wrap canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+}
+
+.vpage-wrap .textLayer { border-radius: 4px; }
+
+/* Selezione testo nel tema del sito */
+.vpage-wrap .textLayer ::selection { background: rgba(0, 255, 136, 0.35); }
+
+/* Link interni/esterni nel PDF */
+.vlink-layer { position: absolute; inset: 0; pointer-events: none; }
+
+.vlink-layer a {
+  position: absolute;
+  pointer-events: auto;
+  border-radius: 2px;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.vlink-layer a:hover {
+  background: rgba(0, 255, 136, 0.15);
+  box-shadow: 0 0 0 1px rgba(0, 255, 136, 0.5);
+}
+
+.vpage-label {
+  position: absolute;
+  bottom: -1.15rem;
+  right: 0;
+  font: 500 0.68rem var(--font-mono);
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Stati: caricamento ed errore
+   ========================================================================== */
+
+.viewer-state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.viewer-state[hidden] { display: none; }
+
+.viewer-state-title { font-size: 1.1rem; font-weight: 700; color: var(--text-white); }
+
+.viewer-state-sub {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  max-width: 520px;
+}
+
+.viewer-state-actions { display: flex; gap: 1rem; margin-top: 0.9rem; flex-wrap: wrap; justify-content: center; }
+
+.vlink {
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-card);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.vlink:hover { border-color: var(--border-hover); color: var(--portal-green); }
+.vlink-accent { color: var(--portal-green); border-color: rgba(0, 255, 136, 0.35); }
+.vlink[hidden] { display: none; }
+
+/* Loader a portale (verde → viola) */
+.portal-loader {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  padding: 3px;
+  background: conic-gradient(from 0deg, var(--portal-green), var(--rick-purple), transparent 70%);
+  animation: portal-spin 1s linear infinite;
+  filter: drop-shadow(0 0 14px rgba(0, 255, 136, 0.45));
+  margin-bottom: 0.6rem;
+}
+
+.portal-loader span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--bg-pitch-black);
+}
+
+@keyframes portal-spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .portal-loader { animation-duration: 3s; }
+  * { transition: none !important; }
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .viewer-brand-name, .viewer-divider, .vbtn-text { display: none; }
+  .viewer-sidebar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.8);
+  }
+}
+
+@media (max-width: 640px) {
+  :root { --header-h: 108px; }
+  .viewer-header-inner { flex-wrap: wrap; align-content: center; row-gap: 0.5rem; padding: 0.5rem 0.9rem; }
+  .viewer-doc-info { flex: 1 1 0; }
+  .viewer-controls { width: 100%; justify-content: space-between; }
+  .viewer-pages { padding: 1rem 0.6rem 3rem; gap: 1.1rem; }
+}
