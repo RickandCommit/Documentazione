@@ -4,8 +4,8 @@
   titolo: "Verbale del Quarto Incontro",
   tipo: "Verbale Interno",
   data: "2026-11-04",
-  versione: "v0.1.0",
-  ultima-modifica: "2026-11-04",
+  versione: "v0.2.0",
+  ultima-modifica: "2026-11-12",
   ora-inizio: "15.00",
   ora-fine: "16.00",
   modalita: "Discord",
@@ -17,6 +17,7 @@
 
 // ==================== REGISTRO DELLE MODIFICHE ====================
 #registro-modifiche(
+  table.cell(align: center)[0.2.0], table.cell(align: center)[2026-11-12], [Modificate "Normativa di Progetto" in "Norme di Progetto"], [Nicola Bonetto], [Sara Stefani],
   table.cell(align: center)[0.1.0], table.cell(align: center)[2026-11-04], [Stesura iniziale del verbale], [Nicola Bonetto], [Sara Stefani],
 )
 
@@ -52,7 +53,7 @@
 
 + Contatti con Eggon: operazioni preliminari e canale Telegram
 + Revisione della valutazione della candidatura
-+ Glossario e Normativa di Progetto (_Way of Working_)
++ Glossario e Norme di Progetto (_Way of Working_)
 + Aggiornamento dei README del repository e del progetto
 + Divisione ufficiale dei ruoli e politica di rotazione
 + Sistemazione della firma e-mail e mail di test al professore
@@ -85,7 +86,7 @@ I ruoli del primo sprint della fase RTB sono:
 - *Responsabile:* Francesco Furin
 - *Verificatore:* Sara Stefani
 - *Amministratore:* Dorde Blagojevic, che aggiorna anche il sito su GitHub Pages con la sezione RTB
-- *Analista (Normativa di Progetto):* Luka Lacic, per una prima stesura, anche solo interna
+- *Analista (Norme di Progetto):* Luka Lacic, per una prima stesura, anche solo interna
 - *Analista (BRD e use case):* Alessandro Rasia dal Polo, per l'individuazione degli attori e dei primi use case
 - *Glossario:* Jatin Bajaj, per la stesura iniziale dei termini
 - *README e verbale:* Nicola Bonetto
@@ -101,7 +102,7 @@ Per le Pull Request si è ribadito che l'autore la apre solo quando ritiene il l
 // ==================== 4. CONCLUSIONI ====================
 = Conclusioni
 
-La riunione ha ufficializzato i ruoli del primo sprint della fase RTB e confermato la rotazione bisettimanale. Le priorità sono il primo contatto con Eggon e la correzione del versionamento, a cui seguiranno le prime bozze di Glossario, Normativa di Progetto e analisi dei requisiti, con scadenze provvisorie all'11 novembre.
+La riunione ha ufficializzato i ruoli del primo sprint della fase RTB e confermato la rotazione bisettimanale. Le priorità sono il primo contatto con Eggon e la correzione del versionamento, a cui seguiranno le prime bozze di Glossario, Norme di Progetto e Analisi dei Requisiti.
 
 #pagebreak()
 
@@ -119,7 +120,7 @@ La riunione ha ufficializzato i ruoli del primo sprint della fase RTB e conferma
   [VI\_2026-11-04.D1], [Contattare Eggon per un primo incontro conoscitivo.], [Scrivere a Eggon per proporre l'incontro.], [Francesco Furin], [2026-11-05], [—],
   [VI\_2026-11-04.D2], [Invio di una mail di test al professore con la nuova firma.], [Inviare la mail e verificare che non finisca nello spam.], [Francesco Furin], [2026-11-05], [—],
   [VI\_2026-11-04.D3], [Avvio del Glossario.], [Redigere la stesura iniziale dei termini.], [Jatin Bajaj], [2026-11-11], [#issue(58)],
-  [VI\_2026-11-04.D4], [Avvio della Normativa di Progetto.], [Redigere una prima stesura delle norme.], [Luka Lacic], [2026-11-11], [#issue(61)],
+  [VI\_2026-11-04.D4], [Avvio delle Norme di Progetto.], [Redigere una prima stesura delle norme.], [Luka Lacic], [2026-11-11], [#issue(61)],
   [VI\_2026-11-04.D5], [Avvio dell'analisi dei requisiti.], [Studiare il capitolato, individuare gli attori e strutturare i primi use case.], [Alessandro Rasia dal Polo], [2026-11-11], [#issue(62)],
   [VI\_2026-11-04.D6], [Aggiunta della sezione RTB al sito.], [Aggiornare GitHub Pages.], [Dorde Blagojevic], [2026-11-11], [#issue(63)],
   [VI\_2026-11-04.D7], [Aggiornamento dei README.], [Aggiornare il README del repository.], [Nicola Bonetto], [2026-11-11], [—],
