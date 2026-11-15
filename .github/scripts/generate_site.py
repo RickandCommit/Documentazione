@@ -266,7 +266,7 @@ def detect_active_phase(root_dir: str, override_phase: str | None = None) -> tup
 
 def build_navbar_html(active_phase: str, archived_phases: list[str]) -> str:
     """Genera i collegamenti della barra di navigazione dinamica."""
-    active_title = PHASE_META[active_phase]["title"].split(" (")[0]
+    active_title = PHASE_META[active_phase]["tag"]
     links = [
         f'          <li>\n            <a href="#{active_phase}" class="nav-item-link" data-section="{active_phase}">{active_title}</a>\n          </li>',
         '          <li>\n            <a href="#diapositive" class="nav-item-link" data-section="diapositive">Diapositive</a>\n          </li>',
@@ -476,15 +476,7 @@ def build_candidatura_section(site_dir: str, root_dir: str, is_archived: bool = 
             f'      </section>'
         )
     else:
-        return (
-            f'        <div class="archive-phase-card" id="archive-candidatura">\n'
-            f'          <div class="archive-phase-header">\n'
-            f'            <h3 class="archive-phase-title">{meta["title"]}</h3>\n'
-            f'            <span class="archive-phase-badge">{meta["tag"]}</span>\n'
-            f'          </div>\n'
-            f'{inner_html}\n'
-            f'        </div>'
-        )
+        return build_archived_phase_card("candidatura", meta["title"], inner_html)
 
 
 def build_generic_phase_section(phase_id: str, site_dir: str, root_dir: str, is_archived: bool = False) -> str:
@@ -587,15 +579,28 @@ def build_generic_phase_section(phase_id: str, site_dir: str, root_dir: str, is_
             f'      </section>'
         )
     else:
-        return (
-            f'        <div class="archive-phase-card" id="archive-{phase_id}">\n'
-            f'          <div class="archive-phase-header">\n'
-            f'            <h3 class="archive-phase-title">{meta["title"]}</h3>\n'
-            f'            <span class="archive-phase-badge">{meta["tag"]}</span>\n'
-            f'          </div>\n'
-            f'{inner_html}\n'
-            f'        </div>'
-        )
+        return build_archived_phase_card(phase_id, meta["title"], inner_html)
+
+
+def build_archived_phase_card(phase_id: str, title: str, inner_html: str) -> str:
+    """Costruisce la card a tendina (<details>) per una fase archiviata."""
+    chevron_svg = (
+        '<svg class="archive-chevron" viewBox="0 0 24 24" width="20" height="20" '
+        'fill="none" stroke="currentColor" stroke-width="2" '
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+        '<path d="M6 9l6 6 6-6"/></svg>'
+    )
+    return (
+        f'        <details class="archive-phase-card" id="archive-{phase_id}">\n'
+        f'          <summary class="archive-phase-header">\n'
+        f'            <h3 class="archive-phase-title">{title}</h3>\n'
+        f'            {chevron_svg}\n'
+        f'          </summary>\n'
+        f'          <div class="archive-phase-body">\n'
+        f'{inner_html}\n'
+        f'          </div>\n'
+        f'        </details>'
+    )
 
 
 def build_phase_section(phase_id: str, site_dir: str, root_dir: str, is_archived: bool = False) -> str:

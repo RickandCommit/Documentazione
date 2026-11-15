@@ -1138,21 +1138,40 @@ main {
   background: var(--bg-card);
   border: 1px solid var(--border-card);
   border-radius: 12px;
-  padding: 1.5rem 1.75rem;
-  margin-bottom: 2rem;
-  transition: border-color 0.2s var(--ease-spring);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  transition: border-color 0.2s var(--ease-spring), box-shadow 0.2s var(--ease-spring);
 }
 
 .archive-phase-card:hover {
-  border-color: rgba(255, 255, 255, 0.16);
+  border-color: rgba(0, 255, 136, 0.28);
+}
+
+.archive-phase-card[open] {
+  border-color: rgba(0, 255, 136, 0.32);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
 }
 
 .archive-phase-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.85rem;
+  padding: 1.25rem 1.75rem;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.archive-phase-header::-webkit-details-marker {
+  display: none;
+}
+
+.archive-phase-header:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.archive-phase-card[open] > .archive-phase-header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -1162,14 +1181,35 @@ main {
   color: var(--text-white);
 }
 
-.archive-phase-badge {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  padding: 0.2rem 0.55rem;
-  border-radius: 6px;
-  background: rgba(148, 163, 184, 0.1);
-  color: var(--text-muted);
-  border: 1px solid rgba(148, 163, 184, 0.2);
+.archive-chevron {
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  transition: transform 0.28s var(--ease-spring), color 0.2s ease;
+}
+
+.archive-phase-header:hover .archive-chevron,
+.archive-phase-card[open] > .archive-phase-header .archive-chevron {
+  color: var(--portal-green);
+}
+
+.archive-phase-card[open] > .archive-phase-header .archive-chevron {
+  transform: rotate(180deg);
+}
+
+.archive-phase-body {
+  padding: 1.5rem 1.75rem;
+  animation: archiveReveal 0.24s var(--ease-spring);
+}
+
+@keyframes archiveReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Utility per impedire andate a capo orfane */
