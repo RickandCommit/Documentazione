@@ -4,8 +4,8 @@
   titolo: "Verbale del Quarto Incontro",
   tipo: "Verbale Interno",
   data: "2026-11-04",
-  versione: "v0.2.0",
-  ultima-modifica: "2026-11-12",
+  versione: "v1.0.0",
+  ultima-modifica: "2026-11-15",
   ora-inizio: "15.00",
   ora-fine: "16.00",
   modalita: "Discord",
@@ -17,6 +17,7 @@
 
 // ==================== REGISTRO DELLE MODIFICHE ====================
 #registro-modifiche(
+  table.cell(align: center)[1.0.0], table.cell(align: center)[2026-11-15], [Approvazione per il rilascio], [Francesco Furin], [—],
   table.cell(align: center)[0.2.0], table.cell(align: center)[2026-11-12], [Modificate "Normativa di Progetto" in "Norme di Progetto"], [Nicola Bonetto], [Sara Stefani],
   table.cell(align: center)[0.1.0], table.cell(align: center)[2026-11-04], [Stesura iniziale del verbale], [Nicola Bonetto], [Sara Stefani],
 )
