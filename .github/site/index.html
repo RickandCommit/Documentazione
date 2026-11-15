@@ -538,6 +538,17 @@
           }, 2200);
         });
       }
+
+      // 4. Apertura dei PDF nel visualizzatore con lo stile del sito
+      //    (senza JavaScript i link restano diretti al PDF nativo)
+      document.querySelectorAll('a[href$=".pdf"]').forEach((link) => {
+        const file = link.getAttribute('href');
+        if (/^(https?:)?\/\//i.test(file)) return;
+        const title = (link.querySelector('h3, h4, .verbale-row-title')?.textContent || '').trim();
+        const params = new URLSearchParams({ file });
+        if (title) params.set('title', title);
+        link.setAttribute('href', `viewer.html?${params.toString()}`);
+      });
     });
   </script>
 

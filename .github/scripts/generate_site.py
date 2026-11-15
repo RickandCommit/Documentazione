@@ -167,6 +167,10 @@ def extract_metadata_from_typ(typ_path: str) -> dict:
     is_signed = "firmato" in filename.lower()
     pdf_filename = filename[:-4] + ".pdf"
 
+    # Titolo dichiarato nel template (titolo: "...")
+    title_match = re.search(r'titolo:\s*"([^"]+)"', text)
+    title = title_match.group(1) if title_match else ""
+
     return {
         "filename": pdf_filename,
         "path": typ_path,
@@ -175,6 +179,7 @@ def extract_metadata_from_typ(typ_path: str) -> dict:
         "company": company,
         "is_signed": is_signed,
         "text": text,
+        "title": title,
     }
 
 
@@ -523,7 +528,7 @@ def build_generic_phase_section(phase_id: str, site_dir: str, root_dir: str, is_
         fname = meta_d["filename"]
         if fname.endswith(".typ"):
             fname = fname[:-4] + ".pdf"
-        title = meta_d["title"] if meta_d["title"] != "Documento" else fname[:-4].replace("_", " ")
+        title = meta_d.get("title") or re.sub(r"_v\d+\.\d+\.\d+$", "", fname[:-4]).replace("_", " ")
         card = (
             f'            <a href="{folder}/{fname}" target="_blank" rel="noopener noreferrer" class="doc-compact-card" aria-label="Apri {title} PDF">\n'
             f'              <div class="doc-compact-body">\n'
