@@ -9,15 +9,16 @@
   ora-inizio: "15.00",
   ora-fine: "15.40",
   modalita: "Discord",
-  stato: "In redazione",
+  stato: "Approvato",
   redattore: "Nicola Bonetto",
   verificatore: "Sara Stefani",
-  esito-verifica: "In attesa"
+  esito-verifica: "Positivo"
 )
 
 // ==================== REGISTRO DELLE MODIFICHE ====================
 #registro-modifiche(
   table.cell(align: center)[1.0.0], table.cell(align: center)[2026-11-18], [Approvazione per il rilascio], [Francesco Furin], [—],
+  table.cell(align: center)[0.2.0], table.cell(align: center)[2026-11-18], [Aggiornamento scadenze e voci nel backlog], [Nicola Bonetto], [Sara Stefani],  
   table.cell(align: center)[0.1.0], table.cell(align: center)[2026-11-18], [Stesura iniziale del verbale], [Nicola Bonetto], [Sara Stefani],
 )
 
@@ -77,7 +78,7 @@ La repository del prodotto verrà creata quando se ne presenterà la necessità.
 
 Sono stati effettuati il merge in `main` del branch di setup della baseline RTB e quello dell'ultimo Diario di Bordo, dopo l'aggiornamento del relativo branch. La sezione RTB non è ancora visibile sul sito: con il caricamento del primo verbale interno in RTB lo script dovrebbe spostare la Candidatura in archivio ed esporre RTB. Dorde verificherà il funzionamento e correggerà eventuali problemi.
 
-Il template è stato aggiornato: il registro delle modifiche non compare più nell'indice e l'ordine delle colonne è cambiato. Tutti devono usare il template della repository e scaricare l'ultimo `regole.md`. Il verbale della riunione precedente è completo e verrà integrato con scadenze e riferimenti alle issue.
+Il template è stato aggiornato: il registro delle modifiche non compare più nell'indice e l'ordine delle colonne è cambiato. Il verbale della riunione precedente è completo e verrà integrato con scadenze e riferimenti alle issue.
 
 == Ruoli e preparazione dell'incontro con Eggon
 
@@ -108,13 +109,11 @@ La riunione ha fatto il punto a metà del primo sprint della fase RTB. Le priori
   inset: 6pt,
   fill: (col, row) => if row == 0 { rgb("#e5e7eb") } else { none },
   [*ID*], [*Decisione*], [*Azione*], [*Incaricato*], [*Scadenza*], table.cell(align: center)[*Issue*],
-  [VI\_2026-11-11.D1], [Invio del verbale esterno del primo incontro a Eggon per la firma.], [Inviare il verbale al referente aziendale, anche via Telegram.], [Francesco Furin], [—], [#issue(64)],
+  [VI\_2026-11-11.D1], [Invio del verbale esterno del primo incontro a Eggon per la firma.], [Inviare il verbale al referente aziendale, anche via Telegram.], [Francesco Furin], [2026-11-18], [#issue(64)],
   [VI\_2026-11-11.D2], [Preparazione per il prossimo incontro con Eggon.], [Studiare le tecnologie e preparare le domande per l'incontro.], [Intero gruppo], [2026-11-16], [—],
   [VI\_2026-11-11.D3], [Prosecuzione dell'analisi dei requisiti, con i casi d'uso modellati in PlantUML.], [Proseguire la modellazione e documentare le scelte sugli attori.], [Alessandro Rasia dal Polo], [—], [#issue(62)],
   [VI\_2026-11-11.D4], [Prosecuzione delle Norme di Progetto secondo la struttura prevista dallo standard ISO.], [Proseguire la stesura delle norme.], [Luka Lacic], [—], [#issue(61)],
   [VI\_2026-11-11.D5], [Pubblicazione di Glossario e Norme di Progetto in RTB, con copia evolutiva in PB a fine fase.], [Pubblicare il Glossario nella cartella RTB.], [Jatin Bajaj], [—], [#issue(58)],
-  [VI\_2026-11-11.D6], [Uso del template e delle regole aggiornate, senza versione nei nomi dei branch.], [Scaricare l'ultimo `regole.md` e usare il template della repository.], [Intero gruppo], [—], [—],
-  [VI\_2026-11-11.D7], [Verifica del sito con il caricamento del primo verbale RTB.], [Controllare l'archiviazione della Candidatura e la comparsa di RTB, correggendo lo script se necessario.], [Dorde Blagojevic], [Dopo il merge del verbale], [#issue(73)],
-  [VI\_2026-11-11.D8], [Creazione della repository del prodotto rimandata a quando servirà.], [#nessuna], [—], [—], [—],
+  [VI\_2026-11-11.D6], [Verifica del sito con il caricamento del primo verbale RTB.], [Controllare l'archiviazione della Candidatura e la comparsa di RTB, correggendo lo script se necessario.], [Dorde Blagojevic], [2026-11-18], [#issue(73)],
 )
 ]
