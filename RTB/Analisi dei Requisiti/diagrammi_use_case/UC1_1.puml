@@ -1,0 +1,21 @@
+@startuml UC1_1
+left to right direction
+
+actor "Dipendente" as dp
+actor "Provider LLM" as llm
+
+rectangle "NEXUM Concierge" {
+    usecase "UC1: Interazione chat testuale" as UC1
+    usecase "UC1.1: Chiarimento di informazioni ambigue" as UC1_1
+}
+
+dp -- UC1
+UC1 -- llm
+
+UC1 <.. UC1_1 : <<extend>>
+note on link
+Nel contesto della domanda
+sono presenti elementi ambigui
+end note
+
+@enduml

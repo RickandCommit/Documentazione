@@ -1,0 +1,7 @@
+@startuml provider_LLM
+left to right direction
+
+
+actor "Provider LLM" as llm
+
+@enduml

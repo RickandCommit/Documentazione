@@ -1,0 +1,12 @@
+@startuml UC13
+left to right direction
+
+actor "Amministratore HR" as hr
+
+rectangle "NEXUM Concierge" {
+    usecase "UC13: Ritiro fonte dalla consultazione" as UC13
+}
+
+hr -- UC13
+
+@enduml

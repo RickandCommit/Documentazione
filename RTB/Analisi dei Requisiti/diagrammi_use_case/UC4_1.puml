@@ -1,0 +1,23 @@
+@startuml UC4_1
+left to right direction
+
+actor "Dipendente" as dp
+actor "Provider LLM" as llm
+actor "Servizi NEXUM" as nexum
+
+rectangle "NEXUM Concierge" {
+    usecase "UC4: Consultazione dati personali, ferie e permessi" as UC4
+    usecase "UC4.1: Visualizzazione errore recupero dati personali" as UC4_1
+}
+
+dp -- UC4
+UC4 -- llm
+UC4 -- nexum
+
+UC4 <.. UC4_1 : <<extend>>
+note on link
+Errore di comunicazione
+con i servizi NEXUM
+end note
+
+@enduml

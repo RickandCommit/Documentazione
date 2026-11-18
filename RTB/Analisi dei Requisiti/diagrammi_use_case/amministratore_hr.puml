@@ -1,0 +1,7 @@
+@startuml amministratore_hr
+left to right direction
+
+
+actor "Amministratore HR" as hr
+
+@enduml

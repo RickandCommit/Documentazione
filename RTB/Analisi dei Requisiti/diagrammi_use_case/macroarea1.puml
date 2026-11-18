@@ -1,0 +1,19 @@
+@startuml macroarea1
+left to right direction
+
+actor "Dipendente" as dp
+actor "Provider LLM" as llm
+
+rectangle "NEXUM Concierge" {
+    usecase "UC1: Interazione chat testuale" as UC1
+    usecase "UC1.1: Chiarimento di informazioni ambigue" as UC1_1
+    usecase "UC1.2: Visualizzazione errore di comunicazione LLM" as UC1_2
+}
+
+dp -- UC1
+UC1 -- llm
+
+UC1 <.. UC1_1 : <<extend>>
+UC1 <.. UC1_2 : <<extend>>
+
+@enduml

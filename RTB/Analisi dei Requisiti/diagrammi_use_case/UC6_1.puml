@@ -1,0 +1,21 @@
+@startuml UC6_1
+left to right direction
+
+actor "Dipendente" as dp
+actor "Provider LLM" as llm
+
+rectangle "NEXUM Concierge" {
+    usecase "UC6: Registrazione richiesta ferie o permessi" as UC6
+    usecase "UC6.1: Visualizzazione riepilogo dati richiesta" as UC6_1
+}
+
+dp -- UC6
+UC6 -- llm
+
+UC6 ..> UC6_1 : <<include>>
+note on link
+Il dipendente visualizza i dati
+riferiti alla richiesta in preparazione
+end note
+
+@enduml

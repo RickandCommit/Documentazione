@@ -1,0 +1,21 @@
+@startuml UC1_2
+left to right direction
+
+actor "Dipendente" as dp
+actor "Provider LLM" as llm
+
+rectangle "NEXUM Concierge" {
+    usecase "UC1: Interazione chat testuale" as UC1
+    usecase "UC1.2: Visualizzazione errore di comunicazione LLM" as UC1_2
+}
+
+dp -- UC1
+UC1 -- llm
+
+UC1 <.. UC1_2 : <<extend>>
+note on link
+Errore tecnico di comunicazione
+con il provider AI
+end note
+
+@enduml

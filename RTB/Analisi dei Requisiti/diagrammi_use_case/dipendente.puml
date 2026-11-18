@@ -1,0 +1,7 @@
+@startuml dipendente
+left to right direction
+
+
+actor "Dipendente" as dp
+
+@enduml

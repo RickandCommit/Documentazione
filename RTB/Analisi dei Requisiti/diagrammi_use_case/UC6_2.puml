@@ -1,0 +1,23 @@
+@startuml UC6_2
+left to right direction
+
+actor "Dipendente" as dp
+actor "Provider LLM" as llm
+actor "Servizi NEXUM" as nexum
+
+rectangle "NEXUM Concierge" {
+    usecase "UC6: Registrazione richiesta ferie o permessi" as UC6
+    usecase "UC6.2: Conferma esplicita invio richiesta" as UC6_2
+}
+
+dp -- UC6
+UC6 -- llm
+UC6 -- nexum
+
+UC6 ..> UC6_2 : <<include>>
+note on link
+Il dipendente dà conferma esplicita
+dell'invio della richiesta
+end note
+
+@enduml

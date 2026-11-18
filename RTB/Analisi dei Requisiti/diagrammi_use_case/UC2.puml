@@ -1,0 +1,14 @@
+@startuml UC2
+left to right direction
+
+actor "Dipendente" as dp
+actor "Provider LLM" as llm
+
+rectangle "NEXUM Concierge" {
+    usecase "UC2: Richiesta informazioni su regolamenti aziendali" as UC2
+}
+
+dp -- UC2
+UC2 -- llm
+
+@enduml

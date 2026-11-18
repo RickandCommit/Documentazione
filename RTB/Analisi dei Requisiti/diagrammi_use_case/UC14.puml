@@ -1,0 +1,12 @@
+@startuml UC14
+left to right direction
+
+actor "Amministratore HR" as hr
+
+rectangle "NEXUM Concierge" {
+    usecase "UC14: Monitoraggio stato elaborazione fonti" as UC14
+}
+
+hr -- UC14
+
+@enduml

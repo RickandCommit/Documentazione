@@ -1,0 +1,24 @@
+@startuml macroarea4
+left to right direction
+
+actor "Dipendente" as dp
+actor "Provider LLM" as llm
+actor "Servizi NEXUM" as nexum
+
+rectangle "NEXUM Concierge" {
+    usecase "UC6: Registrazione richiesta ferie o permessi" as UC6
+    usecase "UC6.1: Visualizzazione riepilogo dati richiesta" as UC6_1
+    usecase "UC6.2: Conferma esplicita invio richiesta" as UC6_2
+    usecase "UC6.3: Modifica dati della richiesta in preparazione" as UC6_3
+    usecase "UC6.4: Visualizzazione errore validazione o sovrapposizione" as UC6_4
+}
+
+dp -- UC6
+UC6 -- llm
+UC6 -- nexum
+UC6 ..> UC6_1 : <<include>>
+UC6 ..> UC6_2 : <<include>>
+UC6 <.. UC6_3 : <<extend>>
+UC6 <.. UC6_4 : <<extend>>
+
+@enduml

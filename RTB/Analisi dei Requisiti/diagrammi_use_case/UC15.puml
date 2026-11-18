@@ -1,0 +1,12 @@
+@startuml UC15
+left to right direction
+
+actor "Amministratore HR" as hr
+
+rectangle "NEXUM Concierge" {
+    usecase "UC15: Consultazione log operazioni e fonti consultate" as UC15
+}
+
+hr -- UC15
+
+@enduml

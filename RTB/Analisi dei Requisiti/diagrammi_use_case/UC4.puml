@@ -1,0 +1,16 @@
+@startuml UC4
+left to right direction
+
+actor "Dipendente" as dp
+actor "Provider LLM" as llm
+actor "Servizi NEXUM" as nexum
+
+rectangle "NEXUM Concierge" {
+    usecase "UC4: Consultazione dati personali, ferie e permessi" as UC4
+}
+
+dp -- UC4
+UC4 -- llm
+UC4 -- nexum
+
+@enduml

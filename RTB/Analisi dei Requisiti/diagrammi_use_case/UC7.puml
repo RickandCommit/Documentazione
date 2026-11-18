@@ -1,0 +1,12 @@
+@startuml UC7
+left to right direction
+
+actor "Amministratore HR" as hr
+
+rectangle "NEXUM Concierge" {
+    usecase "UC7: Creazione Bucket di conoscenza" as UC7
+}
+
+hr -- UC7
+
+@enduml

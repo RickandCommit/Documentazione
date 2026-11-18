@@ -1,0 +1,14 @@
+@startuml UC1
+left to right direction
+
+actor "Dipendente" as dp
+actor "Provider LLM" as llm
+
+rectangle "NEXUM Concierge" {
+    usecase "UC1: Interazione chat testuale" as UC1
+}
+
+dp -- UC1
+UC1 -- llm
+
+@enduml

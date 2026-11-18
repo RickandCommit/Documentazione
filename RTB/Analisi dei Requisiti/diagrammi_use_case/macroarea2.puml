@@ -1,0 +1,22 @@
+@startuml macroarea2
+left to right direction
+
+actor "Dipendente" as dp
+actor "Provider LLM" as llm
+
+rectangle "NEXUM Concierge" {
+    usecase "UC2: Richiesta informazioni su regolamenti aziendali" as UC2
+    usecase "UC2.1: Visualizzazione messaggio di astensione" as UC2_1
+    usecase "UC3: Richiesta istruzioni su funzionalità NEXUM" as UC3
+    usecase "UC3.1: Visualizzazione assenza istruzioni prodotto" as UC3_1
+}
+
+dp -- UC2
+UC2 -- llm
+UC2 <.. UC2_1 : <<extend>>
+
+dp -- UC3
+UC3 -- llm
+UC3 <.. UC3_1 : <<extend>>
+
+@enduml

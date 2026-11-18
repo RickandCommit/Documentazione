@@ -1,0 +1,21 @@
+@startuml UC3_1
+left to right direction
+
+actor "Dipendente" as dp
+actor "Provider LLM" as llm
+
+rectangle "NEXUM Concierge" {
+    usecase "UC3: Richiesta istruzioni su funzionalità NEXUM" as UC3
+    usecase "UC3.1: Visualizzazione assenza istruzioni prodotto" as UC3_1
+}
+
+dp -- UC3
+UC3 -- llm
+
+UC3 <.. UC3_1 : <<extend>>
+note on link
+Non sono presenti informazioni
+sulla funzionalità richiesta
+end note
+
+@enduml

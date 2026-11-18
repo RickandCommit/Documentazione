@@ -1,0 +1,16 @@
+@startuml UC6
+left to right direction
+
+actor "Dipendente" as dp
+actor "Provider LLM" as llm
+actor "Servizi NEXUM" as nexum
+
+rectangle "NEXUM Concierge" {
+    usecase "UC6: Registrazione richiesta ferie o permessi" as UC6
+}
+
+dp -- UC6
+UC6 -- llm
+UC6 -- nexum
+
+@enduml

@@ -1,0 +1,14 @@
+@startuml UC3
+left to right direction
+
+actor "Dipendente" as dp
+actor "Provider LLM" as llm
+
+rectangle "NEXUM Concierge" {
+    usecase "UC3: Richiesta istruzioni su funzionalità NEXUM" as UC3
+}
+
+dp -- UC3
+UC3 -- llm
+
+@enduml

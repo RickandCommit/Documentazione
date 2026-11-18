@@ -1,0 +1,12 @@
+@startuml UC9
+left to right direction
+
+actor "Amministratore HR" as hr
+
+rectangle "NEXUM Concierge" {
+    usecase "UC9: Modifica metadati Bucket" as UC9
+}
+
+hr -- UC9
+
+@enduml

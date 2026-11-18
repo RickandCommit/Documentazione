@@ -1,0 +1,21 @@
+@startuml UC6_3
+left to right direction
+
+actor "Dipendente" as dp
+actor "Provider LLM" as llm
+
+rectangle "NEXUM Concierge" {
+    usecase "UC6: Registrazione richiesta ferie o permessi" as UC6
+    usecase "UC6.3: Modifica dati della richiesta in preparazione" as UC6_3
+}
+
+dp -- UC6
+UC6 -- llm
+
+UC6 <.. UC6_3 : <<extend>>
+note on link
+Modifica dei dati della richiesta
+prima dell'invio definitivo
+end note
+
+@enduml

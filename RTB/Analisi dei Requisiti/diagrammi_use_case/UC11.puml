@@ -1,0 +1,12 @@
+@startuml UC11
+left to right direction
+
+actor "Amministratore HR" as hr
+
+rectangle "NEXUM Concierge" {
+    usecase "UC11: Caricamento nuova fonte documentale" as UC11
+}
+
+hr -- UC11
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml UC5
+left to right direction
+
+actor "Dipendente" as dp
+actor "Provider LLM" as llm
+actor "Servizi NEXUM" as nexum
+
+rectangle "NEXUM Concierge" {
+    usecase "UC5: Consultazione stato richieste" as UC5
+}
+
+dp -- UC5
+UC5 -- llm
+UC5 -- nexum
+
+@enduml
