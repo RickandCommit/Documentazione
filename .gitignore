@@ -24,3 +24,6 @@ desktop.ini
 .idea/
 *.swp
 *~
+
+# SVG generati da PlantUML (non versionati)
+/RTB/Analisi_dei_Requisiti/Casi_Uso/out/
