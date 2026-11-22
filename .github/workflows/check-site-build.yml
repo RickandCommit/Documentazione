@@ -29,6 +29,14 @@ jobs:
       - name: Install Python dependencies
         run: pip install pymupdf
 
+      - name: Installa PlantUML e Graphviz
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y plantuml graphviz
+
+      - name: Genera diagrammi PlantUML
+        run: python .github/scripts/generate_plantuml.py
+
       - name: Compilazione Typst e Assemblaggio Test Sito
         run: |
           # Supporto dinamico a tutte le fasi: Candidatura, RTB, PB
@@ -74,6 +82,14 @@ jobs:
               fi
             fi
           done
+
+          # Documento Analisi dei Requisiti in sottocartella.
+          # Il PDF viene pubblicato nella root RTB, dove il generatore del sito lo rileva.
+          ar="RTB/Analisi_dei_Requisiti/Analisi_dei_Requisiti.typ"
+          if [ -f "$ar" ]; then
+            mkdir -p _site/RTB
+            typst compile --root . "$ar" "_site/RTB/Analisi_dei_Requisiti.pdf"
+          fi
 
           # Copia Diapositive / Diari di bordo (.pdf)
           mkdir -p _site/Diapositive
