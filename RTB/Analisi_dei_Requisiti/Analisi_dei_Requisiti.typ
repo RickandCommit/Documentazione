@@ -2,7 +2,7 @@
 #show: documento.with(
   titolo: "Analisi dei Requisiti",
   sottotitolo: "Specifica dei requisiti software per il capitolato C2 (NEXUM Concierge)",
-  versione: "v0.9.0",
+  versione: "v0.10.0",
   data: "2026-11-23",
   stato: "In lavorazione",
   uso: "Esterno",
@@ -14,10 +14,11 @@
 
 
 #registro-modifiche(
+  table.cell(align: center)[0.10.0], table.cell(align: center)[2026-11-23], [Corretta formattazione tabelle, larghezze colonne e visualizzazione relazioni include/extend], [Jatin Bajaj], [Dorde Blagojevic],
   table.cell(align: center)[0.9.0], table.cell(align: center)[2026-11-23], [Completata Macroarea 5 (UC7-UC15)], [Nicola Bonetto], [Dorde Blagojevic],
   table.cell(align: center)[0.8.0], table.cell(align: center)[2026-11-23], [Recepiti chiarimenti Verbale Esterno 2026-11-17, completate Macroaree 1-4 (UC1-UC6) e aggiornati requisiti e tracciamento], [Jatin Bajaj], [Dorde Blagojevic],
   table.cell(align: center)[0.7.0], table.cell(align: center)[2026-11-16], [Aggiunte tabelle di riepilogo dei requisiti], [Alessandro Rasia dal Polo], [Sara Stefani],
-  table.cell(align: center)[0.6.0], table.cell(align: center)[2026-11-16], [Scissione tabella dei requisiti in funzionali, qualità, prestazionali e di vincolo ], [Alessandro Rasia dal Polo], [Sara Stefani],
+  table.cell(align: center)[0.6.0], table.cell(align: center)[2026-11-16], [Scissione tabella dei requisiti in funzionali, qualità, prestazionali e di vincolo], [Alessandro Rasia dal Polo], [Sara Stefani],
   table.cell(align: center)[0.5.0], table.cell(align: center)[2026-11-16], [Correzione diagrammi UML], [Alessandro Rasia dal Polo], [Sara Stefani],
   table.cell(align: center)[0.4.0], table.cell(align: center)[2026-11-15], [Scissione di un caso d'uso in più casi atomici], [Alessandro Rasia dal Polo], [Sara Stefani],
   table.cell(align: center)[0.3.0], table.cell(align: center)[2026-11-15], [Modificato il codice identificativo dei requisiti], [Alessandro Rasia dal Polo], [Sara Stefani],
@@ -59,9 +60,9 @@ Al fine di prevenire qualsiasi ambiguità, i termini tecnici, gli acronimi e i c
 - *Norme di Progetto:* documento interno del gruppo *RickandCommit*, reperibile nella cartella `Documentazione/`.
 
 === Riferimenti informativi
-- *Capitolato d'Appalto C2 — NEXUM Concierge:*  documento di specifiche tecniche rilasciato da *Eggon S.r.l.*
-- *Verbale Esterno 2026-11-10:* verbale del primo incontro tecnico di allineamento tra il gruppo *RickandCommit* e i referenti di *Eggon S.r.l.*.
-- *Verbale Esterno 2026-11-17:* verbale del secondo incontro tecnico di allineamento tra il gruppo *RickandCommit* e i referenti di *Eggon S.r.l.*.
+- *Capitolato d'Appalto C2 — NEXUM Concierge:* documento di specifiche tecniche rilasciato da *Eggon S.r.l.*
+- *Verbale Esterno 2026-11-10:* verbale del primo incontro tecnico di allineamento tra il gruppo *RickandCommit* e i referenti di *Eggon S.r.l.*
+- *Verbale Esterno 2026-11-17:* verbale del secondo incontro tecnico di allineamento tra il gruppo *RickandCommit* e i referenti di *Eggon S.r.l.*
 - *Verbale Interno 2026-11-18:* verbale della riunione interna di avvio Sprint 2 RTB.
 
 #pagebreak()
@@ -97,8 +98,10 @@ In conformità agli standard ISO/IEC/IEEE 29148 e alla notazione UML2, un *Attor
 - *Attore Secondario:* sistema esterno, servizio o piattaforma di terze parti non modificabile che viene interpellato dal sistema durante l'interazione per completare l'obiettivo dell'attore primario;
 - *Caso d'Uso (UC):* insieme di scenari (principale ed estensioni/inclusioni/generalizzazioni) che descrivono la sequenza di interazioni tra uno o più attori e il sistema per produrre un risultato misurabile e di valore per l'attore.
 
+#text(size: 9pt)[
+#set par(justify: false)
 #table(
-  columns: (2.8cm, 2.3cm, 1fr, 1fr),
+  columns: (3.5cm, 2.1cm, 1fr, 1fr),
   stroke: 0.5pt + rgb("#b5b5b5"),
   inset: 6pt,
   fill: (col, row) => if row == 0 { rgb("#e5e7eb") } else { none },
@@ -106,24 +109,25 @@ In conformità agli standard ISO/IEC/IEEE 29148 e alla notazione UML2, un *Attor
   
   [*Dipendente*\ (Personale)],
   [Primario],
-  [Persona fisica autenticata facente parte dell'azienda. Utilizza la chat del Concierge per richiedere informazioni e gestire le richieste di ferie/permessi.],
-  [È l'utente finale umano che fornisce gli stimoli al sistema tramite l'interfaccia utente.],
+  [Persona fisica autenticata facente parte dell'azienda. Utilizza la chat del Concierge per richiedere informazioni e gestire le richieste di ferie/permessi],
+  [È l'utente finale umano che fornisce gli stimoli al sistema tramite l'interfaccia utente],
 
   [*Amministratore HR*\ (Responsabile Fonti)],
   [Primario],
-  [Persona fisica con privilegi amministrativi. Accede al Backoffice per caricare, organizzare in bucket, aggiornare e ritirare le fonti aziendali.],
-  [È l'operatore umano responsabile del patrimonio informativo aziendale nel backoffice.],
+  [Persona fisica con privilegi amministrativi. Accede al Backoffice per caricare, organizzare in bucket, aggiornare e ritirare le fonti aziendali],
+  [È l'operatore umano responsabile del patrimonio informativo aziendale nel backoffice],
 
   [*Provider LLM*\ (AWS Bedrock)],
   [Secondario],
-  [Servizio cloud esterno di inferenza per modelli linguistici (es. Claude) erogato tramite API da AWS su infrastruttura Eggon. Fornisce comprensione semantica e sintesi.],
-  [Sistema esterno proprietario; il software sviluppato invia prompt strutturati e riceve completamenti testuali senza controllarne la piattaforma.],
+  [Servizio cloud esterno di inferenza per modelli linguistici (es. Claude) erogato tramite API da AWS su infrastruttura Eggon. Fornisce comprensione semantica e sintesi],
+  [Sistema esterno proprietario; il software sviluppato invia prompt strutturati e riceve completamenti testuali senza controllarne la piattaforma],
 
   [*Servizi NEXUM*],
   [Secondario],
-  [Insieme di API aziendali (reali o simulate per la fase PoC/MVP) che gestiscono l'accesso ai dati personali e la registrazione formale delle richieste di assenza.],
-  [Sistema enterprise preesistente con cui il Concierge dialoga per eseguire controlli deterministici e garantire la persistenza transazionale.],
+  [Insieme di API aziendali (reali o simulate per la fase PoC/MVP) che gestiscono l'accesso ai dati personali e la registrazione formale delle richieste di assenza],
+  [Sistema enterprise preesistente con cui il Concierge dialoga per eseguire controlli deterministici e garantire la persistenza transazionale],
 )
+]
 
 
 == Riservatezza dei Dati, Privacy (GDPR) e Gestione Token
@@ -139,14 +143,14 @@ I requisiti software sono stati ricavati ed elaborati a partire dalle seguenti f
 - *Verbale Esterno 2026-11-17:* secondo incontro di allineamento tecnico con i referenti di Eggon S.r.l. (decisioni e vincoli identificati da `VE-2.x`).
 
 == Caratteristiche degli Utenti
-- *Dipendente:* collaboratore aziendale senza competenze tecniche specifiche. Può formulare richieste composte o parziali
+- *Dipendente:* collaboratore aziendale senza competenze tecniche specifiche. Può formulare richieste composte o parziali.
 - *Amministratore HR:* operatore con familiarità sui processi aziendali e sulla documentazione interna. Richiede controlli precisi su autorizzazioni, viste tabellari chiare, feedback asincrono sull'ingestione e log di audit verificabili.
 
 == Piattaforma di Esecuzione e Vincoli Generali
 - *Fruibilità Web:* interfaccia fruibile tramite WebApp moderna (compatibile con browser desktop e mobile standard)
 - *Database e Vettorializzazione:* adozione di PostgreSQL con estensione `pgvector` per il motore RAG
 - *Autenticazione nel PoC/RTB:* simulata tramite selettore di contesto utente (con token applicativo fittizio per singola azienda), in conformità con quanto concordato
-- *Persistenza intra-sessione e assenza di memoria cross-sessione:* come stabilito dal capitolato e confermato con l'azienda (`VE-2`), la conversazione corrente viene mantenuta all'interno della singola sessione anche in caso di ricaricamento della pagina o cambio schermata, finché l'utente non avvia esplicitamente una nuova sessione; tra sessioni distinte il sistema resta invece stateless e ogni nuova sessione parte da uno stato iniziale pulito
+- *Persistenza intra-sessione e assenza di memoria cross-sessione:* come stabilito dal capitolato e confermato con l'azienda (`VE-2.3`), la conversazione corrente viene mantenuta all'interno della singola sessione anche in caso di ricaricamento della pagina o cambio schermata, finché l'utente non avvia esplicitamente una nuova sessione; tra sessioni distinte il sistema resta invece stateless e ogni nuova sessione parte da uno stato iniziale pulito
 
 #pagebreak()
 
@@ -164,52 +168,58 @@ In conformità alle norme di progetto concordate:
 
 == Tabella riassuntiva dei Casi d'Uso
 
+#text(size: 8.5pt)[
+#set par(justify: false)
 #table(
-  columns: (1.5cm, 1fr, 2.2cm, 2.4cm, 2.3cm, 2.5cm),
+  columns: (1.5cm, 1fr, 2.2cm, 3.0cm, 2.5cm, 2.5cm),
+  align: (center, left, center, left, left, left),
   stroke: 0.5pt + rgb("#b5b5b5"),
   inset: 5pt,
   fill: (col, row) => if row == 0 { rgb("#e5e7eb") } else { none },
-  table.cell(align: center)[*Codice*],
-  [*Titolo Caso d'Uso*],
-  table.cell(align: center)[*Tipo*],
-  [*Attore Primario*],
-  [*Attori Secondari*],
-  [*Fonti*],
+  table.header(
+    [*Codice*],
+    [*Titolo Caso d'Uso*],
+    [*Tipo*],
+    [*Attore Primario*],
+    [*Attori Secondari*],
+    [*Fonti*],
+  ),
 
   [UC1], [Interazione chat testuale], [Base], [Dipendente], [Provider LLM], [RB-01, RB-02, RB-03, RB-04, VE-2.3],
-  [UC1.1], [Chiarimento di informazioni ambigue], [<<extend>>], [Dipendente], [Provider LLM], [RB-04],
-  [UC1.2], [Visualizzazione errore di comunicazione LLM], [<<extend>>], [Dipendente], [Provider LLM], [RB-14, VE-2.4],
-  [UC1.3], [Visualizzazione errore di connessione lato client], [<<extend>>], [Dipendente], [—], [RB-14, VE-2.4],
-  [UC1.4], [Avvio nuova sessione di chat], [<<extend>>], [Dipendente], [—], [RB-04, VE-2.3],
+  [UC1.1], [Chiarimento di informazioni ambigue], [\<\<extend\>\>], [Dipendente], [Provider LLM], [RB-04],
+  [UC1.2], [Visualizzazione errore di comunicazione LLM], [\<\<extend\>\>], [Dipendente], [Provider LLM], [RB-14, VE-2.4],
+  [UC1.3], [Visualizzazione errore di connessione lato client], [\<\<extend\>\>], [Dipendente], [—], [RB-14, VE-2.4],
+  [UC1.4], [Avvio nuova sessione di chat], [\<\<extend\>\>], [Dipendente], [—], [RB-04, VE-2.3],
   [UC2], [Richiesta informazioni su regolamenti aziendali], [Base], [Dipendente], [Provider LLM], [RB-02, RB-08, VE-2.2],
-  [UC2.1], [Visualizzazione messaggio di astensione], [<<extend>>], [Dipendente], [Provider LLM], [RB-08, VE-2.2],
+  [UC2.1], [Visualizzazione messaggio di astensione], [\<\<extend\>\>], [Dipendente], [Provider LLM], [RB-08, VE-2.2],
   [UC3], [Richiesta istruzioni su funzionalità NEXUM], [Base], [Dipendente], [Provider LLM], [RB-02, RB-07, RB-08],
-  [UC3.1], [Visualizzazione assenza istruzioni prodotto], [<<extend>>], [Dipendente], [Provider LLM], [RB-08],
-  [UC4], [Consultazione dati personali, ferie e permessi], [Base], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-02, RB-09, RB-10],
-  [UC4.1], [Visualizzazione errore recupero dati personali], [<<extend>>], [Dipendente], [Servizi NEXUM], [RB-14, VE-2.4],
-  [UC5], [Consultazione stato richieste presentate], [Base], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-13, VE-2.5],
-  [UC5.1], [Visualizzazione errore recupero stato richieste], [<<extend>>], [Dipendente], [Servizi NEXUM], [RB-14, VE-2.4],
-  [UC6], [Registrazione richiesta ferie o permessi], [Base], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-02, RB-11, RB-12, VE-1.4, VE-2.5],
-  [UC6.1], [Visualizzazione riepilogo dati richiesta], [<<include>>], [Dipendente], [Provider LLM], [RB-12, VE-2.4],
-  [UC6.2], [Conferma esplicita invio richiesta], [<<include>>], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-12, VE-2.4],
-  [UC6.3], [Modifica dati della richiesta in preparazione], [<<extend>>], [Dipendente], [Provider LLM], [RB-12],
-  [UC6.4], [Visualizzazione errore validazione o sovrapposizione], [<<extend>>], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-14, VE-1.4, VE-2.4],
-  [UC6.5], [Visualizzazione diniego per violazione regolamento aziendale], [<<extend>>], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-08, VE-2.4, VE-2.5],
-  [UC6.6], [Annullamento preparazione richiesta], [<<extend>>], [Dipendente], [Provider LLM], [RB-12],
+  [UC3.1], [Visualizzazione assenza istruzioni prodotto], [\<\<extend\>\>], [Dipendente], [Provider LLM], [RB-08],
+  [UC4], [Consultazione dati personali, ferie e permessi], [Base], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-01, RB-02, RB-09, RB-10],
+  [UC4.1], [Visualizzazione errore recupero dati personali], [\<\<extend\>\>], [Dipendente], [Servizi NEXUM], [RB-14, VE-2.4],
+  [UC5], [Consultazione stato richieste presentate], [Base], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-01, RB-09, RB-13, VE-2.5, AD],
+  [UC5.1], [Visualizzazione errore recupero stato richieste], [\<\<extend\>\>], [Dipendente], [Servizi NEXUM], [RB-14, VE-2.4],
+  [UC6], [Registrazione richiesta ferie o permessi], [Base], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-01, RB-02, RB-04, RB-11, RB-12, RB-13, VE-1.4, VE-2.5, AD],
+  [UC6.1], [Visualizzazione riepilogo dati richiesta], [\<\<include\>\>], [Dipendente], [Provider LLM], [RB-12, VE-2.4],
+  [UC6.2], [Conferma esplicita invio richiesta], [\<\<include\>\>], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-12, VE-2.4],
+  [UC6.3], [Modifica dati della richiesta in preparazione], [\<\<extend\>\>], [Dipendente], [Provider LLM], [RB-12],
+  [UC6.4], [Visualizzazione errore validazione o sovrapposizione], [\<\<extend\>\>], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-14, VE-1.4, VE-2.4],
+  [UC6.5], [Visualizzazione diniego per violazione regolamento aziendale], [\<\<extend\>\>], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-08, VE-2.4, VE-2.5],
+  [UC6.6], [Annullamento preparazione richiesta], [\<\<extend\>\>], [Dipendente], [Provider LLM], [RB-12],
   [UC7], [Creazione Bucket di conoscenza], [Base], [Amministratore HR], [—], [RB-05, VE-2.2],
-  [UC7.1], [Visualizzazione errore validazione dati Bucket], [<<extend>>], [Amministratore HR], [—], [RB-14],
+  [UC7.1], [Visualizzazione errore validazione dati Bucket], [\<\<extend\>\>], [Amministratore HR], [—], [RB-14],
   [UC8], [Visualizzazione elenco Bucket], [Base], [Amministratore HR], [—], [RB-05],
   [UC9], [Modifica metadati Bucket], [Base], [Amministratore HR], [—], [RB-05],
   [UC10], [Ritiro Bucket di conoscenza], [Base], [Amministratore HR], [—], [RB-05, VE-2.2],
   [UC11], [Caricamento nuova fonte documentale], [Base], [Amministratore HR], [—], [RB-05, RB-06, VE-2.2],
-  [UC11.1], [Visualizzazione errore file non valido], [<<extend>>], [Amministratore HR], [—], [RB-14],
+  [UC11.1], [Visualizzazione errore file non valido], [\<\<extend\>\>], [Amministratore HR], [—], [RB-14],
   [UC12], [Sostituzione fonte documentale esistente], [Base], [Amministratore HR], [—], [RB-05, RB-06, VE-2.2],
   [UC13], [Ritiro fonte dalla consultazione], [Base], [Amministratore HR], [—], [RB-05, VE-2.2],
   [UC14], [Monitoraggio stato elaborazione fonti], [Base], [Amministratore HR], [—], [RB-06, RB-14],
-  [UC14.1], [Visualizzazione dettaglio errore di elaborazione], [<<extend>>], [Amministratore HR], [—], [RB-14],
-  [UC14.2], [Scaricamento file originale della fonte], [<<extend>>], [Amministratore HR], [—], [AD],
+  [UC14.1], [Visualizzazione dettaglio errore di elaborazione], [\<\<extend\>\>], [Amministratore HR], [—], [RB-14],
+  [UC14.2], [Scaricamento file originale della fonte], [\<\<extend\>\>], [Amministratore HR], [—], [AD],
   [UC15], [Consultazione log operazioni e fonti consultate], [Base], [Amministratore HR], [—], [RB-15],
 )
+]
 
 #pagebreak()
 
@@ -738,68 +748,71 @@ Per ciascun requisito è specificato il grado di cogenza per la baseline RTB:
 == Requisiti Funzionali
 
 #text(size: 8.5pt)[
+#set par(justify: false)
 #table(
-  columns: (1.8cm, 2.3cm, 1fr, 2.2cm, 2.5cm),
+  columns: (1.7cm, 2.4cm, 1fr, 2.2cm, 2.6cm),
   stroke: 0.5pt + rgb("#b5b5b5"),
   inset: 5pt,
   fill: (col, row) => if row == 0 { rgb("#e5e7eb") } else { none },
-  table.cell(align: center)[*Codice*],
-  table.cell(align: center)[*Importanza*],
-  [*Descrizione del Requisito Funzionale*],
-  table.cell(align: center)[*Casi d'Uso*],
-  [*Fonti*],
-  [RF-001], [Obbligatorio], [Il sistema deve consentire al Dipendente di inviare messaggi testuali in linguaggio naturale tramite l'interfaccia chat.], [UC1], [RB-01, RB-02],
-  [RF-002], [Obbligatorio], [Il sistema deve mantenere il contesto e la cronologia della conversazione all'interno della singola sessione anche in caso di ricaricamento della pagina o cambio schermata, restando stateless tra sessioni distinte.], [UC1], [RB-04, VE-2.3],
-  [RF-003], [Obbligatorio], [Il sistema deve discriminare l'intento dell'utente tra: regole aziendali, istruzioni di prodotto, dati personali e operazioni.], [UC1], [RB-02],
-  [RF-004], [Obbligatorio], [Il sistema deve consentire all'utente di alternare o combinare capacità informative e dispositive all'interno della medesima sessione di chat.], [UC1], [RB-03],
-  [RF-005], [Obbligatorio], [Il sistema deve richiedere chiarimenti proattivi all'utente qualora l'input contenga informazioni ambigue o incomplete (es. date prive di anno).], [UC1.1], [RB-04],
-  [RF-006], [Obbligatorio], [Il sistema deve notificare all'utente eventuali errori tecnici o timeout persistenti nella comunicazione con il Provider LLM tramite un messaggio sintetico e comprensibile.], [UC1.2], [RB-14, VE-2.4],
-  [RF-007], [Obbligatorio], [Il sistema deve consentire la consultazione delle policy e dei regolamenti aziendali interni tramite RAG, rispondendo in linguaggio naturale.], [UC2], [RB-02, RB-08],
-  [RF-008], [Obbligatorio], [Il sistema deve indicare esplicitamente i riferimenti delle fonti documentali utilizzate per formulare la risposta (documento e sezione).], [UC2, UC3], [RB-08],
-  [RF-009], [Obbligatorio], [Il sistema deve astenersi formalmente dal formulare una risposta qualora le fonti documentali autorizzate risultino assenti, insufficienti o presentino contrasti non risolvibili tra documenti distinti.], [UC2.1], [RB-08, VE-2.2],
-  [RF-010], [Obbligatorio], [Il sistema deve consentire la consultazione delle guide e dei manuali d'uso della piattaforma NEXUM.], [UC3], [RB-02, RB-07, RB-08],
-  [RF-011], [Obbligatorio], [Il sistema deve gestire la base di conoscenza dei manuali NEXUM come fonte logicamente e operativamente distinta dai regolamenti interni.], [UC3], [RB-07],
-  [RF-012], [Obbligatorio], [Il sistema deve notificare all'utente l'assenza di istruzioni operative qualora la funzionalità NEXUM richiesta non sia documentata nei manuali.], [UC3.1], [RB-08],
-  [RF-013], [Obbligatorio], [Il sistema deve consentire al Dipendente di consultare i propri dati di ferie e permessi (maturati, fruiti, in attesa e residui) interrogando i Servizi NEXUM autorizzati.], [UC4], [RB-09, RB-10],
-  [RF-014], [Obbligatorio], [Il sistema deve presentare i dati delle assenze specificando chiaramente l'intervallo temporale, l'unità di misura (giorni o ore) e la tipologia.], [UC4], [RB-10],
-  [RF-015], [Obbligatorio], [Il sistema deve vietare la deduzione o il calcolo matematico arbitrario del saldo ferie da parte dell'LLM in assenza di dati applicativi certi.], [UC4], [RB-09],
-  [RF-016], [Obbligatorio], [Il sistema deve notificare all'utente in modo non tecnico eventuali errori o indisponibilità persistenti nella comunicazione con i Servizi NEXUM per il recupero dati personali.], [UC4.1], [RB-14, VE-2.4],
-  [RF-017], [Obbligatorio], [Il sistema deve consentire al Dipendente di visualizzare l'elenco e lo stato aggiornato delle proprie richieste di ferie e permessi presentate.], [UC5], [RB-13],
-  [RF-018], [Obbligatorio], [Il sistema deve distinguere formalmente ed esclusivamente tra i tre stati delle richieste previsti da NEXUM: in attesa, approvata e rifiutata.], [UC5], [RB-13, VE-2.5],
-  [RF-019], [Obbligatorio], [Il sistema deve consentire al Dipendente di avviare in linguaggio naturale la preparazione di una richiesta esclusivamente per le tipologie ferie o permesso (con campo note opzionale ed esclusione della malattia nell'MVP).], [UC6], [RB-11, VE-2.5],
-  [RF-020], [Obbligatorio], [Il sistema deve raccogliere ed estrarre in modo strutturato i parametri della richiesta (tipologia, date complete di anno, eventuale fascia oraria per i permessi e note opzionali).], [UC6], [RB-11, VE-2.5],
-  [RF-021], [Obbligatorio], [Il sistema deve presentare obbligatoriamente all'utente un riepilogo formale completo dei dati della richiesta prima di procedere all'invio.], [UC6.1], [RB-12],
-  [RF-022], [Obbligatorio], [Il sistema deve richiedere una conferma esplicita all'utente per completare l'inoltro della richiesta verso i Servizi NEXUM.], [UC6.2], [RB-12],
-  [RF-023], [Obbligatorio], [Il sistema deve consentire all'utente di modificare uno o più dati della richiesta durante la fase di preparazione prima dell'invio definitivo.], [UC6.3], [RB-12],
-  [RF-024], [Obbligatorio], [In caso di modifica dei dati in preparazione, il sistema deve invalidare la conferma, generare un nuovo riepilogo e richiedere una nuova conferma esplicita.], [UC6.3], [RB-12],
-  [RF-025], [Obbligatorio], [Il sistema deve demandare la validazione delle date e il controllo delle sovrapposizioni temporali ai Servizi NEXUM.], [UC6], [VE-1.4],
-  [RF-026], [Obbligatorio], [Il sistema deve notificare all'utente in modo non tecnico il fallimento della registrazione qualora i Servizi NEXUM segnalino dati non validi, una sovrapposizione temporale o un'indisponibilità persistente.], [UC6.4], [RB-14, VE-1.4, VE-2.4],
-  [RF-027], [Obbligatorio], [A seguito di conferma esplicita, il sistema deve registrare la richiesta presso i Servizi NEXUM nello stato "in attesa" e notificare l'esito al dipendente, senza prevedere modifica diretta o cancellazione post-invio dalla chat.], [UC6], [RB-13, VE-2.5],
-  [RF-028], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di creare un nuovo Bucket di conoscenza specificando nome, descrizione e gruppi destinatari autorizzati nell'ambito della singola azienda.], [UC7], [RB-01, RB-05, VE-2.2],
-  [RF-029], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di visualizzare l'elenco dei Bucket di conoscenza configurati con il relativo stato e numero di fonti.], [UC8], [RB-05],
-  [RF-030], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di modificare i metadati di un Bucket esistente (nome, descrizione, gruppi destinatari autorizzati).], [UC9], [RB-05],
-  [RF-031], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di ritirare un intero Bucket di conoscenza tramite archiviazione logica, escludendolo dalla consultazione attiva del Concierge.], [UC10], [RB-05, VE-2.2],
-  [RF-032], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di caricare documenti informativi in formato PDF (sia testuali sia scansionati con supporto OCR) all'interno di uno specifico Bucket.], [UC11], [RB-05, VE-2.2],
-  [RF-033], [Obbligatorio], [Il sistema deve scomporre i documenti caricati in unità di conoscenza (chunk) preservando metadati di provenienza, versione e data di caricamento.], [UC11], [RB-06],
-  [RF-034], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di sostituire una fonte documentale esistente con una versione aggiornata.], [UC12], [RB-05],
-  [RF-035], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di ritirare una singola fonte documentale mediante archiviazione logica, preservandone la storicizzazione ma escludendola dalla consultazione attiva.], [UC13], [RB-05, VE-2.2],
-  [RF-036], [Obbligatorio], [Il sistema deve garantire che le fonti o i bucket ritirati siano immediatamente esclusi dal recupero sia per nuove conversazioni sia per il proseguimento di quelle correnti.], [UC10, UC12, UC13], [RB-05, RB-08, VE-2.2],
-  [RF-037], [Obbligatorio], [Il sistema deve mostrare all'Amministratore HR lo stato di avanzamento dell'elaborazione delle fonti (in corso, indicizzato, errore di elaborazione).], [UC14], [RB-06, RB-14],
-  [RF-038], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di consultare i log di tracciamento delle fonti citate e delle operazioni dispositive eseguite.], [UC15], [RB-15],
-  [RF-039], [Desiderabile], [Il sistema dovrebbe consentire il caricamento di fonti documentali anche in formato Markdown (.md) o testo semplice (.txt) oltre ai PDF.], [UC11], [Capitolato C2, VE-2.2],
-  [RF-040], [Desiderabile], [Il sistema dovrebbe consentire al Dipendente di filtrare la visualizzazione delle proprie richieste di assenza per anno solare o per stato della pratica.], [UC5], [AD],
-  [RF-041], [Opzionale], [Il sistema potrebbe consentire all'Amministratore HR di scaricare il file originale associato a una fonte documentale precedentemente caricata.], [UC14.2], [AD],
-  [RF-042], [Obbligatorio], [L'interfaccia utente deve rilevare e segnalare chiaramente al Dipendente eventuali errori di rete o disconnessioni lato client.], [UC1.3], [RB-14, VE-2.4],
-  [RF-043], [Obbligatorio], [Il sistema deve consentire al Dipendente di avviare esplicitamente una nuova sessione di chat, chiudendo quella corrente e ripartendo da uno stato pulito.], [UC1.4], [RB-04, VE-2.3],
-  [RF-044], [Obbligatorio], [In presenza di discrepanze tra versioni successive di uno stesso regolamento aziendale, il sistema deve considerare esclusivamente la versione più recente.], [UC2], [RB-08, VE-2.2],
-  [RF-045], [Obbligatorio], [Il sistema deve notificare all'utente in modo non tecnico eventuali errori o indisponibilità persistenti dei Servizi NEXUM durante il recupero dello stato delle richieste.], [UC5.1], [RB-14, VE-2.4],
-  [RF-046], [Obbligatorio], [Prima di inoltrare una richiesta di ferie o permesso, il sistema deve verificare il rispetto dei vincoli del regolamento aziendale attivo (es. preavviso minimo, soglie di saldo negativo) e, in caso di violazione, negare l'invio con un diniego motivato.], [UC6.5], [RB-08, VE-2.4, VE-2.5],
-  [RF-047], [Obbligatorio], [Il sistema deve consentire al Dipendente di annullare la preparazione di una richiesta prima della conferma definitiva senza effettuare alcun invio ai Servizi NEXUM.], [UC6.6], [RB-12],
-  [RF-048], [Obbligatorio], [In caso di errore transitorio di rete o fallimento nelle chiamate ai servizi esterni, il sistema deve eseguire un meccanismo di retry automatico con breve attesa (debounce) prima di segnalare l'errore all'utente.], [UC1.2, UC4.1, UC5.1, UC6.4], [RB-14, VE-2.4],
-  [RF-049], [Opzionale], [Il sistema potrebbe consentire di specificare una categoria o sottotipo opzionale per le richieste di permesso (es. ROL, ex-festività) in vista di future estensioni.], [UC6], [AD],
-  [RF-050], [Obbligatorio], [Il sistema deve validare i dati dei Bucket in fase di creazione e modifica, segnalando puntualmente i campi non validi senza applicare modifiche e mantenendo i dati già inseriti.], [UC7.1], [RB-14],
-  [RF-051], [Obbligatorio], [Il sistema deve verificare la validità dei file selezionati in fase di caricamento o sostituzione (formato supportato, file non vuoto e leggibile), rifiutando quelli non validi con un messaggio esplicativo.], [UC11.1], [RB-14],
-  [RF-052], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di visualizzare il dettaglio sintetico (causa comprensibile e data) relativo agli errori di elaborazione di una fonte.], [UC14.1], [RB-14],
+  table.header(
+    table.cell(align: center)[*Codice*],
+    table.cell(align: center)[*Importanza*],
+    [*Descrizione del Requisito Funzionale*],
+    table.cell(align: center)[*Casi d'Uso*],
+    [*Fonti*],
+  ),
+  [RF-001], [Obbligatorio], [Il sistema deve consentire al Dipendente di inviare messaggi testuali in linguaggio naturale tramite l'interfaccia chat], [UC1], [RB-01, RB-02],
+  [RF-002], [Obbligatorio], [Il sistema deve mantenere il contesto e la cronologia della conversazione all'interno della singola sessione anche in caso di ricaricamento della pagina o cambio schermata, restando stateless tra sessioni distinte], [UC1], [RB-04, VE-2.3],
+  [RF-003], [Obbligatorio], [Il sistema deve discriminare l'intento dell'utente tra: regole aziendali, istruzioni di prodotto, dati personali e operazioni], [UC1], [RB-02],
+  [RF-004], [Obbligatorio], [Il sistema deve consentire all'utente di alternare o combinare capacità informative e dispositive all'interno della medesima sessione di chat], [UC1], [RB-03],
+  [RF-005], [Obbligatorio], [Il sistema deve richiedere chiarimenti proattivi all'utente qualora l'input contenga informazioni ambigue o incomplete (es. date prive di anno)], [UC1.1], [RB-04],
+  [RF-006], [Obbligatorio], [Il sistema deve notificare all'utente eventuali errori tecnici o timeout persistenti nella comunicazione con il Provider LLM tramite un messaggio sintetico e comprensibile], [UC1.2], [RB-14, VE-2.4],
+  [RF-007], [Obbligatorio], [Il sistema deve consentire la consultazione delle policy e dei regolamenti aziendali interni tramite RAG, rispondendo in linguaggio naturale], [UC2], [RB-02, RB-08],
+  [RF-008], [Obbligatorio], [Il sistema deve indicare esplicitamente i riferimenti delle fonti documentali utilizzate per formulare la risposta (documento e sezione)], [UC2, UC3], [RB-08],
+  [RF-009], [Obbligatorio], [Il sistema deve astenersi formalmente dal formulare una risposta qualora le fonti documentali autorizzate risultino assenti, insufficienti o presentino contrasti non risolvibili tra documenti distinti], [UC2.1], [RB-08, VE-2.2],
+  [RF-010], [Obbligatorio], [Il sistema deve consentire la consultazione delle guide e dei manuali d'uso della piattaforma NEXUM], [UC3], [RB-02, RB-07, RB-08],
+  [RF-011], [Obbligatorio], [Il sistema deve gestire la base di conoscenza dei manuali NEXUM come fonte logicamente e operativamente distinta dai regolamenti interni], [UC3], [RB-07],
+  [RF-012], [Obbligatorio], [Il sistema deve notificare all'utente l'assenza di istruzioni operative qualora la funzionalità NEXUM richiesta non sia documentata nei manuali], [UC3.1], [RB-08],
+  [RF-013], [Obbligatorio], [Il sistema deve consentire al Dipendente di consultare i propri dati di ferie e permessi (maturati, fruiti, in attesa e residui) interrogando i Servizi NEXUM autorizzati], [UC4], [RB-09, RB-10],
+  [RF-014], [Obbligatorio], [Il sistema deve presentare i dati delle assenze specificando chiaramente l'intervallo temporale, l'unità di misura (giorni o ore) e la tipologia], [UC4], [RB-10],
+  [RF-015], [Obbligatorio], [Il sistema deve vietare la deduzione o il calcolo matematico arbitrario del saldo ferie da parte dell'LLM in assenza di dati applicativi certi], [UC4], [RB-09],
+  [RF-016], [Obbligatorio], [Il sistema deve notificare all'utente in modo non tecnico eventuali errori o indisponibilità persistenti nella comunicazione con i Servizi NEXUM per il recupero dati personali], [UC4.1], [RB-14, VE-2.4],
+  [RF-017], [Obbligatorio], [Il sistema deve consentire al Dipendente di visualizzare l'elenco e lo stato aggiornato delle proprie richieste di ferie e permessi presentate], [UC5], [RB-13],
+  [RF-018], [Obbligatorio], [Il sistema deve distinguere formalmente ed esclusivamente tra i tre stati delle richieste previsti da NEXUM: in attesa, approvata e rifiutata], [UC5], [RB-13, VE-2.5],
+  [RF-019], [Obbligatorio], [Il sistema deve consentire al Dipendente di avviare in linguaggio naturale la preparazione di una richiesta esclusivamente per le tipologie ferie o permesso (con campo note opzionale ed esclusione della malattia nell'MVP)], [UC6], [RB-11, VE-2.5],
+  [RF-020], [Obbligatorio], [Il sistema deve raccogliere ed estrarre in modo strutturato i parametri della richiesta (tipologia, date complete di anno, eventuale fascia oraria per i permessi e note opzionali)], [UC6], [RB-11, VE-2.5],
+  [RF-021], [Obbligatorio], [Il sistema deve presentare obbligatoriamente all'utente un riepilogo formale completo dei dati della richiesta prima di procedere all'invio], [UC6.1], [RB-12],
+  [RF-022], [Obbligatorio], [Il sistema deve richiedere una conferma esplicita all'utente per completare l'inoltro della richiesta verso i Servizi NEXUM], [UC6.2], [RB-12],
+  [RF-023], [Obbligatorio], [Il sistema deve consentire all'utente di modificare uno o più dati della richiesta durante la fase di preparazione prima dell'invio definitivo], [UC6.3], [RB-12],
+  [RF-024], [Obbligatorio], [In caso di modifica dei dati in preparazione, il sistema deve invalidare la conferma, generare un nuovo riepilogo e richiedere una nuova conferma esplicita], [UC6.3], [RB-12],
+  [RF-025], [Obbligatorio], [Il sistema deve demandare la validazione delle date e il controllo delle sovrapposizioni temporali ai Servizi NEXUM], [UC6], [VE-1.4],
+  [RF-026], [Obbligatorio], [Il sistema deve notificare all'utente in modo non tecnico il fallimento della registrazione qualora i Servizi NEXUM segnalino dati non validi, una sovrapposizione temporale o un'indisponibilità persistente], [UC6.4], [RB-14, VE-1.4, VE-2.4],
+  [RF-027], [Obbligatorio], [A seguito di conferma esplicita, il sistema deve registrare la richiesta presso i Servizi NEXUM nello stato "in attesa" e notificare l'esito al dipendente, senza prevedere modifica diretta o cancellazione post-invio dalla chat], [UC6], [RB-13, VE-2.5],
+  [RF-028], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di creare un nuovo Bucket di conoscenza specificando nome, descrizione e gruppi destinatari autorizzati nell'ambito della singola azienda], [UC7], [RB-01, RB-05, VE-2.2],
+  [RF-029], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di visualizzare l'elenco dei Bucket di conoscenza configurati con il relativo stato e numero di fonti], [UC8], [RB-05],
+  [RF-030], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di modificare i metadati di un Bucket esistente (nome, descrizione, gruppi destinatari autorizzati)], [UC9], [RB-05],
+  [RF-031], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di ritirare un intero Bucket di conoscenza tramite archiviazione logica, escludendolo dalla consultazione attiva del Concierge], [UC10], [RB-05, VE-2.2],
+  [RF-032], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di caricare documenti informativi in formato PDF (sia testuali sia scansionati con supporto OCR) all'interno di uno specifico Bucket], [UC11], [RB-05, VE-2.2],
+  [RF-033], [Obbligatorio], [Il sistema deve scomporre i documenti caricati in unità di conoscenza (chunk) preservando metadati di provenienza, versione e data di caricamento], [UC11], [RB-06],
+  [RF-034], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di sostituire una fonte documentale esistente con una versione aggiornata], [UC12], [RB-05],
+  [RF-035], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di ritirare una singola fonte documentale mediante archiviazione logica, preservandone la storicizzazione ma escludendola dalla consultazione attiva], [UC13], [RB-05, VE-2.2],
+  [RF-036], [Obbligatorio], [Il sistema deve garantire che le fonti o i bucket ritirati siano immediatamente esclusi dal recupero sia per nuove conversazioni sia per il proseguimento di quelle correnti], [UC10, UC12, UC13], [RB-05, RB-08, VE-2.2],
+  [RF-037], [Obbligatorio], [Il sistema deve mostrare all'Amministratore HR lo stato di avanzamento dell'elaborazione delle fonti (in corso, indicizzato, errore di elaborazione)], [UC14], [RB-06, RB-14],
+  [RF-038], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di consultare i log di tracciamento delle fonti citate e delle operazioni dispositive eseguite], [UC15], [RB-15],
+  [RF-039], [Desiderabile], [Il sistema dovrebbe consentire il caricamento di fonti documentali anche in formato Markdown (.md) o testo semplice (.txt) oltre ai PDF], [UC11], [Capitolato~C2, VE-2.2],
+  [RF-040], [Desiderabile], [Il sistema dovrebbe consentire al Dipendente di filtrare la visualizzazione delle proprie richieste di assenza per anno solare o per stato della pratica], [UC5], [AD],
+  [RF-041], [Opzionale], [Il sistema potrebbe consentire all'Amministratore HR di scaricare il file originale associato a una fonte documentale precedentemente caricata], [UC14.2], [AD],
+  [RF-042], [Obbligatorio], [L'interfaccia utente deve rilevare e segnalare chiaramente al Dipendente eventuali errori di rete o disconnessioni lato client], [UC1.3], [RB-14, VE-2.4],
+  [RF-043], [Obbligatorio], [Il sistema deve consentire al Dipendente di avviare esplicitamente una nuova sessione di chat, chiudendo quella corrente e ripartendo da uno stato pulito], [UC1.4], [RB-04, VE-2.3],
+  [RF-044], [Obbligatorio], [In presenza di discrepanze tra versioni successive di uno stesso regolamento aziendale, il sistema deve considerare esclusivamente la versione più recente], [UC2], [RB-08, VE-2.2],
+  [RF-045], [Obbligatorio], [Il sistema deve notificare all'utente in modo non tecnico eventuali errori o indisponibilità persistenti dei Servizi NEXUM durante il recupero dello stato delle richieste], [UC5.1], [RB-14, VE-2.4],
+  [RF-046], [Obbligatorio], [Prima di inoltrare una richiesta di ferie o permesso, il sistema deve verificare il rispetto dei vincoli del regolamento aziendale attivo (es. preavviso minimo, soglie di saldo negativo) e, in caso di violazione, negare l'invio con un diniego motivato], [UC6.5], [RB-08, VE-2.4, VE-2.5],
+  [RF-047], [Obbligatorio], [Il sistema deve consentire al Dipendente di annullare la preparazione di una richiesta prima della conferma definitiva senza effettuare alcun invio ai Servizi NEXUM], [UC6.6], [RB-12],
+  [RF-048], [Obbligatorio], [In caso di errore transitorio di rete o fallimento nelle chiamate ai servizi esterni, il sistema deve eseguire un meccanismo di retry automatico con breve attesa (debounce) prima di segnalare l'errore all'utente], [UC1.2, UC4.1, UC5.1, UC6.4], [RB-14, VE-2.4],
+  [RF-049], [Opzionale], [Il sistema potrebbe consentire di specificare una categoria o sottotipo opzionale per le richieste di permesso (es. ROL, ex-festività) in vista di future estensioni], [UC6], [AD],
+  [RF-050], [Obbligatorio], [Il sistema deve validare i dati dei Bucket in fase di creazione e modifica, segnalando puntualmente i campi non validi senza applicare modifiche e mantenendo i dati già inseriti], [UC7.1], [RB-14],
+  [RF-051], [Obbligatorio], [Il sistema deve verificare la validità dei file selezionati in fase di caricamento o sostituzione (formato supportato, file non vuoto e leggibile), rifiutando quelli non validi con un messaggio esplicativo], [UC11.1], [RB-14],
+  [RF-052], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di visualizzare il dettaglio sintetico (causa comprensibile e data) relativo agli errori di elaborazione di una fonte], [UC14.1], [RB-14],
 )
 ]
 
@@ -808,8 +821,9 @@ Per ciascun requisito è specificato il grado di cogenza per la baseline RTB:
 == Requisiti di Qualità (RQ)
 
 #text(size: 9pt)[
+#set par(justify: false)
 #table(
-  columns: (1.8cm, 2.3cm, 1fr, 2.5cm),
+  columns: (1.8cm, 2.5cm, 1fr, 2.8cm),
   stroke: 0.5pt + rgb("#b5b5b5"),
   inset: 5pt,
   fill: (col, row) => if row == 0 { rgb("#e5e7eb") } else { none },
@@ -817,20 +831,21 @@ Per ciascun requisito è specificato il grado di cogenza per la baseline RTB:
   table.cell(align: center)[*Importanza*],
   [*Descrizione del Requisito di Qualità*],
   [*Fonti*],
-  [RQ-001], [Obbligatorio], [Il sistema deve implementare filtri di sicurezza su input e output per prevenire tentativi di manipolazione del prompt (Prompt Injection).], [VE-1.5, AD],
-  [RQ-002], [Obbligatorio], [Il sistema deve impedire l'esfiltrazione accidentale di dati personali o sensibili (PII) verso l'esterno o verso soggetti non autorizzati.], [VE-1.5, AD],
-  [RQ-003], [Opzionale], [In vista di future estensioni multi-azienda oltre il perimetro dell'MVP, il sistema potrebbe garantire la separazione logica dei dati e delle fonti tra aziende clienti differenti (isolamento multi-tenant).], [RB-01, VE-2.2, AD],
-  [RQ-004], [Obbligatorio], [L'architettura del sistema deve essere modulare per consentire l'estensione verso nuovi domini operativi e fonti senza refactoring globale.], [RB-16],
-  [RQ-005], [Obbligatorio], [Il sistema deve registrare nei log di audit l'identificativo utente, la data, l'abilità invocata e l'esito di ciascuna operazione dispositiva.], [RB-15],
-  [RQ-006], [Obbligatorio], [Il sistema deve garantire che dettagli tecnici interni (quali codici di stato HTTP o payload JSON) non siano mai esposti all'utente finale nei messaggi della chat.], [RB-14, VE-2.4],
+  [RQ-001], [Obbligatorio], [Il sistema deve implementare filtri di sicurezza su input e output per prevenire tentativi di manipolazione del prompt (Prompt Injection)], [VE-1.5, AD],
+  [RQ-002], [Obbligatorio], [Il sistema deve impedire l'esfiltrazione accidentale di dati personali o sensibili (PII) verso l'esterno o verso soggetti non autorizzati], [VE-1.5, AD],
+  [RQ-003], [Opzionale], [In vista di future estensioni multi-azienda oltre il perimetro dell'MVP, il sistema potrebbe garantire la separazione logica dei dati e delle fonti tra aziende clienti differenti (isolamento multi-tenant)], [RB-01, VE-2.2, AD],
+  [RQ-004], [Obbligatorio], [L'architettura del sistema deve essere modulare per consentire l'estensione verso nuovi domini operativi e fonti senza refactoring globale], [RB-16],
+  [RQ-005], [Obbligatorio], [Il sistema deve registrare nei log di audit l'identificativo utente, la data, l'abilità invocata e l'esito di ciascuna operazione dispositiva], [RB-15],
+  [RQ-006], [Obbligatorio], [Il sistema deve garantire che dettagli tecnici interni (quali codici di stato HTTP o payload JSON) non siano mai esposti all'utente finale nei messaggi della chat], [RB-14, VE-2.4],
 )
 ]
 
 == Requisiti di Vincolo (RV)
 
 #text(size: 9pt)[
+#set par(justify: false)
 #table(
-  columns: (1.8cm, 2.3cm, 1fr, 2.5cm),
+  columns: (1.8cm, 2.5cm, 1fr, 2.8cm),
   stroke: 0.5pt + rgb("#b5b5b5"),
   inset: 5pt,
   fill: (col, row) => if row == 0 { rgb("#e5e7eb") } else { none },
@@ -838,22 +853,23 @@ Per ciascun requisito è specificato il grado di cogenza per la baseline RTB:
   table.cell(align: center)[*Importanza*],
   [*Descrizione del Requisito di Vincolo*],
   [*Fonti*],
-  [RV-001], [Obbligatorio], [La base di conoscenza vettoriale deve essere implementata utilizzando PostgreSQL con l'estensione `pgvector`.], [VE-1.3],
-  [RV-002], [Obbligatorio], [Per la revisione RTB/PoC, il Concierge deve essere sviluppato come architettura autonoma e disaccoppiata, interfacciata con API reali o simulate di NEXUM.], [VE-1.1, VE-2.1],
-  [RV-003], [Obbligatorio], [L'interfaccia utente per il personale deve essere fruibile tramite WebApp / Progressive Web App (PWA) compatibile con i principali browser desktop.], [Capitolato C2],
-  [RV-004], [Obbligatorio], [Il backend applicativo del sistema deve essere sviluppato adottando la versione stabile più recente del framework Ruby on Rails.], [VE-1.3, VE §3.8],
-  [RV-005], [Obbligatorio], [Il frontend dell'interfaccia utente deve essere sviluppato adottando il framework Angular v18.], [VE §3.8],
-  [RV-006], [Obbligatorio], [L'integrazione con i modelli linguistici (LLM) deve avvenire tramite credenziali e API erogate su Amazon Web Services (AWS) Bedrock.], [VE-1.2, Capitolato C2],
-  [RV-007], [Obbligatorio], [Il modello linguistico ospitato su AWS Bedrock non deve accedere direttamente al database; tutte le interrogazioni verso la base dati e i servizi esterni devono essere incapsulate e controllate tramite tool definiti in Ruby (`ruby_llm`).], [VE-2.1],
-  [RV-008], [Obbligatorio], [Nel perimetro dell'MVP il sistema deve operare su una singola azienda, adottare un unico ruolo amministrativo (HR/Responsabile Fonti) e gestire la pipeline documentale internamente senza transitare attraverso le API di NEXUM.], [VE-2.1, VE-2.2],
+  [RV-001], [Obbligatorio], [La base di conoscenza vettoriale deve essere implementata utilizzando PostgreSQL con l'estensione `pgvector`], [VE-1.3],
+  [RV-002], [Obbligatorio], [Per la revisione RTB/PoC, il Concierge deve essere sviluppato come architettura autonoma e disaccoppiata, interfacciata con API reali o simulate di NEXUM], [VE-1.1, VE-2.1],
+  [RV-003], [Obbligatorio], [L'interfaccia utente per il personale deve essere fruibile tramite WebApp / Progressive Web App (PWA) compatibile con i principali browser desktop], [Capitolato~C2],
+  [RV-004], [Obbligatorio], [Il backend applicativo del sistema deve essere sviluppato adottando la versione stabile più recente del framework Ruby on Rails], [VE-1.3, VE §3.8],
+  [RV-005], [Obbligatorio], [Il frontend dell'interfaccia utente deve essere sviluppato adottando il framework Angular v18], [VE §3.8],
+  [RV-006], [Obbligatorio], [L'integrazione con i modelli linguistici (LLM) deve avvenire tramite credenziali e API erogate su Amazon Web Services (AWS) Bedrock], [VE-1.2, Capitolato~C2],
+  [RV-007], [Obbligatorio], [Il modello linguistico ospitato su AWS Bedrock non deve accedere direttamente al database; tutte le interrogazioni verso la base dati e i servizi esterni devono essere incapsulate e controllate tramite tool definiti in Ruby (`ruby_llm`)], [VE-2.1],
+  [RV-008], [Obbligatorio], [Nel perimetro dell'MVP il sistema deve operare su una singola azienda, adottare un unico ruolo amministrativo (HR/Responsabile Fonti) e gestire la pipeline documentale internamente senza transitare attraverso le API di NEXUM], [VE-2.1, VE-2.2],
 )
 ]
 
 == Requisiti Prestazionali (RP)
 
 #text(size: 9pt)[
+#set par(justify: false)
 #table(
-  columns: (1.8cm, 2.3cm, 1fr, 2.5cm),
+  columns: (1.8cm, 2.5cm, 1fr, 2.8cm),
   stroke: 0.5pt + rgb("#b5b5b5"),
   inset: 5pt,
   fill: (col, row) => if row == 0 { rgb("#e5e7eb") } else { none },
@@ -861,9 +877,9 @@ Per ciascun requisito è specificato il grado di cogenza per la baseline RTB:
   table.cell(align: center)[*Importanza*],
   [*Descrizione del Requisito Prestazionale*],
   [*Fonti*],
-  [RP-001], [Obbligatorio], [Il sistema deve monitorare e tracciare il consumo dei token e i costi generati dalle invocazioni API su AWS Bedrock per rispettare il budget economico prefissato.], [VE-1.2],
-  [RP-002], [Obbligatorio], [I processi di estrazione testo, chunking e vettorizzazione documentale devono essere eseguiti in modo asincrono per non bloccare l'esperienza d'uso.], [Capitolato C2, AD],
-  [RP-003], [Desiderabile], [Il sistema dovrebbe completare il recupero documentale e la formulazione iniziale della risposta testuale entro un tempo medio accettabile per l'utente (5 secondi).], [AD],
+  [RP-001], [Obbligatorio], [Il sistema deve monitorare e tracciare il consumo dei token e i costi generati dalle invocazioni API su AWS Bedrock per rispettare il budget economico prefissato], [VE-1.2],
+  [RP-002], [Obbligatorio], [I processi di estrazione testo, chunking e vettorizzazione documentale devono essere eseguiti in modo asincrono per non bloccare l'esperienza d'uso], [Capitolato~C2, AD],
+  [RP-003], [Desiderabile], [Il sistema dovrebbe completare il recupero documentale e la formulazione iniziale della risposta testuale entro un tempo medio accettabile per l'utente (5 secondi)], [AD],
 )
 ]
 
@@ -878,12 +894,13 @@ Per ciascun requisito è specificato il grado di cogenza per la baseline RTB:
 La presente matrice certifica che ogni bisogno, vincolo e aspettativa formulata dagli stakeholder nel Capitolato (*RB*), nei Verbali Esterni (*VE*) o nell'Analisi del Dominio (*AD*) è soddisfatta da almeno un requisito software formale (*Principio di Sufficienza*).
 
 #text(size: 9pt)[
+#set par(justify: false)
 #table(
-  columns: (2.5cm, 1fr, 3.8cm),
+  columns: (3.2cm, 1fr, 4.2cm),
   stroke: 0.5pt + rgb("#b5b5b5"),
   inset: 5pt,
   fill: (col, row) => if row == 0 { rgb("#e5e7eb") } else { none },
-  [*Fonte*], [*Descrizione Sintetica della Fonte*], [*Requisiti Software Soddisfatti*],
+  table.header([*Fonte*], [*Descrizione Sintetica della Fonte*], [*Requisiti Software Soddisfatti*]),
   [RB-01], [Contesto persona autenticata e azienda di appartenenza], [RF-001, RF-028, RQ-003],
   [RB-02], [Discriminazione dell'intento dell'utente], [RF-001, RF-003, RF-007, RF-010],
   [RB-03], [Combinazione di capacità differenti nel dialogo], [RF-004],
@@ -922,6 +939,7 @@ La presente matrice certifica che ogni bisogno, vincolo e aspettativa formulata 
 La matrice di tracciabilità tra casi d'uso e requisiti funzionali attesta che ogni interazione prevista ha precisi riscontri comportamentali nel software (*Principio di Necessità*).
 
 #text(size: 9pt)[
+#set par(justify: false)
 #table(
   columns: (2.5cm, 1fr),
   stroke: 0.5pt + rgb("#b5b5b5"),
@@ -970,45 +988,49 @@ La matrice di tracciabilità tra casi d'uso e requisiti funzionali attesta che o
 La presente tabella riassume il legame diretto tra i requisiti di business formulati dal committente/proponente e i casi d'uso modellati, specificando tipologia, priorità e attori coinvolti.
 
 #text(size: 8.5pt)[
+#set par(justify: false)
 #table(
-  columns: (1.5cm, 1fr, 1.2cm, 1.5cm, 2.8cm, 2.5cm),
+  columns: (1.6cm, 1fr, 1.4cm, 1.8cm, 3.0cm, 2.7cm),
+  align: (center, left, center, center, left, left),
   stroke: 0.5pt + rgb("#b5b5b5"),
   inset: 5pt,
   fill: (col, row) => if row == 0 { rgb("#e5e7eb") } else { none },
-  table.cell(align: center)[*Fonte*],
-  [*Descrizione Requisito Utente*],
-  table.cell(align: center)[*Tipo*],
-  table.cell(align: center)[*Priorità*],
-  [*Attori Coinvolti*],
-  table.cell(align: center)[*Casi d'Uso*],
+  table.header(
+    [*Fonte*],
+    [*Descrizione Requisito Utente*],
+    [*Tipo*],
+    [*Priorità*],
+    [*Attori Coinvolti*],
+    [*Casi d'Uso*],
+  ),
 
-  [RB-01], [Operare nel contesto della persona autenticata nell'ambito aziendale.], [F], [O], [Dipendente], [UC1, UC4, UC5, UC6],
-  [RB-02], [Riconoscere e distinguere richieste su regole aziendali, istruzioni di prodotto, dati personali e operazioni.], [F], [O], [Dipendente, Provider LLM], [UC1, UC2, UC3, UC4, UC6],
-  [RB-03], [Combinare capacità informative e operative differenti all'interno della medesima conversazione.], [F], [O], [Dipendente], [UC1],
-  [RB-04], [Mantenere il contesto del dialogo e richiedere chiarimenti in caso di informazioni ambigue (es. date senza anno).], [F], [O], [Dipendente, Provider LLM], [UC1, UC1.1, UC1.4, UC6],
-  [RB-05], [Caricamento, organizzazione in bucket, sostituzione e ritiro delle fonti aziendali da Backoffice.], [F], [O], [Amministratore HR], [UC7, UC8, UC9, UC10, UC11, UC12, UC13],
-  [RB-06], [Trasformazione delle fonti in unità di conoscenza consultabili preservando provenienza, contesto e versione.], [F], [O], [Amministratore HR], [UC11, UC12, UC14],
-  [RB-07], [Gestione dei manuali NEXUM come fonte distinta dai regolamenti aziendali interni.], [F], [O], [Dipendente, Provider LLM], [UC3],
-  [RB-08], [Risposte documentali con citazione delle fonti; astensione formale se fonti insufficienti o in contrasto.], [F], [O], [Dipendente, Provider LLM], [UC2, UC2.1, UC3, UC3.1, UC6.5],
-  [RB-09], [Recupero dei dati personali solo tramite servizi applicativi autorizzati (nessun dato inventato dall'LLM).], [F], [O], [Dipendente, Servizi NEXUM], [UC4, UC5],
-  [RB-10], [Dati personali esposti con periodo esplicito, unità di misura e significato degli stati considerati.], [F], [O], [Dipendente, Servizi NEXUM], [UC4],
-  [RB-11], [Esecuzione delle operazioni tramite abilità definite e invocazione di servizi applicativi autorizzati.], [F], [O], [Dipendente, Servizi NEXUM], [UC6],
-  [RB-12], [Mostrare riepilogo formale completo e richiedere conferma esplicita prima dell'invio; nuovo riepilogo se i dati variano.], [F], [O], [Dipendente], [UC6, UC6.1, UC6.2, UC6.3, UC6.6],
-  [RB-13], [Distinguere formalmente gli stati della richiesta di ferie/permesso (in attesa, approvata, rifiutata).], [F], [O], [Dipendente, Servizi NEXUM], [UC5, UC6],
-  [RB-14], [Comunicazione chiara all'utente di errori tecnici, validazioni fallite, disconnessioni o indisponibilità dei servizi.], [F], [O], [Dipendente, Amministratore HR], [UC1.2, UC1.3, UC4.1, UC5.1, UC6.4, UC7.1, UC11.1, UC14, UC14.1],
-  [RB-15], [Tracciabilità completa delle fonti consultate e degli esiti delle operazioni effettuate.], [Q], [O], [Amministratore HR], [UC15],
-  [RB-16], [Architettura modulare ed estensibile per l'aggiunta di nuove fonti e abilità senza riprogettazione.], [Q], [O], [— (Vincolo architetturale)], [Requisiti di sistema],
-  [VE-1.1], [Disaccoppiamento architetturale iniziale: Concierge autonomo interfacciato tramite simulatori/API NEXUM.], [V], [O], [Servizi NEXUM], [Requisiti di vincolo],
-  [VE-1.2], [Accesso ad AWS Bedrock con monitoraggio del consumo di token e rispetto del budget prefissato.], [P], [O], [Provider LLM], [Requisiti prestazionali],
-  [VE-1.3], [Adozione di PostgreSQL con estensione `pgvector` per la base di conoscenza vettoriale.], [V], [O], [— (Vincolo tecnologico)], [Requisiti di vincolo],
-  [VE-1.4], [Controlli di validità e sovrapposizione ferie delegati deterministicamente ai Servizi NEXUM e non all'LLM.], [F], [O], [Servizi NEXUM], [UC6, UC6.4],
-  [VE-1.5], [Prevenzione da Prompt Injection, filtri di sicurezza per input/output e tutela dei dati sensibili (PII).], [Q], [O], [— (Qualità di sicurezza)], [Requisiti di qualità],
-  [VE-2.1], [Disaccoppiamento DB/Bedrock, tool controllati in Ruby (`ruby_llm`) e gestione documentale interna.], [V], [O], [Provider LLM, Servizi NEXUM], [Requisiti di vincolo],
-  [VE-2.2], [PDF + OCR, archiviazione logica fonti, prevalenza ultima versione, ruolo HR unico e singola azienda.], [F/V], [O], [Dipendente, Amministratore HR], [UC2, UC2.1, UC7, UC10, UC11, UC12, UC13],
-  [VE-2.3], [Persistenza conversazione nella singola sessione al reload/cambio pagina e nuova sessione stateless.], [F], [O], [Dipendente], [UC1, UC1.4],
-  [VE-2.4], [Retry con debounce (senza Idempotency-Key), errori a 3 livelli e divieto esposizione codici HTTP/JSON.], [F/Q], [O], [Dipendente, Provider LLM, Servizi NEXUM], [UC1.2, UC1.3, UC4.1, UC5.1, UC6.1, UC6.2, UC6.4, UC6.5],
-  [VE-2.5], [Perimetro MVP solo ferie/permessi con note opzionali, 3 stati, no modifica/cancellazione post-invio, vincoli PDF verificati dall'agente.], [F], [O], [Dipendente, Servizi NEXUM], [UC5, UC6, UC6.5],
-  [AD], [Funzionalità aggiuntive e usabilità: filtri avanzati richieste, download file originale e sottotipi opzionali.], [F], [D/Op], [Dipendente, Amministratore HR], [UC5, UC6, UC14.2],
+  [RB-01], [Operare nel contesto della persona autenticata nell'ambito aziendale], [F], [O], [Dipendente], [UC1, UC4, UC5, UC6],
+  [RB-02], [Riconoscere e distinguere richieste su regole aziendali, istruzioni di prodotto, dati personali e operazioni], [F], [O], [Dipendente, Provider~LLM], [UC1, UC2, UC3, UC4, UC6],
+  [RB-03], [Combinare capacità informative e operative differenti all'interno della medesima conversazione], [F], [O], [Dipendente], [UC1],
+  [RB-04], [Mantenere il contesto del dialogo e richiedere chiarimenti in caso di informazioni ambigue (es. date senza anno)], [F], [O], [Dipendente, Provider~LLM], [UC1, UC1.1, UC1.4, UC6],
+  [RB-05], [Caricamento, organizzazione in bucket, sostituzione e ritiro delle fonti aziendali da Backoffice], [F], [O], [Amministratore HR], [UC7, UC8, UC9, UC10, UC11, UC12, UC13],
+  [RB-06], [Trasformazione delle fonti in unità di conoscenza consultabili preservando provenienza, contesto e versione], [F], [O], [Amministratore HR], [UC11, UC12, UC14],
+  [RB-07], [Gestione dei manuali NEXUM come fonte distinta dai regolamenti aziendali interni], [F], [O], [Dipendente, Provider~LLM], [UC3],
+  [RB-08], [Risposte documentali con citazione delle fonti; astensione formale se fonti insufficienti o in contrasto], [F], [O], [Dipendente, Provider~LLM], [UC2, UC2.1, UC3, UC3.1, UC6.5],
+  [RB-09], [Recupero dei dati personali solo tramite servizi applicativi autorizzati (nessun dato inventato dall'LLM)], [F], [O], [Dipendente, Servizi~NEXUM], [UC4, UC5],
+  [RB-10], [Dati personali esposti con periodo esplicito, unità di misura e significato degli stati considerati], [F], [O], [Dipendente, Servizi~NEXUM], [UC4],
+  [RB-11], [Esecuzione delle operazioni tramite abilità definite e invocazione di servizi applicativi autorizzati], [F], [O], [Dipendente, Servizi~NEXUM], [UC6],
+  [RB-12], [Mostrare riepilogo formale completo e richiedere conferma esplicita prima dell'invio; nuovo riepilogo se i dati variano], [F], [O], [Dipendente], [UC6, UC6.1, UC6.2, UC6.3, UC6.6],
+  [RB-13], [Distinguere formalmente gli stati della richiesta di ferie/permesso (in attesa, approvata, rifiutata)], [F], [O], [Dipendente, Servizi~NEXUM], [UC5, UC6],
+  [RB-14], [Comunicazione chiara all'utente di errori tecnici, validazioni fallite, disconnessioni o indisponibilità dei servizi], [F], [O], [Dipendente, Amministratore HR], [UC1.2, UC1.3, UC4.1, UC5.1, UC6.4, UC7.1, UC11.1, UC14, UC14.1],
+  [RB-15], [Tracciabilità completa delle fonti consultate e degli esiti delle operazioni effettuate], [Q], [O], [Amministratore HR], [UC15],
+  [RB-16], [Architettura modulare ed estensibile per l'aggiunta di nuove fonti e abilità senza riprogettazione], [Q], [O], [— (Vincolo architetturale)], [Requisiti di sistema],
+  [VE-1.1], [Disaccoppiamento architetturale iniziale: Concierge autonomo interfacciato tramite simulatori/API NEXUM], [V], [O], [Servizi~NEXUM], [Requisiti di vincolo],
+  [VE-1.2], [Accesso ad AWS Bedrock con monitoraggio del consumo di token e rispetto del budget prefissato], [P], [O], [Provider~LLM], [Requisiti prestazionali],
+  [VE-1.3], [Adozione di PostgreSQL con estensione `pgvector` per la base di conoscenza vettoriale], [V], [O], [— (Vincolo tecnologico)], [Requisiti di vincolo],
+  [VE-1.4], [Controlli di validità e sovrapposizione ferie delegati deterministicamente ai Servizi NEXUM e non all'LLM], [F], [O], [Servizi~NEXUM], [UC6, UC6.4],
+  [VE-1.5], [Prevenzione da Prompt Injection, filtri di sicurezza per input/output e tutela dei dati sensibili (PII)], [Q], [O], [— (Qualità di sicurezza)], [Requisiti di qualità],
+  [VE-2.1], [Disaccoppiamento DB/Bedrock, tool controllati in Ruby (`ruby_llm`) e gestione documentale interna], [V], [O], [Provider~LLM, Servizi~NEXUM], [Requisiti di vincolo],
+  [VE-2.2], [PDF + OCR, archiviazione logica fonti, prevalenza ultima versione, ruolo HR unico e singola azienda], [F/V], [O], [Dipendente, Amministratore HR], [UC2, UC2.1, UC7, UC10, UC11, UC12, UC13],
+  [VE-2.3], [Persistenza conversazione nella singola sessione al reload/cambio pagina e nuova sessione stateless], [F], [O], [Dipendente], [UC1, UC1.4],
+  [VE-2.4], [Retry con debounce (senza Idempotency-Key), errori a 3 livelli e divieto esposizione codici HTTP/JSON], [F/Q], [O], [Dipendente, Provider~LLM, Servizi~NEXUM], [UC1.2, UC1.3, UC4.1, UC5.1, UC6.1, UC6.2, UC6.4, UC6.5],
+  [VE-2.5], [Perimetro MVP solo ferie/permessi con note opzionali, 3 stati, no modifica/cancellazione post-invio, vincoli PDF verificati dall'agente], [F], [O], [Dipendente, Servizi~NEXUM], [UC5, UC6, UC6.5],
+  [AD], [Funzionalità aggiuntive e usabilità: filtri avanzati richieste, download file originale e sottotipi opzionali], [F], [D/Op], [Dipendente, Amministratore HR], [UC5, UC6, UC14.2],
 )
 ]
 
@@ -1021,8 +1043,11 @@ La presente tabella riassume il legame diretto tra i requisiti di business formu
 
 Di seguito si riportano i dati quantitativi di riepilogo dei requisiti software individuati, suddivisi per tipologia e grado di importanza concordato per la baseline RTB.
 
+#text(size: 10pt)[
+#set par(justify: false)
 #table(
-  columns: (3.5cm, 2.5cm, 2.5cm, 2.5cm, 2.5cm),
+  columns: (1fr, 2.7cm, 2.7cm, 2.5cm, 2.2cm),
+  align: (left, center, center, center, center),
   stroke: 0.5pt + rgb("#b5b5b5"),
   inset: 6pt,
   fill: (col, row) => if row == 0 { rgb("#e5e7eb") } else { none },
@@ -1033,11 +1058,15 @@ Di seguito si riportano i dati quantitativi di riepilogo dei requisiti software 
   [Prestazionali (RP)], [2], [1], [0], [3],
   [*Totale Complessivo*], [*63*], [*3*], [*3*], [*69*],
 )
+]
 
 #v(0.5cm)
 #align(center)[
+#text(size: 10pt)[
+#set par(justify: false)
 #table(
-  columns: (4.0cm, 3.0cm, 3.0cm),
+  columns: (4.5cm, 3.8cm, 3.2cm),
+  align: (left, center, center),
   stroke: 0.5pt + rgb("#b5b5b5"),
   inset: 6pt,
   fill: (col, row) => if row == 0 { rgb("#e5e7eb") } else { none },
@@ -1047,4 +1076,5 @@ Di seguito si riportano i dati quantitativi di riepilogo dei requisiti software 
   [Opzionali (Op)], [3], [4.35%],
   [*Totale*], [*69*], [*100.00%*],
 )
+]
 ]
