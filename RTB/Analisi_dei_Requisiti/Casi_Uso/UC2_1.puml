@@ -14,8 +14,8 @@ UC2 -- llm
 
 UC2 <.. UC2_1 : <<extend>>
 note on link
-Fonti non sufficienti
-o in contrasto
+Fonti assenti, insufficienti
+o in contrasto non risolvibile
 end note
 
 @enduml

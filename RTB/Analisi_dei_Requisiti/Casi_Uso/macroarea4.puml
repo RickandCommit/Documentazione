@@ -11,6 +11,8 @@ rectangle "NEXUM Concierge" {
     usecase "UC6.2: Conferma esplicita invio richiesta" as UC6_2
     usecase "UC6.3: Modifica dati della richiesta in preparazione" as UC6_3
     usecase "UC6.4: Visualizzazione errore validazione o sovrapposizione" as UC6_4
+    usecase "UC6.5: Visualizzazione diniego per violazione regolamento aziendale" as UC6_5
+    usecase "UC6.6: Annullamento preparazione richiesta" as UC6_6
 }
 
 dp -- UC6
@@ -20,5 +22,7 @@ UC6 ..> UC6_1 : <<include>>
 UC6 ..> UC6_2 : <<include>>
 UC6 <.. UC6_3 : <<extend>>
 UC6 <.. UC6_4 : <<extend>>
+UC6 <.. UC6_5 : <<extend>>
+UC6 <.. UC6_6 : <<extend>>
 
 @enduml

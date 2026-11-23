@@ -1,0 +1,21 @@
+@startuml UC5_1
+left to right direction
+
+actor "Dipendente" as dp
+actor "Servizi NEXUM" as nexum
+
+rectangle "NEXUM Concierge" {
+    usecase "UC5: Consultazione stato richieste presentate" as UC5
+    usecase "UC5.1: Visualizzazione errore recupero stato richieste" as UC5_1
+}
+
+dp -- UC5
+UC5 -- nexum
+
+UC5 <.. UC5_1 : <<extend>>
+note on link
+Errore di comunicazione
+con i Servizi NEXUM
+end note
+
+@enduml

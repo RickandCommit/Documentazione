@@ -180,18 +180,21 @@ In conformità alle norme di progetto concordate:
   [UC1.2], [Visualizzazione errore comunicazione LLM], [<<extend>>], [Dipendente], [Provider LLM], [RB-14],
   [UC1.3], [Visualizzazione errore di connessione lato client], [<<extend>>], [Dipendente], [—], [RB-14, VE-2.4],
   [UC1.4], [Avvio nuova sessione di chat], [<<extend>>], [Dipendente], [—], [RB-04, VE-2.3],
-  [UC2], [Richiesta informazioni su regolamenti aziendali], [Base], [Dipendente], [Provider LLM], [RB-02, RB-08],
-  [UC2.1], [Visualizzazione messaggio di astensione], [<<extend>>], [Dipendente], [Provider LLM], [RB-08],
+  [UC2], [Richiesta informazioni su regolamenti aziendali], [Base], [Dipendente], [Provider LLM], [RB-02, RB-08, VE-2.2],
+  [UC2.1], [Visualizzazione messaggio di astensione], [<<extend>>], [Dipendente], [Provider LLM], [RB-08, VE-2.2],
   [UC3], [Richiesta istruzioni su funzionalità NEXUM], [Base], [Dipendente], [Provider LLM], [RB-02, RB-07, RB-08],
   [UC3.1], [Visualizzazione assenza istruzioni prodotto], [<<extend>>], [Dipendente], [Provider LLM], [RB-08],
   [UC4], [Consultazione dati personali ferie e permessi], [Base], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-02, RB-09, RB-10],
-  [UC4.1], [Visualizzazione errore recupero dati personali], [<<extend>>], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-14],
-  [UC5], [Consultazione stato richieste presentate], [Base], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-13],
-  [UC6], [Registrazione richiesta ferie o permessi], [Base], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-02, RB-11, RB-12, VE-1.4],
-  [UC6.1], [Visualizzazione riepilogo dati richiesta], [<<include>>], [Dipendente], [Provider LLM], [RB-12],
-  [UC6.2], [Conferma esplicita invio richiesta], [<<include>>], [Dipendente], [Provider LLM], [RB-12],
-  [UC6.3], [Modifica dati richiesta in preparazione], [<<extend>>], [Dipendente], [Provider LLM], [RB-12],
-  [UC6.4], [Visualizzazione errore validazione o sovrapposizione], [<<extend>>], [Dipendente], [Servizi NEXUM], [RB-14, VE-1.4],
+  [UC4.1], [Visualizzazione errore recupero dati personali], [<<extend>>], [Dipendente], [Servizi NEXUM], [RB-14, VE-2.4],
+  [UC5], [Consultazione stato richieste presentate], [Base], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-13, VE-2.5],
+  [UC5.1], [Visualizzazione errore recupero stato richieste], [<<extend>>], [Dipendente], [Servizi NEXUM], [RB-14, VE-2.4],
+  [UC6], [Registrazione richiesta ferie o permessi], [Base], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-02, RB-11, RB-12, VE-1.4, VE-2.5],
+  [UC6.1], [Visualizzazione riepilogo dati richiesta], [<<include>>], [Dipendente], [Provider LLM], [RB-12, VE-2.4],
+  [UC6.2], [Conferma esplicita invio richiesta], [<<include>>], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-12, VE-2.4],
+  [UC6.3], [Modifica dati della richiesta in preparazione], [<<extend>>], [Dipendente], [Provider LLM], [RB-12],
+  [UC6.4], [Visualizzazione errore validazione o sovrapposizione], [<<extend>>], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-14, VE-1.4, VE-2.4],
+  [UC6.5], [Visualizzazione diniego per violazione regolamento aziendale], [<<extend>>], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-08, VE-2.4, VE-2.5],
+  [UC6.6], [Annullamento preparazione richiesta], [<<extend>>], [Dipendente], [Provider LLM], [RB-12],
   [UC7], [Creazione Bucket di conoscenza], [Base], [Amministratore HR], [—], [RB-05],
   [UC8], [Visualizzazione elenco Bucket], [Base], [Amministratore HR], [—], [RB-05],
   [UC9], [Modifica metadati Bucket], [Base], [Amministratore HR], [—], [RB-05],
@@ -278,151 +281,234 @@ Gestisce l'invio di messaggi e la ricezione di risposte tramite interfaccia chat
 #pagebreak()
 
 == Macroarea 2: Consultazione Conoscenza (Regolamenti e Manuali)
-Permette al dipendente di porre quesiti in linguaggio naturale relativi a:
-1. *Regolamenti aziendali interni (UC2):* richieste su policy, preavvisi e contratti caricate dall'amministrazione. Il sistema genera la risposta indicando tassativamente le fonti utilizzate. Qualora le fonti siano assenti, non pertinenti o discordanti, il sistema si astiene esplicitamente dal formulare una risposta non verificabile (UC2.1).
-2. *Manuali d'uso NEXUM (UC3):* istruzioni operative sul funzionamento della piattaforma applicativa. Questa base di conoscenza è formalmente distinta dalle policy interne: conoscere la schermata per inserire una richiesta non significa stabilire se l'azienda la approverà.
+Permette al dipendente di porre quesiti in linguaggio naturale relativi a due basi di conoscenza logicamente distinte:
+1. *Regolamenti aziendali interni (`UC2`):* richieste su policy, preavvisi e regole aziendali caricate dal Backoffice. Il sistema consulta esclusivamente le fonti attive autorizzate (facendo prevalere la versione più recente in caso di aggiornamenti dello stesso regolamento) e indica sempre le fonti utilizzate nella risposta. In caso di carenza informativa o contrasti non risolvibili tra fonti diverse, il sistema si astiene esplicitamente (`UC2.1`).
+2. *Manuali d'uso NEXUM (`UC3`):* istruzioni operative sul funzionamento della piattaforma applicativa, mantenute distinte dalle policy aziendali interne (conoscere come compilare una schermata non implica l'approvazione della richiesta). Se la funzionalità non è documentata nei manuali, il sistema lo comunica esplicitamente (`UC3.1`).
+
+#figure(image("Casi_Uso/out/macroarea2.svg", width: 85%), caption: [Diagramma panoramico – Macroarea 2])
 
 === UC2: Richiesta informazioni su regolamenti aziendali
-#figure(image("Casi_Uso/out/UC2.svg", width: 75%), caption: [UC2 – Richiesta informazioni su regolamenti aziendali])
-- *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+#figure(image("Casi_Uso/out/UC2.svg", width: 70%), caption: [UC2 – Richiesta informazioni su regolamenti aziendali])
+- *Attori:* Dipendente (Primario), Provider LLM (Secondario).
+- *Descrizione:* Il dipendente pone una domanda relativa alle regole e alle procedure aziendali su ferie e permessi e riceve una risposta basata sui regolamenti attivi, completa di citazione delle fonti.
+- *Precondizioni:* Il sistema è attivo; il dipendente è autenticato e si trova nella chat (`UC1`); esistono fonti aziendali attive autorizzate per il profilo del dipendente.
+- *Trigger:* Il dipendente desidera chiarire una regola, un preavviso o una procedura prevista dal regolamento aziendale.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. Il dipendente formula in chat una domanda sulle regole o procedure aziendali (es. giorni minimi di preavviso o gestione del saldo negativo).
+  2. Il sistema identifica l'intento come richiesta di conoscenza aziendale e ricerca le informazioni pertinenti esclusivamente tra le fonti attive autorizzate per il dipendente (escludendo le fonti ritirate/archiviate).
+  3. Qualora siano presenti versioni successive di uno stesso regolamento, il sistema considera esclusivamente la versione più recente.
+  4. Il sistema elabora la risposta in linguaggio naturale con il supporto del Provider LLM basandosi solo sulle evidenze recuperate.
+  5. Il sistema mostra al dipendente la risposta in chat accompagnata dai riferimenti espliciti delle fonti utilizzate (nome del documento e sezione pertinente).
+- *Scenari Alternativi:*
+  - Se le fonti autorizzate risultano assenti, insufficienti o presentano contrasti non risolvibili tra documenti distinti, il sistema si astiene dal rispondere (*UC2.1*).
+- *Postcondizioni:* Il dipendente visualizza una risposta accurata basata sui regolamenti aziendali attivi con i relativi riferimenti documentali.
 - *Estensioni:* UC2.1.
 
 === UC2.1: Visualizzazione messaggio di astensione
 #figure(image("Casi_Uso/out/UC2_1.svg", width: 75%), caption: [UC2.1 – Visualizzazione messaggio di astensione])
-- *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+- *Attori:* Dipendente (Primario), Provider LLM (Secondario).
+- *Descrizione:* Il sistema informa esplicitamente il dipendente che non può fornire una risposta affidabile perché le fonti aziendali autorizzate sono assenti, insufficienti o in contrasto non risolvibile.
+- *Precondizioni:* Il dipendente ha inviato una domanda sui regolamenti aziendali (`UC2`), ma la ricerca sulle fonti attive autorizzate non ha prodotto informazioni sufficienti oppure ha rilevato un contrasto non risolvibile tra fonti diverse.
+- *Condizione di estensione:* Fonti autorizzate assenti, insufficienti o in contrasto non risolvibile.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. Il sistema verifica l'impossibilità di formulare una risposta supportata in modo certo dalle fonti aziendali attive.
+  2. Il sistema evita di generare risposte non verificate e mostra in chat un messaggio esplicito di astensione, indicando chiaramente la carenza informativa o il contrasto riscontrato.
+- *Postcondizioni:* Il dipendente è informato dell'impossibilità di rispondere con certezza e non riceve informazioni inventate o non supportate dai documenti aziendali.
 
 === UC3: Richiesta istruzioni su funzionalità NEXUM
-#figure(image("Casi_Uso/out/UC3.svg", width: 75%), caption: [UC3 – Richiesta istruzioni su funzionalità NEXUM])
-- *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+#figure(image("Casi_Uso/out/UC3.svg", width: 70%), caption: [UC3 – Richiesta istruzioni su funzionalità NEXUM])
+- *Attori:* Dipendente (Primario), Provider LLM (Secondario).
+- *Descrizione:* Il dipendente chiede indicazioni operative su come utilizzare una funzionalità della piattaforma NEXUM (area ferie e permessi) e riceve istruzioni basate sui manuali ufficiali del prodotto.
+- *Precondizioni:* Il sistema è attivo; il dipendente è autenticato e si trova nella chat (`UC1`); i manuali operativi NEXUM sono caricati e attivi nel sistema come fonte distinta dai regolamenti aziendali.
+- *Trigger:* Il dipendente vuole sapere come utilizzare una schermata o una funzione dell'applicazione NEXUM.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. Il dipendente chiede in chat come eseguire un'operazione o dove trovare una funzione su NEXUM (es. come visualizzare o cancellare una richiesta sul portale).
+  2. Il sistema identifica l'intento come richiesta di conoscenza del prodotto e ricerca le informazioni pertinenti esclusivamente nei manuali operativi NEXUM, mantenendoli separati dai regolamenti aziendali interni.
+  3. Il sistema genera la guida operativa in linguaggio naturale con il supporto del Provider LLM.
+  4. Il sistema mostra al dipendente le istruzioni richieste in chat indicando esplicitamente la fonte del manuale consultato (ed eventuale sezione pertinente).
+- *Scenari Alternativi:*
+  - Se nei manuali operativi NEXUM non sono presenti istruzioni relative alla funzionalità richiesta, il sistema lo segnala esplicitamente (*UC3.1*).
+- *Postcondizioni:* Il dipendente visualizza le istruzioni operative richieste con indicazione della fonte del manuale NEXUM.
 - *Estensioni:* UC3.1.
 
 === UC3.1: Visualizzazione assenza istruzioni prodotto
 #figure(image("Casi_Uso/out/UC3_1.svg", width: 75%), caption: [UC3.1 – Visualizzazione assenza istruzioni prodotto])
-- *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+- *Attori:* Dipendente (Primario), Provider LLM (Secondario).
+- *Descrizione:* Il sistema comunica chiaramente al dipendente che la funzionalità NEXUM richiesta non è documentata nei manuali disponibili.
+- *Precondizioni:* Il dipendente ha richiesto istruzioni operative su NEXUM (`UC3`), ma i manuali di prodotto caricati nel sistema non contengono informazioni pertinenti alla funzionalità domandata.
+- *Condizione di estensione:* Assenza di istruzioni pertinenti nei manuali operativi NEXUM.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. Il sistema rileva che nessun manuale operativo NEXUM copre la funzionalità richiesta dal dipendente.
+  2. Il sistema mostra in chat un messaggio chiaro in cui dichiara l'assenza di istruzioni disponibili per la funzionalità indicata, evitando di formulare indicazioni non verificate.
+- *Postcondizioni:* Il dipendente è informato che la funzionalità richiesta non è presente nei manuali operativi disponibili.
 
 #pagebreak()
 
 == Macroarea 3: Consultazione Dati Personali Ferie e Permessi
-Abilita la consultazione dei dati applicativi del dipendente autenticato tramite servizi deterministici:
-- *Consultazione fruito e residuo (UC4):* l'utente interroga il sistema sul proprio storico (es. "Quante ferie ho maturato o fatto quest'anno?"). Il sistema delega la query ai servizi autorizzati NEXUM specificando periodo temporale, unità di misura (giorni/ore) e criteri di conteggio deterministici.
-- *Stato avanzamento pratiche (UC5):* restituisce la lista e lo stato aggiornato delle richieste inviate, evidenziando se sono in attesa di approvazione, approvate o rifiutate.
+Abilita la consultazione dei dati personali del dipendente autenticato tramite i Servizi NEXUM autorizzati, impedendo qualsiasi calcolo o deduzione arbitraria da parte del modello linguistico:
+- *Consultazione saldo e storico ferie/permessi (`UC4`):* il dipendente interroga il sistema sui propri contatori di ferie e permessi (maturati, fruiti, in attesa e residui) con periodo e unità di misura espliciti; eventuali errori di recupero sono gestiti in `UC4.1`.
+- *Consultazione stato richieste presentate (`UC5`):* il dipendente visualizza l'elenco e lo stato aggiornato delle proprie richieste, ciascuna classificata esclusivamente in uno dei tre stati previsti (*in attesa*, *approvata*, *rifiutata*); eventuali errori di recupero sono gestiti in `UC5.1`.
+
+#figure(image("Casi_Uso/out/macroarea3.svg", width: 85%), caption: [Diagramma panoramico – Macroarea 3])
 
 === UC4: Consultazione dati personali, ferie e permessi
-#figure(image("Casi_Uso/out/UC4.svg", width: 75%), caption: [UC4 – Consultazione dati personali, ferie e permessi])
-- *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario), Servizi NEXUM (Secondario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+#figure(image("Casi_Uso/out/UC4.svg", width: 70%), caption: [UC4 – Consultazione dati personali, ferie e permessi])
+- *Attori:* Dipendente (Primario), Provider LLM (Secondario), Servizi NEXUM (Secondario).
+- *Descrizione:* Il dipendente consulta i propri dati personali relativi a ferie e permessi (maturati, fruiti, in attesa e residui) recuperati in modo deterministico dai Servizi NEXUM autorizzati.
+- *Precondizioni:* Il sistema è attivo; il dipendente è autenticato e si trova nella chat (`UC1`).
+- *Trigger:* Il dipendente desidera conoscere il proprio saldo residuo o il riepilogo di ferie e permessi per un determinato periodo.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. Il dipendente chiede in chat informazioni sui propri dati di ferie o permessi (es. ferie fruite nell'anno corrente o ore di permesso residue).
+  2. Il sistema interpreta la richiesta con il supporto del Provider LLM, individuando tipologia e periodo di riferimento (richiedendo chiarimenti tramite `UC1.1` se il periodo è ambiguo).
+  3. Il sistema interroga in modo controllato i Servizi NEXUM nel contesto esclusivo del dipendente autenticato per recuperare i dati aggiornati.
+  4. I Servizi NEXUM verificano l'identità e restituiscono i dati personali certificati (tipologia, periodo, unità di misura e contatori maturati, fruiti, in attesa e residui).
+  5. Il sistema presenta al dipendente i dati ricevuti in linguaggio naturale, specificando chiaramente periodo, tipologia e unità di misura (giorni o ore), senza eseguire deduzioni arbitrarie in assenza di dati applicativi.
+- *Scenari Alternativi:*
+  - Se i Servizi NEXUM risultano indisponibili o restituiscono un errore tecnico persistente dopo i tentativi automatici di ripetizione, il sistema notifica l'errore in modo non tecnico (*UC4.1*).
+- *Postcondizioni:* Il dipendente visualizza i propri dati aggiornati e certificati su ferie e permessi relativi al periodo richiesto.
 - *Estensioni:* UC4.1.
 
 === UC4.1: Visualizzazione errore recupero dati personali
 #figure(image("Casi_Uso/out/UC4_1.svg", width: 75%), caption: [UC4.1 – Visualizzazione errore recupero dati personali])
-- *Attori Coinvolti:* Dipendente (Primario), Servizi NEXUM (Secondario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+- *Attori:* Dipendente (Primario), Servizi NEXUM (Secondario).
+- *Descrizione:* Il sistema informa il dipendente in modo chiaro e non tecnico qualora il recupero dei dati personali dai Servizi NEXUM fallisca in modo persistente.
+- *Precondizioni:* Il dipendente ha richiesto i propri dati personali (`UC4`) e la comunicazione con i Servizi NEXUM non è andata a buon fine nemmeno dopo i tentativi automatici di ripetizione con attesa (debounce).
+- *Condizione di estensione:* Errore tecnico persistente o indisponibilità dei Servizi NEXUM durante il recupero dei dati personali.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. Il sistema rileva il fallimento persistente nel recupero dei dati personali dai Servizi NEXUM.
+  2. Il sistema filtra eventuali codici di errore o dettagli tecnici interni e mostra in chat un messaggio sintetico e comprensibile, invitando il dipendente a riprovare più tardi.
+- *Postcondizioni:* Il dipendente è avvisato dell'impossibilità temporanea di consultare i propri dati personali senza esposizione di dettagli tecnici.
 
 === UC5: Consultazione stato richieste presentate
-#figure(image("Casi_Uso/out/UC5.svg", width: 75%), caption: [UC5 – Consultazione stato richieste presentate])
-- *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario), Servizi NEXUM (Secondario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+#figure(image("Casi_Uso/out/UC5.svg", width: 70%), caption: [UC5 – Consultazione stato richieste presentate])
+- *Attori:* Dipendente (Primario), Provider LLM (Secondario), Servizi NEXUM (Secondario).
+- *Descrizione:* Il dipendente consulta l'elenco delle proprie richieste di ferie e permessi inviate e il relativo stato aggiornato (*in attesa*, *approvata* o *rifiutata*).
+- *Precondizioni:* Il sistema è attivo; il dipendente è autenticato e si trova nella chat (`UC1`).
+- *Trigger:* Il dipendente vuole verificare l'esito o lo stato di avanzamento delle proprie richieste di ferie o permessi già presentate.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. Il dipendente chiede in chat di visualizzare le proprie richieste di ferie o permessi presentate (eventualmente specificando un periodo o uno stato).
+  2. Il sistema interpreta la richiesta con il supporto del Provider LLM e interroga i Servizi NEXUM nel contesto esclusivo del dipendente autenticato.
+  3. I Servizi NEXUM restituiscono l'elenco aggiornato delle richieste del dipendente con tipologia, periodo e stato corrente.
+  4. Il sistema mostra in chat le richieste distinguendo esplicitamente tra i tre stati previsti: *in attesa*, *approvata* e *rifiutata*.
+- *Scenari Alternativi:*
+  - Se non risultano richieste presenti per il dipendente nel periodo o filtro indicato, il sistema lo comunica esplicitamente in chat.
+  - Se i Servizi NEXUM risultano indisponibili o falliscono in modo persistente dopo i tentativi automatici di ripetizione, il sistema mostra un messaggio di errore non tecnico (*UC5.1*).
+- *Postcondizioni:* Il dipendente visualizza l'elenco e lo stato aggiornato delle proprie richieste di ferie e permessi.
+- *Estensioni:* UC5.1.
+
+=== UC5.1: Visualizzazione errore recupero stato richieste
+#figure(image("Casi_Uso/out/UC5_1.svg", width: 75%), caption: [UC5.1 – Visualizzazione errore recupero stato richieste])
+- *Attori:* Dipendente (Primario), Servizi NEXUM (Secondario).
+- *Descrizione:* Il sistema informa il dipendente in modo comprensibile qualora il recupero dell'elenco delle richieste dai Servizi NEXUM fallisca in modo persistente.
+- *Precondizioni:* Il dipendente ha chiesto di consultare lo stato delle proprie richieste (`UC5`) e la chiamata ai Servizi NEXUM ha fallito anche dopo i tentativi automatici di ripetizione con attesa (debounce).
+- *Condizione di estensione:* Errore tecnico persistente o indisponibilità dei Servizi NEXUM durante il recupero dello stato delle richieste.
+- *Scenario Principale:*
+  1. Il sistema rileva il fallimento persistente nel recupero dell'elenco richieste dai Servizi NEXUM.
+  2. Il sistema nasconde eventuali dettagli tecnici o codici di stato interni e mostra in chat un messaggio sintetico e comprensibile, invitando il dipendente a riprovare più tardi.
+- *Postcondizioni:* Il dipendente è informato dell'impossibilità temporanea di consultare lo stato delle proprie richieste senza esposizione di errori tecnici.
 
 #pagebreak()
 
 == Macroarea 4: Registrazione Richieste Ferie e Permessi (Workflow Guidato)
-Rappresenta il flusso operativo dispositivo del sistema:
-1. L'utente manifesta la volontà di richiedere ferie o permessi (es. "Segna ferie dal 12 al 16 maggio").
-2. Il sistema estrae i parametri, risolve eventuali ambiguità e presenta obbligatoriamente un *Riepilogo Formale Completo (UC6.1)* indicante tipologia, data inizio, data fine, orari e ore complessive.
-3. Il sistema richiede una *Conferma Esplicita (UC6.2)* tramite pulsante o risposta affermativa univoca.
-4. Se l'utente decide di modificare uno o più dati *(UC6.3)*, il sistema rigenera il riepilogo e richiede una nuova conferma esplicita (RB-12).
-5. All'atto dell'invio, le API deterministiche verificano la validità delle date e l'assenza di sovrapposizioni temporali con richieste preesistenti (VE-1.4); in caso di conflitto, la transazione viene respinta con apposita notifica di errore puntuale *(UC6.4)*. La registrazione avvenuta con successo attesta che la richiesta è nello stato registrata / in attesa di approvazione (RB-13).
+Rappresenta il flusso operativo dispositivo del sistema nell'ambito dell'MVP, limitato esclusivamente a *ferie* e *permessi* con campo note opzionale e senza causali o sottotipi obbligatori (la malattia resta formalmente esclusa):
+1. Il dipendente manifesta in linguaggio naturale la volontà di inserire una richiesta di ferie (data inizio, data fine, note opzionali) o di permesso (data, fascia oraria, note opzionali).
+2. Il sistema raccoglie i parametri, risolve eventuali ambiguità (`UC1.1`), verifica il rispetto dei vincoli del regolamento aziendale (es. preavviso minimo e soglie di saldo negativo; in caso di violazione scatta `UC6.5`) e presenta obbligatoriamente un *Riepilogo Formale Completo (`UC6.1`)*.
+3. Il dipendente può modificare i dati prima dell'invio (`UC6.3`), annullare la preparazione (`UC6.6`) oppure fornire una *Conferma Esplicita (`UC6.2`)* per inoltrare la richiesta.
+4. All'atto dell'invio, i Servizi NEXUM verificano validità e assenza di sovrapposizioni temporali; eventuali errori di validazione, conflitti o indisponibilità persistenti sono comunicati in modo non tecnico (`UC6.4`). A registrazione avvenuta, la richiesta entra nello stato *in attesa*; non è prevista alcuna modifica diretta post-invio e l'eventuale cancellazione resta gestita direttamente sul portale NEXUM.
+
+#figure(image("Casi_Uso/out/macroarea4.svg", width: 85%), caption: [Diagramma panoramico – Macroarea 4])
 
 === UC6: Registrazione richiesta ferie o permessi
-#figure(image("Casi_Uso/out/UC6.svg", width: 75%), caption: [UC6 – Registrazione richiesta ferie o permessi])
-- *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario), Servizi NEXUM (Secondario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+#figure(image("Casi_Uso/out/UC6.svg", width: 70%), caption: [UC6 – Registrazione richiesta ferie o permessi])
+- *Attori:* Dipendente (Primario), Provider LLM (Secondario), Servizi NEXUM (Secondario).
+- *Descrizione:* Il dipendente prepara, verifica, conferma e registra una nuova richiesta di ferie o permessi tramite il flusso conversazionale guidato.
+- *Precondizioni:* Il sistema è attivo; il dipendente è autenticato e si trova nella chat (`UC1`).
+- *Trigger:* Il dipendente desidera inviare una nuova richiesta di ferie o di permesso.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. Il dipendente esprime in chat l'intenzione di richiedere ferie o un permesso, indicando periodo (date per le ferie; data e fascia oraria per i permessi) ed eventuali note opzionali.
+  2. Il sistema estrae i parametri della richiesta con il supporto del Provider LLM; se mancano dati essenziali o vi sono ambiguità (es. data priva di anno), richiede chiarimenti (`UC1.1`).
+  3. Il sistema verifica il rispetto delle regole aziendali vigenti nei regolamenti attivi (es. preavviso minimo e limiti di saldo negativo, consultando i contatori tramite i Servizi NEXUM ove necessario).
+  4. Il sistema mostra al dipendente il riepilogo formale completo dei dati della richiesta (*UC6.1*).
+  5. Il dipendente fornisce la conferma esplicita per l'invio definitivo della richiesta (*UC6.2*).
+  6. Il sistema inoltra la richiesta ai Servizi NEXUM nel contesto esclusivo del dipendente autenticato e riceve l'esito della registrazione.
+  7. Il sistema comunica in chat l'avvenuta registrazione della richiesta nello stato *in attesa*, precisando che essa rimane soggetta al normale processo di approvazione aziendale su NEXUM.
+- *Scenari Alternativi:*
+  - Se la richiesta viola un vincolo del regolamento aziendale (es. preavviso insufficiente o saldo negativo non consentito), il sistema blocca l'invio e fornisce un diniego motivato (*UC6.5*).
+  - Se il dipendente desidera correggere uno o più dati prima dell'invio, modifica la richiesta in preparazione (*UC6.3*) e ripete riepilogo e conferma.
+  - Se il dipendente non conferma l'invio dopo il riepilogo, la preparazione viene annullata (*UC6.6*).
+  - Se i Servizi NEXUM respingono la richiesta per dati non validi/sovrapposizione temporale o risultano indisponibili anche dopo i tentativi automatici di ripetizione, il sistema notifica l'errore (*UC6.4*).
+- *Postcondizioni:* La richiesta di ferie o permesso è registrata presso i Servizi NEXUM nello stato *in attesa* e l'esito è comunicato al dipendente in chat.
 - *Inclusioni:* UC6.1, UC6.2.
-- *Estensioni:* UC6.3, UC6.4.
+- *Estensioni:* UC6.3, UC6.4, UC6.5, UC6.6.
 
 === UC6.1: Visualizzazione riepilogo dati richiesta
 #figure(image("Casi_Uso/out/UC6_1.svg", width: 70%), caption: [UC6.1 – Visualizzazione riepilogo dati richiesta])
-- *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+- *Attori:* Dipendente (Primario), Provider LLM (Secondario).
+- *Descrizione:* Prima dell'invio definitivo, il sistema presenta al dipendente un riepilogo completo e strutturato di tutti i dati della richiesta in preparazione.
+- *Precondizioni:* Il dipendente ha avviato `UC6` e tutti i parametri obbligatori della richiesta di ferie o permesso sono stati raccolti, disambiguati e verificati rispetto al regolamento aziendale.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. Il sistema compone il riepilogo completo dei dati raccolti: tipologia (*ferie* o *permesso*), date complete di anno (e fascia oraria/ore complessive per i permessi) ed eventuali note opzionali.
+  2. Il sistema visualizza il riepilogo nella chat, evidenziando che la richiesta non è ancora stata inviata e invitando il dipendente a verificarne la correttezza.
+- *Postcondizioni:* Il dipendente visualizza il riepilogo completo e accurato della richiesta in preparazione ed è pronto a confermare, modificare o annullare.
 
 === UC6.2: Conferma esplicita invio richiesta
 #figure(image("Casi_Uso/out/UC6_2.svg", width: 70%), caption: [UC6.2 – Conferma esplicita invio richiesta])
-- *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario), Servizi NEXUM (Secondario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+- *Attori:* Dipendente (Primario), Provider LLM (Secondario), Servizi NEXUM (Secondario).
+- *Descrizione:* Il dipendente esprime una conferma esplicita e univoca sul riepilogo presentato, autorizzando il sistema a trasmettere la richiesta ai Servizi NEXUM.
+- *Precondizioni:* Il sistema ha mostrato al dipendente il riepilogo completo e aggiornato della richiesta (`UC6.1`) e nessuna modifica successiva ha invalidato tale riepilogo.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. Il dipendente verifica i dettagli nel riepilogo e fornisce una conferma esplicita e inequivocabile all'invio.
+  2. Il sistema registra l'avvenuta conferma esplicita e autorizza l'inoltro definitivo della richiesta verso i Servizi NEXUM.
+- *Postcondizioni:* La conferma esplicita del dipendente è acquisita e la richiesta è pronta per la registrazione definitiva presso i Servizi NEXUM.
 
 === UC6.3: Modifica dati della richiesta in preparazione
 #figure(image("Casi_Uso/out/UC6_3.svg", width: 75%), caption: [UC6.3 – Modifica dati della richiesta in preparazione])
-- *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+- *Attori:* Dipendente (Primario), Provider LLM (Secondario).
+- *Descrizione:* Il dipendente modifica uno o più dati della richiesta prima che venga inviata definitivamente, invalidando qualsiasi conferma precedente e imponendo un nuovo riepilogo.
+- *Precondizioni:* Il dipendente sta visualizzando il riepilogo della richiesta in preparazione (`UC6.1`) e la richiesta non è ancora stata inoltrata ai Servizi NEXUM.
+- *Trigger:* Il dipendente rileva un'imprecisione nei dati riepilogati o desidera cambiare periodo, orari o note prima dell'invio.
+- *Condizione di estensione:* Il dipendente richiede di modificare uno o più campi della richiesta prima della conferma definitiva.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. Il dipendente indica in chat le variazioni da apportare ai dati della richiesta in preparazione.
+  2. Il sistema aggiorna i parametri della richiesta con il supporto del Provider LLM e invalida qualsiasi eventuale conferma precedente.
+  3. Il sistema ripresenta obbligatoriamente un nuovo riepilogo completo aggiornato (`UC6.1`) e richiede una nuova conferma esplicita (`UC6.2`).
+- *Postcondizioni:* I dati della richiesta in preparazione sono aggiornati e la procedura richiede un nuovo ciclo di riepilogo e conferma prima di qualsiasi invio.
 
 === UC6.4: Visualizzazione errore validazione o sovrapposizione
 #figure(image("Casi_Uso/out/UC6_4.svg", width: 75%), caption: [UC6.4 – Visualizzazione errore validazione o sovrapposizione])
-- *Attori Coinvolti:* Dipendente (Primario), Servizi NEXUM (Secondario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+- *Attori:* Dipendente (Primario), Provider LLM (Secondario), Servizi NEXUM (Secondario).
+- *Descrizione:* Il sistema informa in modo chiaro e non tecnico il dipendente quando i Servizi NEXUM rifiutano la registrazione per dati non validi o sovrapposizione temporale, oppure risultano persistentemente indisponibili.
+- *Precondizioni:* Il dipendente ha confermato la richiesta (`UC6.2`), ma i Servizi NEXUM segnalano un errore di validazione/conflitto (es. sovrapposizione con una richiesta esistente) oppure falliscono in modo persistente dopo i tentativi automatici di ripetizione con attesa (debounce).
+- *Condizione di estensione:* Rifiuto della registrazione da parte dei Servizi NEXUM per dati non validi/sovrapposizione oppure errore tecnico persistente durante l'invio.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. Il sistema riceve l'esito negativo dai Servizi NEXUM o rileva il fallimento persistente dell'invio dopo i tentativi di ripetizione automatica.
+  2. Il sistema impedisce la registrazione parziale o duplicata, nasconde codici di errore tecnici e dettagli interni e mostra in chat un messaggio comprensibile che spiega il problema (es. sovrapposizione di date o temporanea indisponibilità del servizio).
+- *Postcondizioni:* La richiesta non viene registrata su NEXUM e il dipendente riceve una spiegazione chiara e comprensibile dell'esito negativo.
+
+=== UC6.5: Visualizzazione diniego per violazione regolamento aziendale
+#figure(image("Casi_Uso/out/UC6_5.svg", width: 75%), caption: [UC6.5 – Visualizzazione diniego per violazione regolamento aziendale])
+- *Attori:* Dipendente (Primario), Provider LLM (Secondario), Servizi NEXUM (Secondario).
+- *Descrizione:* Il sistema blocca la preparazione della richiesta quando questa viola un vincolo stabilito nel regolamento aziendale attivo e spiega il motivo del diniego al dipendente.
+- *Precondizioni:* Il dipendente ha richiesto la registrazione di ferie o permessi (`UC6`), ma il confronto tra i parametri richiesti, i dati di saldo recuperati dai Servizi NEXUM e le regole del regolamento aziendale attivo evidenzia una violazione (es. giorni minimi di preavviso non rispettati o superamento della soglia massima di saldo negativo).
+- *Condizione di estensione:* La richiesta viola una regola numerica o procedurale definita nel regolamento aziendale attivo.
+- *Scenario Principale:*
+  1. Il sistema rileva che la richiesta non rispetta uno o più vincoli previsti dal regolamento aziendale attivo.
+  2. Il sistema interrompe la procedura di invio senza inoltrare la richiesta ai Servizi NEXUM.
+  3. Il sistema formula in chat un diniego motivato e comprensibile, indicando la regola violata e citando il riferimento al regolamento aziendale applicato.
+- *Postcondizioni:* Nessuna richiesta viene inoltrata ai Servizi NEXUM e il dipendente comprende chiaramente quale regola aziendale impedisce la richiesta.
+
+=== UC6.6: Annullamento preparazione richiesta
+#figure(image("Casi_Uso/out/UC6_6.svg", width: 75%), caption: [UC6.6 – Annullamento preparazione richiesta])
+- *Attori:* Dipendente (Primario), Provider LLM (Secondario).
+- *Descrizione:* Il dipendente annulla la preparazione di una richiesta di ferie o permesso prima dell'invio definitivo.
+- *Precondizioni:* Il dipendente ha avviato `UC6` e si trova nella fase di preparazione o visualizzazione del riepilogo (`UC6.1`) prima della conferma definitiva.
+- *Trigger:* Il dipendente decide di non procedere più con l'invio della richiesta in preparazione.
+- *Condizione di estensione:* Il dipendente rifiuta la conferma o chiede esplicitamente di annullare la preparazione della richiesta.
+- *Scenario Principale:*
+  1. Il dipendente comunica in chat di voler annullare la richiesta in preparazione (o nega la conferma al riepilogo).
+  2. Il sistema scarta i dati della bozza in preparazione senza effettuare alcun invio ai Servizi NEXUM.
+  3. Il sistema conferma in chat che la procedura è stata annullata e nessuna richiesta è stata registrata.
+- *Postcondizioni:* La preparazione della richiesta è annullata, nessuna operazione è stata eseguita sui Servizi NEXUM e il dipendente può continuare a usare la chat.
 
 #pagebreak()
 

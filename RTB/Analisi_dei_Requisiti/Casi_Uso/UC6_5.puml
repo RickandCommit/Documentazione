@@ -1,0 +1,23 @@
+@startuml UC6_5
+left to right direction
+
+actor "Dipendente" as dp
+actor "Provider LLM" as llm
+actor "Servizi NEXUM" as nexum
+
+rectangle "NEXUM Concierge" {
+    usecase "UC6: Registrazione richiesta ferie o permessi" as UC6
+    usecase "UC6.5: Visualizzazione diniego per violazione regolamento aziendale" as UC6_5
+}
+
+dp -- UC6
+UC6 -- llm
+UC6 -- nexum
+
+UC6 <.. UC6_5 : <<extend>>
+note on link
+La richiesta viola un vincolo
+del regolamento aziendale attivo
+end note
+
+@enduml

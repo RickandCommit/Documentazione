@@ -9,6 +9,7 @@ rectangle "NEXUM Concierge" {
     usecase "UC4: Consultazione dati personali, ferie e permessi" as UC4
     usecase "UC4.1: Visualizzazione errore recupero dati personali" as UC4_1
     usecase "UC5: Consultazione stato richieste presentate" as UC5
+    usecase "UC5.1: Visualizzazione errore recupero stato richieste" as UC5_1
 }
 
 dp -- UC4
@@ -19,5 +20,6 @@ UC4 <.. UC4_1 : <<extend>>
 dp -- UC5
 UC5 -- llm
 UC5 -- nexum
+UC5 <.. UC5_1 : <<extend>>
 
 @enduml
