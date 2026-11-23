@@ -1,5 +1,4 @@
-#import "Documentazione/.github/template/template.typ": *
-
+#import "../../.github/template/template.typ": *
 #show: documento.with(
   titolo: "Analisi dei Requisiti",
   sottotitolo: "Specifica dei requisiti software per il capitolato C2 (NEXUM Concierge)",
@@ -196,7 +195,7 @@ In conformità alle norme di progetto concordate:
 Gestisce l'accesso e l'invio di messaggi tramite interfaccia chat testuale. Il sistema mantiene il contesto storico dei messaggi scambiati nella sessione, identifica le intenzioni dell'utente (routing verso la capacità opportuna) e interviene in modo proattivo quando le richieste contengono dati incompleti o ambigui (es. "vorrei prendere ferie dal 3 al 7" -> il sistema chiede conferma dell'anno o del mese di riferimento). In caso di mancata risposta o timeout da parte del provider AWS Bedrock, scatta la notifica dell'errore tecnico (UC1.2).
 
 === UC1: Interazione chat testuale
-#figure(image("casi_uso/out/UC1.svg", width: 75%), caption: [UC1 – Interazione chat testuale])
+#figure(image("Casi_Uso/out/UC1.svg", width: 75%), caption: [UC1 – Interazione chat testuale])
 - *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario).
 - *Descrizione:* [Il dipendente inizia una conversazione con l'assistente virtuale]
 - *Precondizioni:* [Il dipendente è autorizzato ed è stato autenticato]
@@ -207,7 +206,7 @@ Gestisce l'accesso e l'invio di messaggi tramite interfaccia chat testuale. Il s
 - *Estensioni:* UC1.1, UC1.2.
 
 === UC1.1: Chiarimento di informazioni ambigue
-#figure(image("casi_uso/out/UC1_1.svg", width: 75%), caption: [UC1.1 – Chiarimento di informazioni ambigue])
+#figure(image("Casi_Uso/out/UC1_1.svg", width: 75%), caption: [UC1.1 – Chiarimento di informazioni ambigue])
 - *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -217,7 +216,7 @@ Gestisce l'accesso e l'invio di messaggi tramite interfaccia chat testuale. Il s
 - *Postcondizioni:* [Stato del sistema al completamento con successo]
 
 === UC1.2: Visualizzazione errore di comunicazione LLM
-#figure(image("casi_uso/out/UC1_2.svg", width: 75%), caption: [UC1.2 – Visualizzazione errore di comunicazione LLM])
+#figure(image("Casi_Uso/out/UC1_2.svg", width: 75%), caption: [UC1.2 – Visualizzazione errore di comunicazione LLM])
 - *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -234,7 +233,7 @@ Permette al dipendente di porre quesiti in linguaggio naturale relativi a:
 2. *Manuali d'uso NEXUM (UC3):* istruzioni operative sul funzionamento della piattaforma applicativa. Questa base di conoscenza è formalmente distinta dalle policy interne: conoscere la schermata per inserire una richiesta non significa stabilire se l'azienda la approverà.
 
 === UC2: Richiesta informazioni su regolamenti aziendali
-#figure(image("casi_uso/out/UC2.svg", width: 75%), caption: [UC2 – Richiesta informazioni su regolamenti aziendali])
+#figure(image("Casi_Uso/out/UC2.svg", width: 75%), caption: [UC2 – Richiesta informazioni su regolamenti aziendali])
 - *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -245,7 +244,7 @@ Permette al dipendente di porre quesiti in linguaggio naturale relativi a:
 - *Estensioni:* UC2.1.
 
 === UC2.1: Visualizzazione messaggio di astensione
-#figure(image("casi_uso/out/UC2_1.svg", width: 75%), caption: [UC2.1 – Visualizzazione messaggio di astensione])
+#figure(image("Casi_Uso/out/UC2_1.svg", width: 75%), caption: [UC2.1 – Visualizzazione messaggio di astensione])
 - *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -255,7 +254,7 @@ Permette al dipendente di porre quesiti in linguaggio naturale relativi a:
 - *Postcondizioni:* [Stato del sistema al completamento con successo]
 
 === UC3: Richiesta istruzioni su funzionalità NEXUM
-#figure(image("casi_uso/out/UC3.svg", width: 75%), caption: [UC3 – Richiesta istruzioni su funzionalità NEXUM])
+#figure(image("Casi_Uso/out/UC3.svg", width: 75%), caption: [UC3 – Richiesta istruzioni su funzionalità NEXUM])
 - *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -266,7 +265,7 @@ Permette al dipendente di porre quesiti in linguaggio naturale relativi a:
 - *Estensioni:* UC3.1.
 
 === UC3.1: Visualizzazione assenza istruzioni prodotto
-#figure(image("casi_uso/out/UC3_1.svg", width: 75%), caption: [UC3.1 – Visualizzazione assenza istruzioni prodotto])
+#figure(image("Casi_Uso/out/UC3_1.svg", width: 75%), caption: [UC3.1 – Visualizzazione assenza istruzioni prodotto])
 - *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -283,7 +282,7 @@ Abilita la consultazione dei dati applicativi del dipendente autenticato tramite
 - *Stato avanzamento pratiche (UC5):* restituisce la lista e lo stato aggiornato delle richieste inviate, evidenziando se sono in attesa di approvazione, approvate o rifiutate.
 
 === UC4: Consultazione dati personali, ferie e permessi
-#figure(image("casi_uso/out/UC4.svg", width: 75%), caption: [UC4 – Consultazione dati personali, ferie e permessi])
+#figure(image("Casi_Uso/out/UC4.svg", width: 75%), caption: [UC4 – Consultazione dati personali, ferie e permessi])
 - *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario), Servizi NEXUM (Secondario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -294,7 +293,7 @@ Abilita la consultazione dei dati applicativi del dipendente autenticato tramite
 - *Estensioni:* UC4.1.
 
 === UC4.1: Visualizzazione errore recupero dati personali
-#figure(image("casi_uso/out/UC4_1.svg", width: 75%), caption: [UC4.1 – Visualizzazione errore recupero dati personali])
+#figure(image("Casi_Uso/out/UC4_1.svg", width: 75%), caption: [UC4.1 – Visualizzazione errore recupero dati personali])
 - *Attori Coinvolti:* Dipendente (Primario), Servizi NEXUM (Secondario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -304,7 +303,7 @@ Abilita la consultazione dei dati applicativi del dipendente autenticato tramite
 - *Postcondizioni:* [Stato del sistema al completamento con successo]
 
 === UC5: Consultazione stato richieste presentate
-#figure(image("casi_uso/out/UC5.svg", width: 75%), caption: [UC5 – Consultazione stato richieste presentate])
+#figure(image("Casi_Uso/out/UC5.svg", width: 75%), caption: [UC5 – Consultazione stato richieste presentate])
 - *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario), Servizi NEXUM (Secondario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -324,7 +323,7 @@ Rappresenta il flusso operativo dispositivo del sistema:
 5. All'atto dell'invio, le API deterministiche verificano la validità delle date e l'assenza di sovrapposizioni temporali con richieste preesistenti (VE-1.4); in caso di conflitto, la transazione viene respinta con apposita notifica di errore puntuale *(UC6.4)*. La registrazione avvenuta con successo attesta che la richiesta è nello stato registrata / in attesa di approvazione (RB-13).
 
 === UC6: Registrazione richiesta ferie o permessi
-#figure(image("casi_uso/out/UC6.svg", width: 75%), caption: [UC6 – Registrazione richiesta ferie o permessi])
+#figure(image("Casi_Uso/out/UC6.svg", width: 75%), caption: [UC6 – Registrazione richiesta ferie o permessi])
 - *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario), Servizi NEXUM (Secondario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -336,7 +335,7 @@ Rappresenta il flusso operativo dispositivo del sistema:
 - *Estensioni:* UC6.3, UC6.4.
 
 === UC6.1: Visualizzazione riepilogo dati richiesta
-#figure(image("casi_uso/out/UC6_1.svg", width: 70%), caption: [UC6.1 – Visualizzazione riepilogo dati richiesta])
+#figure(image("Casi_Uso/out/UC6_1.svg", width: 70%), caption: [UC6.1 – Visualizzazione riepilogo dati richiesta])
 - *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -346,7 +345,7 @@ Rappresenta il flusso operativo dispositivo del sistema:
 - *Postcondizioni:* [Stato del sistema al completamento con successo]
 
 === UC6.2: Conferma esplicita invio richiesta
-#figure(image("casi_uso/out/UC6_2.svg", width: 70%), caption: [UC6.2 – Conferma esplicita invio richiesta])
+#figure(image("Casi_Uso/out/UC6_2.svg", width: 70%), caption: [UC6.2 – Conferma esplicita invio richiesta])
 - *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario), Servizi NEXUM (Secondario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -356,7 +355,7 @@ Rappresenta il flusso operativo dispositivo del sistema:
 - *Postcondizioni:* [Stato del sistema al completamento con successo]
 
 === UC6.3: Modifica dati della richiesta in preparazione
-#figure(image("casi_uso/out/UC6_3.svg", width: 75%), caption: [UC6.3 – Modifica dati della richiesta in preparazione])
+#figure(image("Casi_Uso/out/UC6_3.svg", width: 75%), caption: [UC6.3 – Modifica dati della richiesta in preparazione])
 - *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -366,7 +365,7 @@ Rappresenta il flusso operativo dispositivo del sistema:
 - *Postcondizioni:* [Stato del sistema al completamento con successo]
 
 === UC6.4: Visualizzazione errore validazione o sovrapposizione
-#figure(image("casi_uso/out/UC6_4.svg", width: 75%), caption: [UC6.4 – Visualizzazione errore validazione o sovrapposizione])
+#figure(image("Casi_Uso/out/UC6_4.svg", width: 75%), caption: [UC6.4 – Visualizzazione errore validazione o sovrapposizione])
 - *Attori Coinvolti:* Dipendente (Primario), Servizi NEXUM (Secondario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -390,7 +389,7 @@ Fornisce all'Amministratore HR gli strumenti per governare la conoscenza azienda
 - Visualizzazione dei log di audit delle operazioni e delle fonti citate nelle risposte (UC15).
 
 === UC7: Creazione Bucket di conoscenza
-#figure(image("casi_uso/out/UC7.svg", width: 65%), caption: [UC7 – Creazione Bucket di conoscenza])
+#figure(image("Casi_Uso/out/UC7.svg", width: 65%), caption: [UC7 – Creazione Bucket di conoscenza])
 - *Attori Coinvolti:* Amministratore HR (Primario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -400,7 +399,7 @@ Fornisce all'Amministratore HR gli strumenti per governare la conoscenza azienda
 - *Postcondizioni:* [Stato del sistema al completamento con successo]
 
 === UC8: Visualizzazione elenco Bucket
-#figure(image("casi_uso/out/UC8.svg", width: 65%), caption: [UC8 – Visualizzazione elenco Bucket])
+#figure(image("Casi_Uso/out/UC8.svg", width: 65%), caption: [UC8 – Visualizzazione elenco Bucket])
 - *Attori Coinvolti:* Amministratore HR (Primario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -410,7 +409,7 @@ Fornisce all'Amministratore HR gli strumenti per governare la conoscenza azienda
 - *Postcondizioni:* [Stato del sistema al completamento con successo]
 
 === UC9: Modifica metadati Bucket
-#figure(image("casi_uso/out/UC9.svg", width: 65%), caption: [UC9 – Modifica metadati Bucket])
+#figure(image("Casi_Uso/out/UC9.svg", width: 65%), caption: [UC9 – Modifica metadati Bucket])
 - *Attori Coinvolti:* Amministratore HR (Primario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -420,7 +419,7 @@ Fornisce all'Amministratore HR gli strumenti per governare la conoscenza azienda
 - *Postcondizioni:* [Stato del sistema al completamento con successo]
 
 === UC10: Ritiro Bucket di conoscenza
-#figure(image("casi_uso/out/UC10.svg", width: 65%), caption: [UC10 – Ritiro Bucket di conoscenza])
+#figure(image("Casi_Uso/out/UC10.svg", width: 65%), caption: [UC10 – Ritiro Bucket di conoscenza])
 - *Attori Coinvolti:* Amministratore HR (Primario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -430,7 +429,7 @@ Fornisce all'Amministratore HR gli strumenti per governare la conoscenza azienda
 - *Postcondizioni:* [Stato del sistema al completamento con successo]
 
 === UC11: Caricamento nuova fonte documentale
-#figure(image("casi_uso/out/UC11.svg", width: 65%), caption: [UC11 – Caricamento nuova fonte documentale])
+#figure(image("Casi_Uso/out/UC11.svg", width: 65%), caption: [UC11 – Caricamento nuova fonte documentale])
 - *Attori Coinvolti:* Amministratore HR (Primario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -440,7 +439,7 @@ Fornisce all'Amministratore HR gli strumenti per governare la conoscenza azienda
 - *Postcondizioni:* [Stato del sistema al completamento con successo]
 
 === UC12: Sostituzione fonte documentale esistente
-#figure(image("casi_uso/out/UC12.svg", width: 65%), caption: [UC12 – Sostituzione fonte documentale esistente])
+#figure(image("Casi_Uso/out/UC12.svg", width: 65%), caption: [UC12 – Sostituzione fonte documentale esistente])
 - *Attori Coinvolti:* Amministratore HR (Primario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -450,7 +449,7 @@ Fornisce all'Amministratore HR gli strumenti per governare la conoscenza azienda
 - *Postcondizioni:* [Stato del sistema al completamento con successo]
 
 === UC13: Ritiro fonte dalla consultazione
-#figure(image("casi_uso/out/UC13.svg", width: 65%), caption: [UC13 – Ritiro fonte dalla consultazione])
+#figure(image("Casi_Uso/out/UC13.svg", width: 65%), caption: [UC13 – Ritiro fonte dalla consultazione])
 - *Attori Coinvolti:* Amministratore HR (Primario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -460,7 +459,7 @@ Fornisce all'Amministratore HR gli strumenti per governare la conoscenza azienda
 - *Postcondizioni:* [Stato del sistema al completamento con successo]
 
 === UC14: Monitoraggio stato elaborazione fonti
-#figure(image("casi_uso/out/UC14.svg", width: 65%), caption: [UC14 – Monitoraggio stato elaborazione fonti])
+#figure(image("Casi_Uso/out/UC14.svg", width: 65%), caption: [UC14 – Monitoraggio stato elaborazione fonti])
 - *Attori Coinvolti:* Amministratore HR (Primario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
@@ -470,7 +469,7 @@ Fornisce all'Amministratore HR gli strumenti per governare la conoscenza azienda
 - *Postcondizioni:* [Stato del sistema al completamento con successo]
 
 === UC15: Consultazione log operazioni e fonti consultate
-#figure(image("casi_uso/out/UC15.svg", width: 65%), caption: [UC15 – Consultazione log operazioni e fonti consultate])
+#figure(image("Casi_Uso/out/UC15.svg", width: 65%), caption: [UC15 – Consultazione log operazioni e fonti consultate])
 - *Attori Coinvolti:* Amministratore HR (Primario).
 - *Descrizione:* [Descrizione sintetica dell'interazione]
 - *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
