@@ -2,17 +2,19 @@
 #show: documento.with(
   titolo: "Analisi dei Requisiti",
   sottotitolo: "Specifica dei requisiti software per il capitolato C2 (NEXUM Concierge)",
-  versione: "v0.7.0",
-  data: "2026-11-16",
+  versione: "v0.8.0",
+  data: "2026-11-23",
   stato: "In lavorazione",
   uso: "Esterno",
-  redattori: ("Alessandro Rasia dal Polo",),
-  verificatori: ("Sara Stefani",),
+  redattori: ("Alessandro Rasia dal Polo", "Jatin Bajaj", "Nicola Bonetto"),
+  verificatori: ("Sara Stefani", "Dorde Blagojevic"),
+  esito-verifica: "In attesa",
   destinatari: [Prof. Tullio Vardanega \ Prof. Riccardo Cardin],
 )
 
 
 #registro-modifiche(
+  table.cell(align: center)[0.8.0], table.cell(align: center)[2026-11-23], [Recepiti chiarimenti Verbale Esterno 2026-11-17 e allineamento alle Norme di Progetto], [Jatin Bajaj], [Dorde Blagojevic],
   table.cell(align: center)[0.7.0], table.cell(align: center)[2026-11-16], [Aggiunte tabelle di riepilogo dei requisiti], [Alessandro Rasia dal Polo], [Sara Stefani],
   table.cell(align: center)[0.6.0], table.cell(align: center)[2026-11-16], [Scissione tabella dei requisiti in funzionali, qualità, prestazionali e di vincolo ], [Alessandro Rasia dal Polo], [Sara Stefani],
   table.cell(align: center)[0.5.0], table.cell(align: center)[2026-11-16], [Correzione diagrammi UML], [Alessandro Rasia dal Polo], [Sara Stefani],
@@ -33,12 +35,12 @@
 
 == Scopo del documento
 Lo scopo del documento è definire in modo formale, rigoroso e strutturato i requisiti software del sistema *NEXUM Concierge*, sviluppato dal gruppo *RickandCommit* per conto dell'azienda proponente *Eggon S.r.l.*
-All'interno del testo le funzionalità richieste comprese di casi d'uso sono classificate in requisiti obbligatori, desiserabili e opzionali, secondo le specifiche fornite dal capitolato C2 e quelle emerse dagli incontri con l'azienda proponente.
+All'interno del testo le funzionalità richieste comprese di casi d'uso sono classificate in requisiti obbligatori, desiderabili e opzionali, secondo le specifiche fornite dal capitolato C2 e quelle emerse dagli incontri con l'azienda proponente.
 
 == Scopo del prodotto
 Il prodotto *NEXUM Concierge* è un assistente conversazionale pensato per integrarsi nell'ecosistema *NEXUM*. L'obiettivo primario è agevolare l'accesso dei dipendenti alle informazioni e ai servizi aziendali attraverso il linguaggio naturale.
 
-L'assistente è in grado di rispondere a diverse richieste utilizzando delle abilità speciche:
+L'assistente è in grado di rispondere a diverse richieste utilizzando delle abilità specifiche:
 1. *Conoscenza aziendale:* consultazione documentale dei regolamenti e contratti interni tramite architettura RAG (*Retrieval-Augmented Generation*), con citazione esplicita delle fonti e astensione formale in caso di carenza o contrasto informativo.
 2. *Conoscenza del prodotto:* guida contestuale all'uso delle funzionalità dell'applicazione NEXUM sulla base dei manuali operativi ufficiali.
 3. *Consultazione dei dati personali:* lettura certificata e deterministica dei dati di cartellino (ferie e permessi fruiti, residui, storico richieste) tramite servizi applicativi autorizzati.
@@ -46,7 +48,7 @@ L'assistente è in grado di rispondere a diverse richieste utilizzando delle abi
 5. *Governo della conoscenza (Backoffice):* ambiente amministrativo riservato al personale HR per il caricamento, organizzazione in bucket, sostituzione e ritiro delle fonti informative.
 
 == Glossario
-Al fine di prevenire qualsiasi ambiguità, i termini tecnici, gli acronimi e i concetti specifici di dominio utilizzati nella documentazione sono raccolti e formalizzati nel *Glossario* del progetto. I termini definiti nel glossario sono contraddistinti nel testo con una "G" a pedice (es. RAG#sub[G], Bucket#sub[G], LLM#sub[G]).
+Al fine di prevenire qualsiasi ambiguità, i termini tecnici, gli acronimi e i concetti specifici di dominio utilizzati nella documentazione sono raccolti e formalizzati nel *Glossario* del progetto. I termini definiti nel glossario sono contraddistinti alla prima occorrenza con una "G" ad apice (es. RAG#super[G], Bucket#super[G], LLM#super[G]).
 
 == Riferimenti
 
@@ -58,6 +60,8 @@ Al fine di prevenire qualsiasi ambiguità, i termini tecnici, gli acronimi e i c
 === Riferimenti informativi
 - *Capitolato d'Appalto C2 — NEXUM Concierge:*  documento di specifiche tecniche rilasciato da *Eggon S.r.l.*
 - *Verbale Esterno 2026-11-10:* verbale del primo incontro tecnico di allineamento tra il gruppo *RickandCommit* e i referenti di *Eggon S.r.l.*.
+- *Verbale Esterno 2026-11-17:* verbale del secondo incontro tecnico di allineamento tra il gruppo *RickandCommit* e i referenti di *Eggon S.r.l.*.
+- *Verbale Interno 2026-11-18:* verbale della riunione interna di avvio Sprint 2 RTB.
 
 #pagebreak()
 
@@ -72,12 +76,19 @@ Il progetto prevede lo sviluppo del sistema *NEXUM Concierge*, un assistente int
 Lo sviluppo del software segue un approccio incrementale a spirale: partendo da un prototipo verificativo (*Proof of Concept - PoC*) per la validazione della fattibilità tecnologica, si prosegue poi verso il rilascio di un *Minimum Viable Product (MVP)* pienamente operativo e collaudabile focalizzato sul dominio verticale di *ferie e permessi*.
 L'obiettivo a lungo termine, espresso dai requisiti opzionali, prevede di integrare Concierge all'interno della piattaforma NEXUM.
 
+In particolare, per il perimetro dell'MVP sono stati concordati con l'azienda i seguenti limiti:
+- gestione di una *singola azienda* (esclusa la gestione multi-azienda);
+- *ruolo amministrativo unico* (HR/Amministrazione e Responsabile Fonti coincidono);
+- gestione esclusiva di *ferie e permessi* con campo note opzionale (esclusa la tipologia malattia);
+- *divieto di modifica diretta* delle richieste già inviate e gestione dell'eventuale cancellazione direttamente sul portale NEXUM.
+
 == Confine del Sistema
 Il confine del sistema delimita in maniera non ambigua le responsabilità del software da realizzare rispetto agli attori e ai servizi esterni. Il sistema *NEXUM Concierge* comprende:
 - L'interfaccia utente conversazionale (WebApp / PWA fruibile da browser desktop e mobile)
 - L'interfaccia amministrativa di Backoffice per la gestione dei bucket e delle fonti
 - L'orchestratore del dialogo e la logica di business applicativa per l'identificazione e il routing delle intenzioni dell'utente
 - Il motore di integrazione documentale e ricerca semantica
+- Il database interno per la persistenza delle conversazioni e della base di conoscenza vettoriale (`pgvector`) e i tool applicativi controllati in Ruby (`ruby_llm`)
 
 == Modellazione degli Attori
 In conformità agli standard ISO/IEC/IEEE 29148 e alla notazione UML2, un *Attore* rappresenta un ruolo giocato da un'entità esterna non modificabile che interagisce direttamente con il sistema per raggiungere un obiettivo o per supportare l'erogazione di un servizio:
@@ -124,6 +135,7 @@ I requisiti software sono stati ricavati ed elaborati a partire dalle seguenti f
 - *Verbale Esterno 2026-11-10:* primo incontro di allineamento tecnico con i referenti di Eggon S.r.l. (decisioni e vincoli identificati da `VE-1.x`).
 - *Analisi del Dominio (AD):* requisiti impliciti riguardanti usabilità per WebApp/PWA e standard di sicurezza.
 - *Verbali Interni (VI-xx):* decisioni collegiali formalizzate dal gruppo durante i meeting interni.
+- *Verbale Esterno 2026-11-17:* secondo incontro di allineamento tecnico con i referenti di Eggon S.r.l. (decisioni e vincoli identificati da `VE-2.x`).
 
 == Caratteristiche degli Utenti
 - *Dipendente:* collaboratore aziendale senza competenze tecniche specifiche. Può formulare richieste composte o parziali
@@ -132,7 +144,7 @@ I requisiti software sono stati ricavati ed elaborati a partire dalle seguenti f
 == Piattaforma di Esecuzione e Vincoli Generali
 - *Fruibilità Web:* interfaccia fruibile tramite WebApp moderna (compatibile con browser desktop e mobile standard)
 - *Database e Vettorializzazione:* adozione di PostgreSQL con estensione `pgvector` per il motore RAG
-- *Autenticazione nel PoC/RTB:* simulata tramite selettore di contesto (utente/azienda), in conformità con quanto concordato
+- *Autenticazione nel PoC/RTB:* simulata tramite selettore di contesto utente (con token applicativo fittizio per singola azienda), in conformità con quanto concordato
 - *Assenza di memoria cross-sessione:* come stabilito dal capitolato, la memoria delle conversazioni tra sessioni diverse non è prevista per l'MVP: ogni nuova sessione parte da uno stato iniziale pulito
 
 #pagebreak()
