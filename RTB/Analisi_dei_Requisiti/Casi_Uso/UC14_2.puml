@@ -1,0 +1,19 @@
+@startuml UC14_2
+left to right direction
+
+actor "Amministratore HR" as hr
+
+rectangle "NEXUM Concierge" {
+    usecase "UC14: Monitoraggio stato elaborazione fonti" as UC14
+    usecase "UC14.2: Scaricamento file originale della fonte" as UC14_2
+}
+
+hr -- UC14
+
+UC14 <.. UC14_2 : <<extend>>
+note on link
+L'Amministratore HR richiede il
+download del file originale (opzionale)
+end note
+
+@enduml

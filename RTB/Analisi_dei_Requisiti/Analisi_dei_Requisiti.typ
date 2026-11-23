@@ -2,7 +2,7 @@
 #show: documento.with(
   titolo: "Analisi dei Requisiti",
   sottotitolo: "Specifica dei requisiti software per il capitolato C2 (NEXUM Concierge)",
-  versione: "v0.8.0",
+  versione: "v0.9.0",
   data: "2026-11-23",
   stato: "In lavorazione",
   uso: "Esterno",
@@ -14,7 +14,8 @@
 
 
 #registro-modifiche(
-  table.cell(align: center)[0.8.0], table.cell(align: center)[2026-11-23], [Recepiti chiarimenti Verbale Esterno 2026-11-17 e allineamento alle Norme di Progetto], [Jatin Bajaj], [Dorde Blagojevic],
+  table.cell(align: center)[0.9.0], table.cell(align: center)[2026-11-23], [Completata Macroarea 5 (UC7-UC15)], [Nicola Bonetto], [Dorde Blagojevic],
+  table.cell(align: center)[0.8.0], table.cell(align: center)[2026-11-23], [Recepiti chiarimenti Verbale Esterno 2026-11-17, completate Macroaree 1-4 (UC1-UC6) e aggiornati requisiti e tracciamento], [Jatin Bajaj], [Dorde Blagojevic],
   table.cell(align: center)[0.7.0], table.cell(align: center)[2026-11-16], [Aggiunte tabelle di riepilogo dei requisiti], [Alessandro Rasia dal Polo], [Sara Stefani],
   table.cell(align: center)[0.6.0], table.cell(align: center)[2026-11-16], [Scissione tabella dei requisiti in funzionali, qualità, prestazionali e di vincolo ], [Alessandro Rasia dal Polo], [Sara Stefani],
   table.cell(align: center)[0.5.0], table.cell(align: center)[2026-11-16], [Correzione diagrammi UML], [Alessandro Rasia dal Polo], [Sara Stefani],
@@ -145,7 +146,7 @@ I requisiti software sono stati ricavati ed elaborati a partire dalle seguenti f
 - *Fruibilità Web:* interfaccia fruibile tramite WebApp moderna (compatibile con browser desktop e mobile standard)
 - *Database e Vettorializzazione:* adozione di PostgreSQL con estensione `pgvector` per il motore RAG
 - *Autenticazione nel PoC/RTB:* simulata tramite selettore di contesto utente (con token applicativo fittizio per singola azienda), in conformità con quanto concordato
-- *Assenza di memoria cross-sessione:* come stabilito dal capitolato, la memoria delle conversazioni tra sessioni diverse non è prevista per l'MVP: ogni nuova sessione parte da uno stato iniziale pulito
+- *Persistenza intra-sessione e assenza di memoria cross-sessione:* come stabilito dal capitolato e confermato con l'azienda (`VE-2`), la conversazione corrente viene mantenuta all'interno della singola sessione anche in caso di ricaricamento della pagina o cambio schermata, finché l'utente non avvia esplicitamente una nuova sessione; tra sessioni distinte il sistema resta invece stateless e ogni nuova sessione parte da uno stato iniziale pulito
 
 #pagebreak()
 
@@ -156,7 +157,7 @@ I requisiti software sono stati ricavati ed elaborati a partire dalle seguenti f
 
 == Convenzioni e Norme di Progetto sui Casi d'Uso
 In conformità alle norme di progetto concordate:
-- *Regola di denominazione:* i casi d'uso adottano la forma canonica *Infinito Verbo + Oggetto*, formulati rigorosamente dal punto di vista dell'attore interagente.
+- *Regola di denominazione:* i casi d'uso adottano una forma nominale chiara (*Azione/Sostantivo + Oggetto*), formulati dal punto di vista dell'attore interagente.
 - *Relazioni tra casi d'uso:*
   - *`<<include>>`:* la funzionalità inclusa è eseguita sempre e necessariamente durante l'esecuzione del caso d'uso base.
   - *`<<extend>>`:* la funzionalità estesa rappresenta un'eccezione, un errore o una variazione condizionata al verificarsi di uno specifico punto di estensione (*extension point*).
@@ -175,16 +176,16 @@ In conformità alle norme di progetto concordate:
   [*Attori Secondari*],
   [*Fonti*],
 
-  [UC1], [Interazione chat testuale], [Base], [Dipendente], [Provider LLM], [RB-01, RB-02, RB-03, RB-04],
+  [UC1], [Interazione chat testuale], [Base], [Dipendente], [Provider LLM], [RB-01, RB-02, RB-03, RB-04, VE-2.3],
   [UC1.1], [Chiarimento di informazioni ambigue], [<<extend>>], [Dipendente], [Provider LLM], [RB-04],
-  [UC1.2], [Visualizzazione errore comunicazione LLM], [<<extend>>], [Dipendente], [Provider LLM], [RB-14],
+  [UC1.2], [Visualizzazione errore di comunicazione LLM], [<<extend>>], [Dipendente], [Provider LLM], [RB-14, VE-2.4],
   [UC1.3], [Visualizzazione errore di connessione lato client], [<<extend>>], [Dipendente], [—], [RB-14, VE-2.4],
   [UC1.4], [Avvio nuova sessione di chat], [<<extend>>], [Dipendente], [—], [RB-04, VE-2.3],
   [UC2], [Richiesta informazioni su regolamenti aziendali], [Base], [Dipendente], [Provider LLM], [RB-02, RB-08, VE-2.2],
   [UC2.1], [Visualizzazione messaggio di astensione], [<<extend>>], [Dipendente], [Provider LLM], [RB-08, VE-2.2],
   [UC3], [Richiesta istruzioni su funzionalità NEXUM], [Base], [Dipendente], [Provider LLM], [RB-02, RB-07, RB-08],
   [UC3.1], [Visualizzazione assenza istruzioni prodotto], [<<extend>>], [Dipendente], [Provider LLM], [RB-08],
-  [UC4], [Consultazione dati personali ferie e permessi], [Base], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-02, RB-09, RB-10],
+  [UC4], [Consultazione dati personali, ferie e permessi], [Base], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-02, RB-09, RB-10],
   [UC4.1], [Visualizzazione errore recupero dati personali], [<<extend>>], [Dipendente], [Servizi NEXUM], [RB-14, VE-2.4],
   [UC5], [Consultazione stato richieste presentate], [Base], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-13, VE-2.5],
   [UC5.1], [Visualizzazione errore recupero stato richieste], [<<extend>>], [Dipendente], [Servizi NEXUM], [RB-14, VE-2.4],
@@ -195,14 +196,18 @@ In conformità alle norme di progetto concordate:
   [UC6.4], [Visualizzazione errore validazione o sovrapposizione], [<<extend>>], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-14, VE-1.4, VE-2.4],
   [UC6.5], [Visualizzazione diniego per violazione regolamento aziendale], [<<extend>>], [Dipendente], [Servizi NEXUM, Provider LLM], [RB-08, VE-2.4, VE-2.5],
   [UC6.6], [Annullamento preparazione richiesta], [<<extend>>], [Dipendente], [Provider LLM], [RB-12],
-  [UC7], [Creazione Bucket di conoscenza], [Base], [Amministratore HR], [—], [RB-05],
+  [UC7], [Creazione Bucket di conoscenza], [Base], [Amministratore HR], [—], [RB-05, VE-2.2],
+  [UC7.1], [Visualizzazione errore validazione dati Bucket], [<<extend>>], [Amministratore HR], [—], [RB-14],
   [UC8], [Visualizzazione elenco Bucket], [Base], [Amministratore HR], [—], [RB-05],
   [UC9], [Modifica metadati Bucket], [Base], [Amministratore HR], [—], [RB-05],
-  [UC10], [Ritiro Bucket di conoscenza], [Base], [Amministratore HR], [—], [RB-05],
-  [UC11], [Caricamento nuova fonte documentale], [Base], [Amministratore HR], [—], [RB-05, RB-06],
-  [UC12], [Sostituzione fonte documentale esistente], [Base], [Amministratore HR], [—], [RB-05],
-  [UC13], [Ritiro fonte dalla consultazione], [Base], [Amministratore HR], [—], [RB-05],
+  [UC10], [Ritiro Bucket di conoscenza], [Base], [Amministratore HR], [—], [RB-05, VE-2.2],
+  [UC11], [Caricamento nuova fonte documentale], [Base], [Amministratore HR], [—], [RB-05, RB-06, VE-2.2],
+  [UC11.1], [Visualizzazione errore file non valido], [<<extend>>], [Amministratore HR], [—], [RB-14],
+  [UC12], [Sostituzione fonte documentale esistente], [Base], [Amministratore HR], [—], [RB-05, RB-06, VE-2.2],
+  [UC13], [Ritiro fonte dalla consultazione], [Base], [Amministratore HR], [—], [RB-05, VE-2.2],
   [UC14], [Monitoraggio stato elaborazione fonti], [Base], [Amministratore HR], [—], [RB-06, RB-14],
+  [UC14.1], [Visualizzazione dettaglio errore di elaborazione], [<<extend>>], [Amministratore HR], [—], [RB-14],
+  [UC14.2], [Scaricamento file originale della fonte], [<<extend>>], [Amministratore HR], [—], [AD],
   [UC15], [Consultazione log operazioni e fonti consultate], [Base], [Amministratore HR], [—], [RB-15],
 )
 
@@ -513,106 +518,205 @@ Rappresenta il flusso operativo dispositivo del sistema nell'ambito dell'MVP, li
 #pagebreak()
 
 == Macroarea 5: Gestione Fonti e Knowledge Base (Backoffice)
-Fornisce all'Amministratore HR gli strumenti per governare la conoscenza aziendale:
-- Creazione e categorizzazione dei Bucket con assegnazione di gruppi destinatari autorizzati (UC7).
-- Visualizzazione dell'elenco dei Bucket registrati (UC8).
-- Modifica dei metadati e dei permessi di accesso dei Bucket (UC9).
-- Ritiro immediato di un Bucket di conoscenza dalla consultazione (UC10).
-- Caricamento di documenti (PDF o testo) (UC11).
-- Sostituzione di una fonte documentale esistente con revisione normativa (UC12).
-- Ritiro immediato di una fonte dalla consultazione (UC13).
-- Monitoraggio asincrono dello stato di elaborazione dei documenti (in corso, indicizzato, errore) (UC14).
-- Visualizzazione dei log di audit delle operazioni e delle fonti citate nelle risposte (UC15).
+Fornisce all'Amministratore HR (ruolo amministrativo unico per l'MVP nell'ambito della singola azienda) gli strumenti per governare la conoscenza aziendale:
+- Creazione dei Bucket con assegnazione dei gruppi destinatari autorizzati (`UC7`) e segnalazione di dati non validi (`UC7.1`).
+- Visualizzazione dell'elenco dei Bucket registrati (`UC8`).
+- Modifica dei metadati e dei gruppi destinatari dei Bucket (`UC9`).
+- Ritiro tramite archiviazione logica di un intero Bucket dalla consultazione (`UC10`).
+- Caricamento di documenti in formato PDF, sia testuali sia scansionati con supporto OCR (`UC11`), e segnalazione di file non validi (`UC11.1`).
+- Sostituzione di una fonte esistente con una nuova versione (`UC12`).
+- Ritiro tramite archiviazione logica di una singola fonte dalla consultazione (`UC13`).
+- Monitoraggio asincrono dello stato di elaborazione delle fonti (`UC14`), con dettaglio degli errori di elaborazione (`UC14.1`) e scaricamento opzionale del file originale (`UC14.2`).
+- Visualizzazione dei log di audit delle operazioni e delle fonti citate nelle risposte (`UC15`).
+
+#figure(image("Casi_Uso/out/macroarea5.svg", width: 85%), caption: [Diagramma panoramico – Macroarea 5])
 
 === UC7: Creazione Bucket di conoscenza
 #figure(image("Casi_Uso/out/UC7.svg", width: 65%), caption: [UC7 – Creazione Bucket di conoscenza])
-- *Attori Coinvolti:* Amministratore HR (Primario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+- *Attori:* Amministratore HR (Primario).
+- *Descrizione:* L'Amministratore HR crea un nuovo Bucket (contenitore configurabile di fonti documentali nell'ambito della singola azienda), specificandone nome, descrizione e gruppi destinatari autorizzati alla consultazione.
+- *Precondizioni:* Il sistema è attivo; l'Amministratore HR è autenticato con privilegi amministrativi e accede alla sezione del Backoffice dedicata ai Bucket.
+- *Trigger:* L'Amministratore HR desidera creare un nuovo Bucket di conoscenza.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. L'Amministratore HR richiede la creazione di un nuovo Bucket.
+  2. Il sistema mostra il modulo di creazione con i campi nome, descrizione e gruppi destinatari selezionabili.
+  3. L'Amministratore HR compila nome e descrizione, seleziona uno o più gruppi destinatari e conferma la creazione.
+  4. Il sistema valida i dati inseriti e registra il nuovo Bucket in stato attivo, inizialmente privo di fonti.
+  5. Il sistema notifica all'Amministratore HR l'esito positivo dell'operazione.
+- *Scenari Alternativi:*
+  - Se i dati inseriti non superano la validazione (es. nome mancante o duplicato, nessun gruppo destinatario selezionato), il sistema segnala l'errore (*UC7.1*).
+- *Postcondizioni:* Il Bucket è registrato, attivo e visibile nell'elenco dei Bucket; non contiene ancora fonti ed è pronto ad accoglierne.
+- *Estensioni:* UC7.1.
+
+// Da confermare con Eggon: unicità del nome del Bucket e obbligatorietà di almeno un gruppo destinatario.
+=== UC7.1: Visualizzazione errore validazione dati Bucket
+#figure(image("Casi_Uso/out/UC7_1.svg", width: 70%), caption: [UC7.1 – Visualizzazione errore validazione dati Bucket])
+- *Attori:* Amministratore HR (Primario).
+- *Descrizione:* Il sistema segnala all'Amministratore HR che i dati inseriti per un Bucket non sono validi, indicando i campi da correggere senza registrare né modificare il Bucket.
+- *Precondizioni:* L'Amministratore HR ha confermato la creazione (`UC7`) o la modifica (`UC9`) di un Bucket e almeno un controllo di validazione ha esito negativo (nome mancante, nome già utilizzato da un altro Bucket o nessun gruppo destinatario selezionato).
+- *Condizione di estensione:* I dati inseriti durante la creazione o la modifica del Bucket non superano la validazione.
+- *Scenario Principale:*
+  1. Il sistema interrompe l'operazione in corso.
+  2. Il sistema mostra, per ciascun campo non valido, un messaggio comprensibile che ne spiega il motivo, mantenendo nel modulo i dati già inseriti per agevolarne la correzione.
+- *Postcondizioni:* Nessun Bucket è stato creato o modificato; il modulo resta disponibile per la correzione dei dati.
 
 === UC8: Visualizzazione elenco Bucket
 #figure(image("Casi_Uso/out/UC8.svg", width: 65%), caption: [UC8 – Visualizzazione elenco Bucket])
-- *Attori Coinvolti:* Amministratore HR (Primario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+- *Attori:* Amministratore HR (Primario).
+- *Descrizione:* L'Amministratore HR consulta l'elenco dei Bucket configurati con le relative informazioni di sintesi.
+- *Precondizioni:* Il sistema è attivo; l'Amministratore HR è autenticato con privilegi amministrativi nel Backoffice.
+- *Trigger:* L'Amministratore HR desidera consultare i Bucket di conoscenza configurati.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. L'Amministratore HR accede alla sezione dei Bucket nel Backoffice.
+  2. Il sistema recupera i Bucket configurati e mostra l'elenco indicando, per ciascuno, nome, descrizione, gruppi destinatari, stato (*attivo* o *ritirato*) e numero di fonti contenute.
+- *Scenari Alternativi:*
+  - Se non è presente alcun Bucket configurato, il sistema lo segnala con un apposito messaggio informativo.
+- *Postcondizioni:* L'elenco dei Bucket è visualizzato; nessun dato è stato modificato.
 
 === UC9: Modifica metadati Bucket
 #figure(image("Casi_Uso/out/UC9.svg", width: 65%), caption: [UC9 – Modifica metadati Bucket])
-- *Attori Coinvolti:* Amministratore HR (Primario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+- *Attori:* Amministratore HR (Primario).
+- *Descrizione:* L'Amministratore HR modifica nome, descrizione e/o gruppi destinatari di un Bucket esistente senza alterare le fonti in esso contenute.
+- *Precondizioni:* Il sistema è attivo; l'Amministratore HR è autenticato con privilegi amministrativi nel Backoffice ed è presente almeno un Bucket.
+- *Trigger:* L'Amministratore HR desidera aggiornare i metadati o i destinatari autorizzati di un Bucket esistente.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. L'Amministratore HR seleziona un Bucket dall'elenco (`UC8`) e richiede la modifica dei metadati.
+  2. Il sistema mostra il modulo precompilato con i valori correnti.
+  3. L'Amministratore HR modifica uno o più campi tra nome, descrizione e gruppi destinatari e conferma l'aggiornamento.
+  4. Il sistema valida i dati, aggiorna i metadati del Bucket e notifica l'esito positivo.
+- *Scenari Alternativi:*
+  - Se i dati modificati non superano la validazione, il sistema interrompe l'aggiornamento e segnala i campi errati (*UC7.1*).
+- *Postcondizioni:* I metadati del Bucket sono aggiornati e le nuove autorizzazioni dei gruppi destinatari si applicano alle interrogazioni successive del Concierge; le fonti del Bucket restano invariate.
+- *Estensioni:* UC7.1.
 
 === UC10: Ritiro Bucket di conoscenza
 #figure(image("Casi_Uso/out/UC10.svg", width: 65%), caption: [UC10 – Ritiro Bucket di conoscenza])
-- *Attori Coinvolti:* Amministratore HR (Primario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+- *Attori:* Amministratore HR (Primario).
+- *Descrizione:* L'Amministratore HR ritira un intero Bucket dalla consultazione attiva tramite archiviazione logica; il Bucket e le sue fonti diventano immediatamente non utilizzabili dal Concierge ma restano conservati nello storico.
+- *Precondizioni:* Il sistema è attivo; l'Amministratore HR è autenticato con privilegi amministrativi nel Backoffice ed è presente almeno un Bucket attivo.
+- *Trigger:* L'Amministratore HR desidera escludere un intero Bucket dalla consultazione del Concierge.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. L'Amministratore HR seleziona un Bucket attivo dall'elenco (`UC8`) e richiede il ritiro del Bucket.
+  2. Il sistema mostra il nome del Bucket e il numero di fonti interessate, richiedendo una conferma esplicita.
+  3. L'Amministratore HR conferma il ritiro.
+  4. Il sistema archivia logicamente il Bucket e tutte le sue fonti, escludendoli immediatamente dal recupero documentale, e notifica l'esito positivo.
+- *Scenari Alternativi:*
+  - Se l'Amministratore HR annulla alla richiesta di conferma, l'operazione termina senza alcuna modifica.
+- *Postcondizioni:* Il Bucket e le relative fonti risultano ritirati e non sono più accessibili al Concierge né per nuove conversazioni né per il proseguimento di quelle in corso; i record restano conservati per la storicizzazione e il monitoraggio della qualità.
 
 === UC11: Caricamento nuova fonte documentale
 #figure(image("Casi_Uso/out/UC11.svg", width: 65%), caption: [UC11 – Caricamento nuova fonte documentale])
-- *Attori Coinvolti:* Amministratore HR (Primario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+- *Attori:* Amministratore HR (Primario).
+- *Descrizione:* L'Amministratore HR carica un documento in formato PDF (testuale o scansionato con supporto OCR) in un Bucket attivo; il sistema registra la nuova fonte e ne avvia l'elaborazione asincrona in unità di conoscenza consultabili.
+- *Precondizioni:* Il sistema è attivo; l'Amministratore HR è autenticato con privilegi amministrativi nel Backoffice ed è presente almeno un Bucket attivo.
+- *Trigger:* L'Amministratore HR desidera rendere consultabile dal Concierge un nuovo documento aziendale.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. L'Amministratore HR seleziona il Bucket attivo di destinazione, richiede il caricamento di una nuova fonte e sceglie il file PDF dal proprio dispositivo.
+  2. L'Amministratore HR conferma il caricamento.
+  3. Il sistema verifica la validità del file e registra la fonte nel Bucket assegnandole versione e data di caricamento.
+  4. Il sistema avvia l'elaborazione asincrona del documento (includendo il riconoscimento ottico dei caratteri qualora il PDF sia una scansione), imposta lo stato della fonte su *in corso* e notifica l'avvio dell'operazione.
+- *Scenari Alternativi:*
+  - Se il file selezionato non è in un formato supportato, è vuoto o illeggibile, il sistema rifiuta il caricamento e mostra un errore (*UC11.1*).
+- *Postcondizioni:* La fonte è registrata nel Bucket in stato *in corso* e diventa consultabile dal Concierge al termine positivo dell'elaborazione asincrona (`UC14`).
+- *Estensioni:* UC11.1.
+
+=== UC11.1: Visualizzazione errore file non valido
+#figure(image("Casi_Uso/out/UC11_1.svg", width: 70%), caption: [UC11.1 – Visualizzazione errore file non valido])
+- *Attori:* Amministratore HR (Primario).
+- *Descrizione:* Il sistema segnala all'Amministratore HR che il file selezionato non può essere accettato come fonte, spiegandone il motivo senza registrare o modificare alcuna fonte.
+- *Precondizioni:* L'Amministratore HR ha confermato il caricamento (`UC11`) o la sostituzione (`UC12`) di una fonte, ma il file selezionato non rispetta il formato supportato, risulta vuoto oppure danneggiato/illeggibile.
+- *Condizione di estensione:* Il file selezionato durante il caricamento o la sostituzione non supera la verifica di validità.
+- *Scenario Principale:*
+  1. Il sistema interrompe l'operazione di caricamento o sostituzione.
+  2. Il sistema mostra un messaggio chiaro che indica la causa del rifiuto del file, consentendo all'Amministratore HR di selezionarne un altro.
+- *Postcondizioni:* Nessuna fonte è stata registrata o modificata; eventuali versioni già presenti restano invariate.
 
 === UC12: Sostituzione fonte documentale esistente
 #figure(image("Casi_Uso/out/UC12.svg", width: 65%), caption: [UC12 – Sostituzione fonte documentale esistente])
-- *Attori Coinvolti:* Amministratore HR (Primario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+- *Attori:* Amministratore HR (Primario).
+- *Descrizione:* L'Amministratore HR sostituisce una fonte esistente con una nuova versione del documento; a elaborazione completata, la nuova versione prevale esclusivamente e la precedente viene archiviata logicamente.
+- *Precondizioni:* Il sistema è attivo; l'Amministratore HR è autenticato con privilegi amministrativi nel Backoffice ed è presente almeno una fonte attiva in un Bucket attivo.
+- *Trigger:* L'Amministratore HR desidera aggiornare una fonte esistente con una versione più recente del documento (es. un regolamento aggiornato).
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. L'Amministratore HR seleziona la fonte da sostituire nell'elenco (`UC14`), richiede la sostituzione e seleziona il nuovo file PDF.
+  2. L'Amministratore HR conferma la sostituzione.
+  3. Il sistema verifica la validità del file, lo registra come nuova versione della medesima fonte (con numero di versione incrementato e data di caricamento) e ne avvia l'elaborazione asincrona in stato *in corso*.
+  4. Al termine positivo dell'elaborazione, il sistema rende consultabile la nuova versione e ritira tramite archiviazione logica la versione precedente.
+- *Scenari Alternativi:*
+  - Se il nuovo file non supera la validazione, il sistema interrompe la sostituzione e segnala l'errore (*UC11.1*), lasciando invariata la versione attuale.
+  - Se l'elaborazione asincrona della nuova versione fallisce (`UC14.1`), la versione precedente resta consultabile fino al caricamento di un file valido.
+- *Postcondizioni:* Solo la versione più recente è consultabile dal Concierge; la versione precedente è archiviata logicamente e resa inaccessibile sia per nuove conversazioni sia per quelle in corso.
+- *Estensioni:* UC11.1.
 
+// Da confermare con Eggon: la versione precedente resta attiva fino al termine positivo dell'elaborazione della nuova.
 === UC13: Ritiro fonte dalla consultazione
 #figure(image("Casi_Uso/out/UC13.svg", width: 65%), caption: [UC13 – Ritiro fonte dalla consultazione])
-- *Attori Coinvolti:* Amministratore HR (Primario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+- *Attori:* Amministratore HR (Primario).
+- *Descrizione:* L'Amministratore HR ritira una singola fonte documentale dalla consultazione attiva tramite archiviazione logica, conservandone lo storico ma impedendone l'uso da parte del Concierge.
+- *Precondizioni:* Il sistema è attivo; l'Amministratore HR è autenticato con privilegi amministrativi nel Backoffice ed è presente almeno una fonte attiva in un Bucket attivo.
+- *Trigger:* L'Amministratore HR desidera escludere una fonte deprecata o non più valida dalla consultazione del Concierge.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. L'Amministratore HR seleziona la fonte da ritirare nell'elenco (`UC14`) e richiede il ritiro.
+  2. Il sistema richiede una conferma esplicita dell'operazione.
+  3. L'Amministratore HR conferma il ritiro.
+  4. Il sistema archivia logicamente la fonte, escludendola immediatamente dal recupero documentale, e notifica l'esito positivo.
+- *Scenari Alternativi:*
+  - Se l'Amministratore HR annulla alla richiesta di conferma, l'operazione termina senza alcuna modifica.
+- *Postcondizioni:* La fonte risulta ritirata e non è più accessibile al Concierge né per nuove conversazioni né per quelle in corso; il record rimane conservato per la storicizzazione delle conversazioni che l'hanno citata.
 
 === UC14: Monitoraggio stato elaborazione fonti
 #figure(image("Casi_Uso/out/UC14.svg", width: 65%), caption: [UC14 – Monitoraggio stato elaborazione fonti])
-- *Attori Coinvolti:* Amministratore HR (Primario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+- *Attori:* Amministratore HR (Primario).
+- *Descrizione:* L'Amministratore HR consulta l'elenco delle fonti di un Bucket con il relativo stato di elaborazione asincrona e la disponibilità alla consultazione (vista da cui può anche accedere a `UC12`, `UC13`, `UC14.1` e `UC14.2`).
+- *Precondizioni:* Il sistema è attivo; l'Amministratore HR è autenticato con privilegi amministrativi nel Backoffice ed è presente almeno un Bucket.
+- *Trigger:* L'Amministratore HR desidera verificare lo stato di elaborazione e disponibilità delle fonti caricate.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. L'Amministratore HR accede alla sezione delle fonti e seleziona un Bucket.
+  2. Il sistema mostra l'elenco delle fonti indicando, per ciascuna, nome, versione, data di caricamento, stato di elaborazione (*in corso*, *indicizzato*, *errore*) e disponibilità alla consultazione (*consultabile*, *non consultabile*, *ritirata*).
+  3. Il sistema aggiorna gli stati man mano che le elaborazioni asincrone procedono.
+- *Scenari Alternativi:*
+  - Se il Bucket non contiene fonti, il sistema lo segnala con un apposito messaggio informativo.
+  - Se l'Amministratore HR seleziona una fonte in stato *errore*, visualizza il dettaglio dell'errore (*UC14.1*).
+  - Se l'Amministratore HR richiede una copia del documento originale di una fonte, può scaricarla (*UC14.2*, funzionalità opzionale).
+- *Postcondizioni:* Gli stati di elaborazione e disponibilità delle fonti sono visualizzati; nessun dato è stato modificato.
+- *Estensioni:* UC14.1, UC14.2.
+
+=== UC14.1: Visualizzazione dettaglio errore di elaborazione
+#figure(image("Casi_Uso/out/UC14_1.svg", width: 70%), caption: [UC14.1 – Visualizzazione dettaglio errore di elaborazione])
+- *Attori:* Amministratore HR (Primario).
+- *Descrizione:* L'Amministratore HR visualizza la causa sintetica per cui l'elaborazione asincrona di una fonte non è andata a buon fine.
+- *Precondizioni:* L'elenco delle fonti è visualizzato (`UC14`) ed esiste almeno una fonte in stato *errore*.
+- *Trigger:* L'Amministratore HR seleziona una fonte in stato *errore* per comprenderne la causa.
+- *Condizione di estensione:* L'Amministratore HR seleziona una fonte il cui stato di elaborazione è *errore*.
+- *Scenario Principale:*
+  1. L'Amministratore HR seleziona la fonte in stato *errore* nell'elenco.
+  2. Il sistema mostra la causa dell'errore in termini comprensibili (es. testo non estraibile, file danneggiato o servizio di elaborazione temporaneamente non disponibile) e la data dell'errore, indicando la possibilità di sostituire il file (`UC12`).
+- *Postcondizioni:* Il dettaglio dell'errore è visualizzato; la fonte resta in stato *errore* e non è consultabile dal Concierge.
+
+=== UC14.2: Scaricamento file originale della fonte
+#figure(image("Casi_Uso/out/UC14_2.svg", width: 70%), caption: [UC14.2 – Scaricamento file originale della fonte])
+- *Attori:* Amministratore HR (Primario).
+- *Descrizione:* L'Amministratore HR scarica una copia del file originale associato a una fonte precedentemente caricata (funzionalità opzionale).
+- *Precondizioni:* L'elenco delle fonti è visualizzato (`UC14`) e il file originale della fonte selezionata è conservato dal sistema.
+- *Trigger:* L'Amministratore HR desidera ottenere una copia locale del file originale di una fonte.
+- *Condizione di estensione:* L'Amministratore HR seleziona l'azione di scaricamento del file originale su una fonte dell'elenco.
+- *Scenario Principale:*
+  1. L'Amministratore HR seleziona una fonte dall'elenco (`UC14`) e richiede lo scaricamento del file originale.
+  2. Il sistema mette a disposizione il file originale così come era stato caricato.
+- *Postcondizioni:* L'Amministratore HR dispone di una copia del file originale; nessun dato nel sistema è stato modificato.
 
 === UC15: Consultazione log operazioni e fonti consultate
 #figure(image("Casi_Uso/out/UC15.svg", width: 65%), caption: [UC15 – Consultazione log operazioni e fonti consultate])
-- *Attori Coinvolti:* Amministratore HR (Primario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+- *Attori:* Amministratore HR (Primario).
+- *Descrizione:* L'Amministratore HR consulta il registro di tracciamento delle fonti documentali citate dal Concierge e delle operazioni dispositive eseguite per conto dei dipendenti.
+- *Precondizioni:* Il sistema è attivo; l'Amministratore HR è autenticato con privilegi amministrativi e accede alla sezione del Backoffice dedicata ai log di audit.
+- *Trigger:* L'Amministratore HR desidera verificare quali fonti sono state consultate e quali operazioni sono state eseguite dal Concierge.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. L'Amministratore HR accede alla sezione dei log di audit nel Backoffice.
+  2. Il sistema recupera le voci registrate e le mostra in ordine cronologico inverso indicando data e ora, utente, capacità invocata, fonti consultate (documento, versione e sezione) oppure operazione dispositiva con relativa conferma ed esito.
+- *Scenari Alternativi:*
+  - Se non sono presenti voci di log, il sistema lo segnala con un apposito messaggio informativo.
+- *Postcondizioni:* Le voci di log sono visualizzate; nessun dato è stato modificato.
 
 #pagebreak()
 // ============================================================
@@ -645,46 +749,57 @@ Per ciascun requisito è specificato il grado di cogenza per la baseline RTB:
   table.cell(align: center)[*Casi d'Uso*],
   [*Fonti*],
   [RF-001], [Obbligatorio], [Il sistema deve consentire al Dipendente di inviare messaggi testuali in linguaggio naturale tramite l'interfaccia chat.], [UC1], [RB-01, RB-02],
-  [RF-002], [Obbligatorio], [Il sistema deve mantenere il contesto della conversazione per l'intera durata della sessione corrente.], [UC1], [RB-04],
+  [RF-002], [Obbligatorio], [Il sistema deve mantenere il contesto e la cronologia della conversazione all'interno della singola sessione anche in caso di ricaricamento della pagina o cambio schermata, restando stateless tra sessioni distinte.], [UC1], [RB-04, VE-2.3],
   [RF-003], [Obbligatorio], [Il sistema deve discriminare l'intento dell'utente tra: regole aziendali, istruzioni di prodotto, dati personali e operazioni.], [UC1], [RB-02],
   [RF-004], [Obbligatorio], [Il sistema deve consentire all'utente di alternare o combinare capacità informative e dispositive all'interno della medesima sessione di chat.], [UC1], [RB-03],
   [RF-005], [Obbligatorio], [Il sistema deve richiedere chiarimenti proattivi all'utente qualora l'input contenga informazioni ambigue o incomplete (es. date prive di anno).], [UC1.1], [RB-04],
-  [RF-006], [Obbligatorio], [Il sistema deve notificare all'utente eventuali errori tecnici o timeout nella comunicazione con il provider LLM.], [UC1.2], [RB-14],
+  [RF-006], [Obbligatorio], [Il sistema deve notificare all'utente eventuali errori tecnici o timeout persistenti nella comunicazione con il Provider LLM tramite un messaggio sintetico e comprensibile.], [UC1.2], [RB-14, VE-2.4],
   [RF-007], [Obbligatorio], [Il sistema deve consentire la consultazione delle policy e dei regolamenti aziendali interni tramite RAG, rispondendo in linguaggio naturale.], [UC2], [RB-02, RB-08],
   [RF-008], [Obbligatorio], [Il sistema deve indicare esplicitamente i riferimenti delle fonti documentali utilizzate per formulare la risposta (documento e sezione).], [UC2, UC3], [RB-08],
-  [RF-009], [Obbligatorio], [Il sistema deve astenersi formalmente dal formulare una risposta qualora le fonti documentali autorizzate risultino assenti, insufficienti o discordanti.], [UC2.1], [RB-08],
+  [RF-009], [Obbligatorio], [Il sistema deve astenersi formalmente dal formulare una risposta qualora le fonti documentali autorizzate risultino assenti, insufficienti o presentino contrasti non risolvibili tra documenti distinti.], [UC2.1], [RB-08, VE-2.2],
   [RF-010], [Obbligatorio], [Il sistema deve consentire la consultazione delle guide e dei manuali d'uso della piattaforma NEXUM.], [UC3], [RB-02, RB-07, RB-08],
   [RF-011], [Obbligatorio], [Il sistema deve gestire la base di conoscenza dei manuali NEXUM come fonte logicamente e operativamente distinta dai regolamenti interni.], [UC3], [RB-07],
   [RF-012], [Obbligatorio], [Il sistema deve notificare all'utente l'assenza di istruzioni operative qualora la funzionalità NEXUM richiesta non sia documentata nei manuali.], [UC3.1], [RB-08],
-  [RF-013], [Obbligatorio], [Il sistema deve consentire al Dipendente di consultare il proprio storico di ferie e permessi fruiti interrogando i servizi applicativi autorizzati.], [UC4], [RB-09, RB-10],
+  [RF-013], [Obbligatorio], [Il sistema deve consentire al Dipendente di consultare i propri dati di ferie e permessi (maturati, fruiti, in attesa e residui) interrogando i Servizi NEXUM autorizzati.], [UC4], [RB-09, RB-10],
   [RF-014], [Obbligatorio], [Il sistema deve presentare i dati delle assenze specificando chiaramente l'intervallo temporale, l'unità di misura (giorni o ore) e la tipologia.], [UC4], [RB-10],
   [RF-015], [Obbligatorio], [Il sistema deve vietare la deduzione o il calcolo matematico arbitrario del saldo ferie da parte dell'LLM in assenza di dati applicativi certi.], [UC4], [RB-09],
-  [RF-016], [Obbligatorio], [Il sistema deve notificare all'utente eventuali errori o indisponibilità nella comunicazione con i servizi applicativi per il recupero dati.], [UC4.1], [RB-14],
-  [RF-017], [Obbligatorio], [Il sistema deve consentire al Dipendente di visualizzare l'elenco e lo stato aggiornato delle proprie richieste di ferie/permessi presentate.], [UC5], [RB-13],
-  [RF-018], [Obbligatorio], [Il sistema deve distinguere formalmente tra i seguenti stati delle richieste: registrata, in attesa di approvazione, approvata e respinta.], [UC5], [RB-13],
-  [RF-019], [Obbligatorio], [Il sistema deve consentire al Dipendente di avviare in linguaggio naturale la procedura di richiesta di ferie o permessi.], [UC6], [RB-11],
-  [RF-020], [Obbligatorio], [Il sistema deve estrarre deterministicamente i parametri della richiesta (tipo assenza, data inizio, data fine, orari) tramite function calling.], [UC6], [RB-11],
+  [RF-016], [Obbligatorio], [Il sistema deve notificare all'utente in modo non tecnico eventuali errori o indisponibilità persistenti nella comunicazione con i Servizi NEXUM per il recupero dati personali.], [UC4.1], [RB-14, VE-2.4],
+  [RF-017], [Obbligatorio], [Il sistema deve consentire al Dipendente di visualizzare l'elenco e lo stato aggiornato delle proprie richieste di ferie e permessi presentate.], [UC5], [RB-13],
+  [RF-018], [Obbligatorio], [Il sistema deve distinguere formalmente ed esclusivamente tra i tre stati delle richieste previsti da NEXUM: in attesa, approvata e rifiutata.], [UC5], [RB-13, VE-2.5],
+  [RF-019], [Obbligatorio], [Il sistema deve consentire al Dipendente di avviare in linguaggio naturale la preparazione di una richiesta esclusivamente per le tipologie ferie o permesso (con campo note opzionale ed esclusione della malattia nell'MVP).], [UC6], [RB-11, VE-2.5],
+  [RF-020], [Obbligatorio], [Il sistema deve raccogliere ed estrarre in modo strutturato i parametri della richiesta (tipologia, date complete di anno, eventuale fascia oraria per i permessi e note opzionali).], [UC6], [RB-11, VE-2.5],
   [RF-021], [Obbligatorio], [Il sistema deve presentare obbligatoriamente all'utente un riepilogo formale completo dei dati della richiesta prima di procedere all'invio.], [UC6.1], [RB-12],
-  [RF-022], [Obbligatorio], [Il sistema deve richiedere una conferma esplicita all'utente per completare l'inoltro della richiesta verso i servizi applicativi.], [UC6.2], [RB-12],
+  [RF-022], [Obbligatorio], [Il sistema deve richiedere una conferma esplicita all'utente per completare l'inoltro della richiesta verso i Servizi NEXUM.], [UC6.2], [RB-12],
   [RF-023], [Obbligatorio], [Il sistema deve consentire all'utente di modificare uno o più dati della richiesta durante la fase di preparazione prima dell'invio definitivo.], [UC6.3], [RB-12],
   [RF-024], [Obbligatorio], [In caso di modifica dei dati in preparazione, il sistema deve invalidare la conferma, generare un nuovo riepilogo e richiedere una nuova conferma esplicita.], [UC6.3], [RB-12],
-  [RF-025], [Obbligatorio], [Il sistema deve demandare la validazione delle date e il controllo delle sovrapposizioni temporali ai servizi applicativi di backend.], [UC6], [VE-1.4],
-  [RF-026], [Obbligatorio], [Il sistema deve notificare all'utente il fallimento della registrazione qualora il servizio applicativo segnali una sovrapposizione temporale o violazione di policy.], [UC6.4], [RB-14, VE-1.4],
-  [RF-027], [Obbligatorio], [A seguito di conferma positiva, il sistema deve persistere la richiesta nello stato "registrata / in attesa di approvazione" e notificare l'esito al dipendente.], [UC6], [RB-13],
-  [RF-028], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di creare un nuovo Bucket di conoscenza specificando nome, descrizione, azienda e gruppi destinatari autorizzati.], [UC7], [RB-01, RB-05],
+  [RF-025], [Obbligatorio], [Il sistema deve demandare la validazione delle date e il controllo delle sovrapposizioni temporali ai Servizi NEXUM.], [UC6], [VE-1.4],
+  [RF-026], [Obbligatorio], [Il sistema deve notificare all'utente in modo non tecnico il fallimento della registrazione qualora i Servizi NEXUM segnalino dati non validi, una sovrapposizione temporale o un'indisponibilità persistente.], [UC6.4], [RB-14, VE-1.4, VE-2.4],
+  [RF-027], [Obbligatorio], [A seguito di conferma esplicita, il sistema deve registrare la richiesta presso i Servizi NEXUM nello stato "in attesa" e notificare l'esito al dipendente, senza prevedere modifica diretta o cancellazione post-invio dalla chat.], [UC6], [RB-13, VE-2.5],
+  [RF-028], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di creare un nuovo Bucket di conoscenza specificando nome, descrizione e gruppi destinatari autorizzati nell'ambito della singola azienda.], [UC7], [RB-01, RB-05, VE-2.2],
   [RF-029], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di visualizzare l'elenco dei Bucket di conoscenza configurati con il relativo stato e numero di fonti.], [UC8], [RB-05],
   [RF-030], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di modificare i metadati di un Bucket esistente (nome, descrizione, gruppi destinatari autorizzati).], [UC9], [RB-05],
-  [RF-031], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di ritirare un intero Bucket di conoscenza escludendolo dalla consultazione attiva del Concierge.], [UC10], [RB-05],
-  [RF-032], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di caricare documenti informativi in formato PDF testuale all'interno di uno specifico Bucket.], [UC11], [RB-05],
+  [RF-031], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di ritirare un intero Bucket di conoscenza tramite archiviazione logica, escludendolo dalla consultazione attiva del Concierge.], [UC10], [RB-05, VE-2.2],
+  [RF-032], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di caricare documenti informativi in formato PDF (sia testuali sia scansionati con supporto OCR) all'interno di uno specifico Bucket.], [UC11], [RB-05, VE-2.2],
   [RF-033], [Obbligatorio], [Il sistema deve scomporre i documenti caricati in unità di conoscenza (chunk) preservando metadati di provenienza, versione e data di caricamento.], [UC11], [RB-06],
   [RF-034], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di sostituire una fonte documentale esistente con una versione aggiornata.], [UC12], [RB-05],
-  [RF-035], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di ritirare una singola fonte documentale dalla consultazione attiva.], [UC13], [RB-05],
-  [RF-036], [Obbligatorio], [Il sistema deve garantire che le fonti o i bucket ritirati siano immediatamente esclusi dalle risposte successive del Concierge.], [UC10, UC12, UC13], [RB-05, RB-08],
+  [RF-035], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di ritirare una singola fonte documentale mediante archiviazione logica, preservandone la storicizzazione ma escludendola dalla consultazione attiva.], [UC13], [RB-05, VE-2.2],
+  [RF-036], [Obbligatorio], [Il sistema deve garantire che le fonti o i bucket ritirati siano immediatamente esclusi dal recupero sia per nuove conversazioni sia per il proseguimento di quelle correnti.], [UC10, UC12, UC13], [RB-05, RB-08, VE-2.2],
   [RF-037], [Obbligatorio], [Il sistema deve mostrare all'Amministratore HR lo stato di avanzamento dell'elaborazione delle fonti (in corso, indicizzato, errore di elaborazione).], [UC14], [RB-06, RB-14],
   [RF-038], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di consultare i log di tracciamento delle fonti citate e delle operazioni dispositive eseguite.], [UC15], [RB-15],
-  [RF-039], [Desiderabile], [Il sistema dovrebbe consentire il caricamento di fonti documentali anche in formato Markdown (.md) o testo semplice (.txt) oltre ai PDF.], [UC11], [Capitolato C2],
+  [RF-039], [Desiderabile], [Il sistema dovrebbe consentire il caricamento di fonti documentali anche in formato Markdown (.md) o testo semplice (.txt) oltre ai PDF.], [UC11], [Capitolato C2, VE-2.2],
   [RF-040], [Desiderabile], [Il sistema dovrebbe consentire al Dipendente di filtrare la visualizzazione delle proprie richieste di assenza per anno solare o per stato della pratica.], [UC5], [AD],
-  [RF-041], [Opzionale], [Il sistema potrebbe consentire all'Amministratore HR di scaricare il file originale associato a una fonte documentale precedentemente caricata.], [UC8, UC11], [AD],
+  [RF-041], [Opzionale], [Il sistema potrebbe consentire all'Amministratore HR di scaricare il file originale associato a una fonte documentale precedentemente caricata.], [UC14.2], [AD],
+  [RF-042], [Obbligatorio], [L'interfaccia utente deve rilevare e segnalare chiaramente al Dipendente eventuali errori di rete o disconnessioni lato client.], [UC1.3], [RB-14, VE-2.4],
+  [RF-043], [Obbligatorio], [Il sistema deve consentire al Dipendente di avviare esplicitamente una nuova sessione di chat, chiudendo quella corrente e ripartendo da uno stato pulito.], [UC1.4], [RB-04, VE-2.3],
+  [RF-044], [Obbligatorio], [In presenza di discrepanze tra versioni successive di uno stesso regolamento aziendale, il sistema deve considerare esclusivamente la versione più recente.], [UC2], [RB-08, VE-2.2],
+  [RF-045], [Obbligatorio], [Il sistema deve notificare all'utente in modo non tecnico eventuali errori o indisponibilità persistenti dei Servizi NEXUM durante il recupero dello stato delle richieste.], [UC5.1], [RB-14, VE-2.4],
+  [RF-046], [Obbligatorio], [Prima di inoltrare una richiesta di ferie o permesso, il sistema deve verificare il rispetto dei vincoli del regolamento aziendale attivo (es. preavviso minimo, soglie di saldo negativo) e, in caso di violazione, negare l'invio con un diniego motivato.], [UC6.5], [RB-08, VE-2.4, VE-2.5],
+  [RF-047], [Obbligatorio], [Il sistema deve consentire al Dipendente di annullare la preparazione di una richiesta prima della conferma definitiva senza effettuare alcun invio ai Servizi NEXUM.], [UC6.6], [RB-12],
+  [RF-048], [Obbligatorio], [In caso di errore transitorio di rete o fallimento nelle chiamate ai servizi esterni, il sistema deve eseguire un meccanismo di retry automatico con breve attesa (debounce) prima di segnalare l'errore all'utente.], [UC1.2, UC4.1, UC5.1, UC6.4], [RB-14, VE-2.4],
+  [RF-049], [Opzionale], [Il sistema potrebbe consentire di specificare una categoria o sottotipo opzionale per le richieste di permesso (es. ROL, ex-festività) in vista di future estensioni.], [UC6], [AD],
+  [RF-050], [Obbligatorio], [Il sistema deve validare i dati dei Bucket in fase di creazione e modifica, segnalando puntualmente i campi non validi senza applicare modifiche e mantenendo i dati già inseriti.], [UC7.1], [RB-14],
+  [RF-051], [Obbligatorio], [Il sistema deve verificare la validità dei file selezionati in fase di caricamento o sostituzione (formato supportato, file non vuoto e leggibile), rifiutando quelli non validi con un messaggio esplicativo.], [UC11.1], [RB-14],
+  [RF-052], [Obbligatorio], [Il sistema deve consentire all'Amministratore HR di visualizzare il dettaglio sintetico (causa comprensibile e data) relativo agli errori di elaborazione di una fonte.], [UC14.1], [RB-14],
 )
 ]
 
@@ -704,9 +819,10 @@ Per ciascun requisito è specificato il grado di cogenza per la baseline RTB:
   [*Fonti*],
   [RQ-001], [Obbligatorio], [Il sistema deve implementare filtri di sicurezza su input e output per prevenire tentativi di manipolazione del prompt (Prompt Injection).], [VE-1.5, AD],
   [RQ-002], [Obbligatorio], [Il sistema deve impedire l'esfiltrazione accidentale di dati personali o sensibili (PII) verso l'esterno o verso soggetti non autorizzati.], [VE-1.5, AD],
-  [RQ-003], [Obbligatorio], [Il sistema deve garantire la totale separazione logica dei dati e delle fonti tra aziende clienti differenti (isolamento multi-tenant).], [RB-01, AD],
+  [RQ-003], [Opzionale], [In vista di future estensioni multi-azienda oltre il perimetro dell'MVP, il sistema potrebbe garantire la separazione logica dei dati e delle fonti tra aziende clienti differenti (isolamento multi-tenant).], [RB-01, VE-2.2, AD],
   [RQ-004], [Obbligatorio], [L'architettura del sistema deve essere modulare per consentire l'estensione verso nuovi domini operativi e fonti senza refactoring globale.], [RB-16],
   [RQ-005], [Obbligatorio], [Il sistema deve registrare nei log di audit l'identificativo utente, la data, l'abilità invocata e l'esito di ciascuna operazione dispositiva.], [RB-15],
+  [RQ-006], [Obbligatorio], [Il sistema deve garantire che dettagli tecnici interni (quali codici di stato HTTP o payload JSON) non siano mai esposti all'utente finale nei messaggi della chat.], [RB-14, VE-2.4],
 )
 ]
 
@@ -723,11 +839,13 @@ Per ciascun requisito è specificato il grado di cogenza per la baseline RTB:
   [*Descrizione del Requisito di Vincolo*],
   [*Fonti*],
   [RV-001], [Obbligatorio], [La base di conoscenza vettoriale deve essere implementata utilizzando PostgreSQL con l'estensione `pgvector`.], [VE-1.3],
-  [RV-002], [Obbligatorio], [Per la revisione RTB/PoC, il Concierge deve essere sviluppato come architettura autonoma e disaccoppiata, interfacciata con API simulate di NEXUM.], [VE-1.1],
+  [RV-002], [Obbligatorio], [Per la revisione RTB/PoC, il Concierge deve essere sviluppato come architettura autonoma e disaccoppiata, interfacciata con API reali o simulate di NEXUM.], [VE-1.1, VE-2.1],
   [RV-003], [Obbligatorio], [L'interfaccia utente per il personale deve essere fruibile tramite WebApp / Progressive Web App (PWA) compatibile con i principali browser desktop.], [Capitolato C2],
-  [RV-004], [Obbligatorio], [Il backend applicativo del sistema deve essere sviluppato adottando la versione stabile più recente del framework Ruby on Rails.], [VE §3.8],
+  [RV-004], [Obbligatorio], [Il backend applicativo del sistema deve essere sviluppato adottando la versione stabile più recente del framework Ruby on Rails.], [VE-1.3, VE §3.8],
   [RV-005], [Obbligatorio], [Il frontend dell'interfaccia utente deve essere sviluppato adottando il framework Angular v18.], [VE §3.8],
   [RV-006], [Obbligatorio], [L'integrazione con i modelli linguistici (LLM) deve avvenire tramite credenziali e API erogate su Amazon Web Services (AWS) Bedrock.], [VE-1.2, Capitolato C2],
+  [RV-007], [Obbligatorio], [Il modello linguistico ospitato su AWS Bedrock non deve accedere direttamente al database; tutte le interrogazioni verso la base dati e i servizi esterni devono essere incapsulate e controllate tramite tool definiti in Ruby (`ruby_llm`).], [VE-2.1],
+  [RV-008], [Obbligatorio], [Nel perimetro dell'MVP il sistema deve operare su una singola azienda, adottare un unico ruolo amministrativo (HR/Responsabile Fonti) e gestire la pipeline documentale internamente senza transitare attraverso le API di NEXUM.], [VE-2.1, VE-2.2],
 )
 ]
 
@@ -766,30 +884,35 @@ La presente matrice certifica che ogni bisogno, vincolo e aspettativa formulata 
   inset: 5pt,
   fill: (col, row) => if row == 0 { rgb("#e5e7eb") } else { none },
   [*Fonte*], [*Descrizione Sintetica della Fonte*], [*Requisiti Software Soddisfatti*],
-  [RB-01], [Contesto persona autenticata e azienda selezionata], [RF-001, RF-028, RQ-003],
+  [RB-01], [Contesto persona autenticata e azienda di appartenenza], [RF-001, RF-028, RQ-003],
   [RB-02], [Discriminazione dell'intento dell'utente], [RF-001, RF-003, RF-007, RF-010],
   [RB-03], [Combinazione di capacità differenti nel dialogo], [RF-004],
-  [RB-04], [Mantenimento del contesto e chiarimenti proattivi], [RF-002, RF-005],
+  [RB-04], [Mantenimento del contesto e chiarimenti proattivi], [RF-002, RF-005, RF-043],
   [RB-05], [Caricamento, organizzazione, sostituzione e ritiro fonti da Backoffice], [RF-028, RF-029, RF-030, RF-031, RF-032, RF-034, RF-035, RF-036],
   [RB-06], [Trasformazione in unità di conoscenza (chunking, metadati, stato)], [RF-033, RF-037],
   [RB-07], [Distinzione della base di conoscenza dei manuali NEXUM], [RF-010, RF-011],
-  [RB-08], [Citazione esplicita fonti e astensione formale per contrasto/carenza], [RF-007, RF-008, RF-009, RF-010, RF-012, RF-036],
+  [RB-08], [Citazione esplicita fonti e astensione formale per contrasto/carenza], [RF-007, RF-008, RF-009, RF-010, RF-012, RF-036, RF-044, RF-046],
   [RB-09], [Lettura dati personali solo via servizi autorizzati (nessun calcolo LLM)], [RF-013, RF-015],
   [RB-10], [Dati personali esposti con periodo, unità di misura e stati], [RF-013, RF-014],
   [RB-11], [Esecuzione operazioni tramite abilità definite e servizi applicativi], [RF-019, RF-020],
-  [RB-12], [Riepilogo formale completo e conferma esplicita prima dell'invio], [RF-021, RF-022, RF-023, RF-024],
-  [RB-13], [Distinzione formale degli stati delle richieste (registrata, approvata, ecc.)], [RF-017, RF-018, RF-027],
-  [RB-14], [Notifica trasparente di errori tecnici, validazioni fallite e indisponibilità], [RF-006, RF-016, RF-026, RF-037],
+  [RB-12], [Riepilogo formale completo e conferma esplicita prima dell'invio], [RF-021, RF-022, RF-023, RF-024, RF-047],
+  [RB-13], [Distinzione formale degli stati delle richieste], [RF-017, RF-018, RF-027],
+  [RB-14], [Notifica trasparente di errori tecnici, validazioni fallite e indisponibilità], [RF-006, RF-016, RF-026, RF-037, RF-042, RF-045, RF-048, RF-050, RF-051, RF-052, RQ-006],
   [RB-15], [Tracciabilità completa delle fonti consultate e degli esiti operativi], [RF-038, RQ-005],
   [RB-16], [Architettura aperta ed estensibile verso nuove fonti e abilità], [RQ-004],
   [VE-1.1], [Disaccoppiamento architetturale PoC/MVP e API simulate NEXUM], [RV-002],
   [VE-1.2], [Credenziali AWS Bedrock e monitoraggio del vincolo di budget token], [RV-006, RP-001],
   [VE-1.3], [Adozione di PostgreSQL con estensione `pgvector` e Rails latest], [RV-001, RV-004],
-  [VE-1.4], [Validazione e controlli sovrapposizione ferie delegati al backend API], [RF-025, RF-026],
+  [VE-1.4], [Validazione e controlli sovrapposizione ferie delegati ai Servizi NEXUM], [RF-025, RF-026],
   [VE-1.5], [Sicurezza applicativa, anti-Prompt Injection e protezione dati sensibili (PII)], [RQ-001, RQ-002],
   [VE §3.8], [Standard tecnologici concordati: Angular v18 e Ruby on Rails], [RV-004, RV-005],
-  [Capitolato C2], [Fruibilità come PWA desktop e gestione asincrona elaborazioni], [RV-003, RP-002, RF-039],
-  [Analisi Dominio (AD)], [Usabilità, filtri avanzati, tempi di risposta e sicurezza d'uso], [RF-040, RF-041, RQ-001, RQ-002, RQ-003, RP-002, RP-003],
+  [VE-2.1], [Disaccoppiamento DB/Bedrock, tool controllati in Ruby (`ruby_llm`) e gestione documentale interna], [RV-002, RV-007, RV-008],
+  [VE-2.2], [PDF + OCR, archiviazione logica fonti, prevalenza ultima versione, ruolo HR unico e singola azienda], [RF-009, RF-028, RF-031, RF-032, RF-035, RF-036, RF-039, RF-044, RQ-003, RV-008],
+  [VE-2.3], [Persistenza conversazione nella singola sessione e avvio nuova sessione stateless], [RF-002, RF-043],
+  [VE-2.4], [Retry automatico con debounce (senza Idempotency-Key) e classificazione errori a 3 livelli], [RF-006, RF-016, RF-026, RF-042, RF-045, RF-046, RF-048, RQ-006],
+  [VE-2.5], [Solo ferie/permessi con note opzionali (no malattia), 3 stati, no modifica/cancellazione post-invio, vincoli PDF controllati dall'agente], [RF-018, RF-019, RF-020, RF-027, RF-046],
+  [Capitolato C2], [Fruibilità come PWA desktop e gestione asincrona elaborazioni], [RF-039, RV-003, RV-006, RP-002],
+  [Analisi Dominio (AD)], [Usabilità, filtri avanzati, tempi di risposta, sicurezza d'uso ed estensioni opzionali], [RF-040, RF-041, RF-049, RQ-001, RQ-002, RQ-003, RP-002, RP-003],
 )
 ]
 
@@ -807,27 +930,36 @@ La matrice di tracciabilità tra casi d'uso e requisiti funzionali attesta che o
   [*Caso d'Uso*], [*Requisiti Funzionali Implementati*],
   [UC1], [RF-001, RF-002, RF-003, RF-004],
   [UC1.1], [RF-005],
-  [UC1.2], [RF-006],
-  [UC2], [RF-007, RF-008],
+  [UC1.2], [RF-006, RF-048],
+  [UC1.3], [RF-042],
+  [UC1.4], [RF-043],
+  [UC2], [RF-007, RF-008, RF-044],
   [UC2.1], [RF-009],
   [UC3], [RF-008, RF-010, RF-011],
   [UC3.1], [RF-012],
   [UC4], [RF-013, RF-014, RF-015],
-  [UC4.1], [RF-016],
+  [UC4.1], [RF-016, RF-048],
   [UC5], [RF-017, RF-018, RF-040],
-  [UC6], [RF-019, RF-020, RF-025, RF-027],
+  [UC5.1], [RF-045, RF-048],
+  [UC6], [RF-019, RF-020, RF-025, RF-027, RF-049],
   [UC6.1], [RF-021],
-  [UC6.2], [RF-022, RF-024],
-  [UC6.3], [RF-023],
-  [UC6.4], [RF-026],
+  [UC6.2], [RF-022],
+  [UC6.3], [RF-023, RF-024],
+  [UC6.4], [RF-026, RF-048],
+  [UC6.5], [RF-046],
+  [UC6.6], [RF-047],
   [UC7], [RF-028],
-  [UC8], [RF-029, RF-041],
+  [UC7.1], [RF-050],
+  [UC8], [RF-029],
   [UC9], [RF-030],
   [UC10], [RF-031, RF-036],
-  [UC11], [RF-032, RF-033, RF-039, RF-041],
+  [UC11], [RF-032, RF-033, RF-039],
+  [UC11.1], [RF-051],
   [UC12], [RF-034, RF-036],
   [UC13], [RF-035, RF-036],
   [UC14], [RF-037],
+  [UC14.1], [RF-052],
+  [UC14.2], [RF-041],
   [UC15], [RF-038],
 )
 ]
@@ -850,27 +982,33 @@ La presente tabella riassume il legame diretto tra i requisiti di business formu
   [*Attori Coinvolti*],
   table.cell(align: center)[*Casi d'Uso*],
 
-  [RB-01], [Operare nel contesto della persona autenticata e dell'azienda selezionata.], [F], [O], [Dipendente], [UC1, UC4, UC5, UC6],
+  [RB-01], [Operare nel contesto della persona autenticata nell'ambito aziendale.], [F], [O], [Dipendente], [UC1, UC4, UC5, UC6],
   [RB-02], [Riconoscere e distinguere richieste su regole aziendali, istruzioni di prodotto, dati personali e operazioni.], [F], [O], [Dipendente, Provider LLM], [UC1, UC2, UC3, UC4, UC6],
   [RB-03], [Combinare capacità informative e operative differenti all'interno della medesima conversazione.], [F], [O], [Dipendente], [UC1],
-  [RB-04], [Mantenere il contesto del dialogo e richiedere chiarimenti in caso di informazioni ambigue (es. date senza anno).], [F], [O], [Dipendente, Provider LLM], [UC1, UC1.1, UC6],
-  [RB-05], [Caricamento, organizzazione in bucket, sostituzione e ritiro delle fonti aziendali da Backoffice.], [F], [O], [Amministratore HR], [UC7, UC8, UC9, UC10],
-  [RB-06], [Trasformazione delle fonti in unità di conoscenza consultabili preservando provenienza, contesto e versione.], [F], [O], [Amministratore HR], [UC8, UC11],
+  [RB-04], [Mantenere il contesto del dialogo e richiedere chiarimenti in caso di informazioni ambigue (es. date senza anno).], [F], [O], [Dipendente, Provider LLM], [UC1, UC1.1, UC1.4, UC6],
+  [RB-05], [Caricamento, organizzazione in bucket, sostituzione e ritiro delle fonti aziendali da Backoffice.], [F], [O], [Amministratore HR], [UC7, UC8, UC9, UC10, UC11, UC12, UC13],
+  [RB-06], [Trasformazione delle fonti in unità di conoscenza consultabili preservando provenienza, contesto e versione.], [F], [O], [Amministratore HR], [UC11, UC12, UC14],
   [RB-07], [Gestione dei manuali NEXUM come fonte distinta dai regolamenti aziendali interni.], [F], [O], [Dipendente, Provider LLM], [UC3],
-  [RB-08], [Risposte documentali con citazione delle fonti; astensione formale se fonti insufficienti o in contrasto.], [F], [O], [Dipendente, Provider LLM], [UC2, UC2.1, UC3, UC3.1],
+  [RB-08], [Risposte documentali con citazione delle fonti; astensione formale se fonti insufficienti o in contrasto.], [F], [O], [Dipendente, Provider LLM], [UC2, UC2.1, UC3, UC3.1, UC6.5],
   [RB-09], [Recupero dei dati personali solo tramite servizi applicativi autorizzati (nessun dato inventato dall'LLM).], [F], [O], [Dipendente, Servizi NEXUM], [UC4, UC5],
   [RB-10], [Dati personali esposti con periodo esplicito, unità di misura e significato degli stati considerati.], [F], [O], [Dipendente, Servizi NEXUM], [UC4],
   [RB-11], [Esecuzione delle operazioni tramite abilità definite e invocazione di servizi applicativi autorizzati.], [F], [O], [Dipendente, Servizi NEXUM], [UC6],
-  [RB-12], [Mostrare riepilogo formale completo e richiedere conferma esplicita prima dell'invio; nuovo riepilogo se i dati variano.], [F], [O], [Dipendente], [UC6, UC6.1, UC6.2, UC6.3],
-  [RB-13], [Distinguere formalmente tra registrazione, attesa di approvazione e approvazione della richiesta ferie.], [F], [O], [Dipendente, Servizi NEXUM], [UC5, UC6],
-  [RB-14], [Comunicazione chiara all'utente di errori tecnici, validazioni fallite o indisponibilità dei servizi.], [F], [O], [Dipendente, Amministratore HR], [UC1.2, UC6.4, UC14],
+  [RB-12], [Mostrare riepilogo formale completo e richiedere conferma esplicita prima dell'invio; nuovo riepilogo se i dati variano.], [F], [O], [Dipendente], [UC6, UC6.1, UC6.2, UC6.3, UC6.6],
+  [RB-13], [Distinguere formalmente gli stati della richiesta di ferie/permesso (in attesa, approvata, rifiutata).], [F], [O], [Dipendente, Servizi NEXUM], [UC5, UC6],
+  [RB-14], [Comunicazione chiara all'utente di errori tecnici, validazioni fallite, disconnessioni o indisponibilità dei servizi.], [F], [O], [Dipendente, Amministratore HR], [UC1.2, UC1.3, UC4.1, UC5.1, UC6.4, UC7.1, UC11.1, UC14, UC14.1],
   [RB-15], [Tracciabilità completa delle fonti consultate e degli esiti delle operazioni effettuate.], [Q], [O], [Amministratore HR], [UC15],
   [RB-16], [Architettura modulare ed estensibile per l'aggiunta di nuove fonti e abilità senza riprogettazione.], [Q], [O], [— (Vincolo architetturale)], [Requisiti di sistema],
   [VE-1.1], [Disaccoppiamento architetturale iniziale: Concierge autonomo interfacciato tramite simulatori/API NEXUM.], [V], [O], [Servizi NEXUM], [Requisiti di vincolo],
   [VE-1.2], [Accesso ad AWS Bedrock con monitoraggio del consumo di token e rispetto del budget prefissato.], [P], [O], [Provider LLM], [Requisiti prestazionali],
   [VE-1.3], [Adozione di PostgreSQL con estensione `pgvector` per la base di conoscenza vettoriale.], [V], [O], [— (Vincolo tecnologico)], [Requisiti di vincolo],
-  [VE-1.4], [Controlli di validità e sovrapposizione ferie delegati deterministicamente al backend/API e non all'LLM.], [F], [O], [Servizi NEXUM], [UC6, UC6.4],
+  [VE-1.4], [Controlli di validità e sovrapposizione ferie delegati deterministicamente ai Servizi NEXUM e non all'LLM.], [F], [O], [Servizi NEXUM], [UC6, UC6.4],
   [VE-1.5], [Prevenzione da Prompt Injection, filtri di sicurezza per input/output e tutela dei dati sensibili (PII).], [Q], [O], [— (Qualità di sicurezza)], [Requisiti di qualità],
+  [VE-2.1], [Disaccoppiamento DB/Bedrock, tool controllati in Ruby (`ruby_llm`) e gestione documentale interna.], [V], [O], [Provider LLM, Servizi NEXUM], [Requisiti di vincolo],
+  [VE-2.2], [PDF + OCR, archiviazione logica fonti, prevalenza ultima versione, ruolo HR unico e singola azienda.], [F/V], [O], [Dipendente, Amministratore HR], [UC2, UC2.1, UC7, UC10, UC11, UC12, UC13],
+  [VE-2.3], [Persistenza conversazione nella singola sessione al reload/cambio pagina e nuova sessione stateless.], [F], [O], [Dipendente], [UC1, UC1.4],
+  [VE-2.4], [Retry con debounce (senza Idempotency-Key), errori a 3 livelli e divieto esposizione codici HTTP/JSON.], [F/Q], [O], [Dipendente, Provider LLM, Servizi NEXUM], [UC1.2, UC1.3, UC4.1, UC5.1, UC6.1, UC6.2, UC6.4, UC6.5],
+  [VE-2.5], [Perimetro MVP solo ferie/permessi con note opzionali, 3 stati, no modifica/cancellazione post-invio, vincoli PDF verificati dall'agente.], [F], [O], [Dipendente, Servizi NEXUM], [UC5, UC6, UC6.5],
+  [AD], [Funzionalità aggiuntive e usabilità: filtri avanzati richieste, download file originale e sottotipi opzionali.], [F], [D/Op], [Dipendente, Amministratore HR], [UC5, UC6, UC14.2],
 )
 ]
 
@@ -889,11 +1027,11 @@ Di seguito si riportano i dati quantitativi di riepilogo dei requisiti software 
   inset: 6pt,
   fill: (col, row) => if row == 0 { rgb("#e5e7eb") } else { none },
   [*Tipologia*], [*Obbligatori*], [*Desiderabili*], [*Opzionali*], [*Totale*],
-  [Funzionali (RF)], [38], [2], [1], [41],
-  [Qualità (RQ)], [5], [0], [0], [5],
-  [Vincolo (RV)], [6], [0], [0], [6],
+  [Funzionali (RF)], [48], [2], [2], [52],
+  [Qualità (RQ)], [5], [0], [1], [6],
+  [Vincolo (RV)], [8], [0], [0], [8],
   [Prestazionali (RP)], [2], [1], [0], [3],
-  [*Totale Complessivo*], [*51*], [*3*], [*1*], [*55*],
+  [*Totale Complessivo*], [*63*], [*3*], [*3*], [*69*],
 )
 
 #v(0.5cm)
@@ -904,9 +1042,9 @@ Di seguito si riportano i dati quantitativi di riepilogo dei requisiti software 
   inset: 6pt,
   fill: (col, row) => if row == 0 { rgb("#e5e7eb") } else { none },
   [*Importanza*], [*Numero Requisiti*], [*Percentuale*],
-  [Obbligatori (O)], [51], [92.7%],
-  [Desiderabili (D)], [3], [5.5%],
-  [Opzionali (Op)], [1], [1.8%],
-  [*Totale*], [*55*], [*100%*],
+  [Obbligatori (O)], [63], [91.30%],
+  [Desiderabili (D)], [3], [4.35%],
+  [Opzionali (Op)], [3], [4.35%],
+  [*Totale*], [*69*], [*100.00%*],
 )
 ]

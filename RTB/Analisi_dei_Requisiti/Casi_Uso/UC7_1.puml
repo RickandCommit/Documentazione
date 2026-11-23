@@ -1,0 +1,27 @@
+@startuml UC7_1
+left to right direction
+
+actor "Amministratore HR" as hr
+
+rectangle "NEXUM Concierge" {
+    usecase "UC7: Creazione Bucket di conoscenza" as UC7
+    usecase "UC9: Modifica metadati Bucket" as UC9
+    usecase "UC7.1: Visualizzazione errore validazione dati Bucket" as UC7_1
+}
+
+hr -- UC7
+hr -- UC9
+
+UC7 <.. UC7_1 : <<extend>>
+note on link
+Dati inseriti non validi
+in fase di creazione
+end note
+
+UC9 <.. UC7_1 : <<extend>>
+note on link
+Dati modificati non validi
+in fase di aggiornamento
+end note
+
+@enduml

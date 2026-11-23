@@ -1,0 +1,19 @@
+@startuml UC14_1
+left to right direction
+
+actor "Amministratore HR" as hr
+
+rectangle "NEXUM Concierge" {
+    usecase "UC14: Monitoraggio stato elaborazione fonti" as UC14
+    usecase "UC14.1: Visualizzazione dettaglio errore di elaborazione" as UC14_1
+}
+
+hr -- UC14
+
+UC14 <.. UC14_1 : <<extend>>
+note on link
+L'Amministratore HR seleziona
+una fonte in stato di errore
+end note
+
+@enduml

@@ -5,13 +5,17 @@ actor "Amministratore HR" as hr
 
 rectangle "NEXUM Concierge" {
     usecase "UC7: Creazione Bucket di conoscenza" as UC7
+    usecase "UC7.1: Visualizzazione errore validazione dati Bucket" as UC7_1
     usecase "UC8: Visualizzazione elenco Bucket" as UC8
     usecase "UC9: Modifica metadati Bucket" as UC9
     usecase "UC10: Ritiro Bucket di conoscenza" as UC10
     usecase "UC11: Caricamento nuova fonte documentale" as UC11
+    usecase "UC11.1: Visualizzazione errore file non valido" as UC11_1
     usecase "UC12: Sostituzione fonte documentale esistente" as UC12
     usecase "UC13: Ritiro fonte dalla consultazione" as UC13
     usecase "UC14: Monitoraggio stato elaborazione fonti" as UC14
+    usecase "UC14.1: Visualizzazione dettaglio errore di elaborazione" as UC14_1
+    usecase "UC14.2: Scaricamento file originale della fonte" as UC14_2
     usecase "UC15: Consultazione log operazioni e fonti consultate" as UC15
 }
 
@@ -24,5 +28,12 @@ hr -- UC12
 hr -- UC13
 hr -- UC14
 hr -- UC15
+
+UC7 <.. UC7_1 : <<extend>>
+UC9 <.. UC7_1 : <<extend>>
+UC11 <.. UC11_1 : <<extend>>
+UC12 <.. UC11_1 : <<extend>>
+UC14 <.. UC14_1 : <<extend>>
+UC14 <.. UC14_2 : <<extend>>
 
 @enduml

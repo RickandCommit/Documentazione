@@ -1,0 +1,27 @@
+@startuml UC11_1
+left to right direction
+
+actor "Amministratore HR" as hr
+
+rectangle "NEXUM Concierge" {
+    usecase "UC11: Caricamento nuova fonte documentale" as UC11
+    usecase "UC12: Sostituzione fonte documentale esistente" as UC12
+    usecase "UC11.1: Visualizzazione errore file non valido" as UC11_1
+}
+
+hr -- UC11
+hr -- UC12
+
+UC11 <.. UC11_1 : <<extend>>
+note on link
+File non supportato, vuoto
+o illeggibile al caricamento
+end note
+
+UC12 <.. UC11_1 : <<extend>>
+note on link
+File non supportato, vuoto
+o illeggibile alla sostituzione
+end note
+
+@enduml
