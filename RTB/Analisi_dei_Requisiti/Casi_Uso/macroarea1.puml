@@ -8,6 +8,8 @@ rectangle "NEXUM Concierge" {
     usecase "UC1: Interazione chat testuale" as UC1
     usecase "UC1.1: Chiarimento di informazioni ambigue" as UC1_1
     usecase "UC1.2: Visualizzazione errore di comunicazione LLM" as UC1_2
+    usecase "UC1.3: Visualizzazione errore di connessione lato client" as UC1_3
+    usecase "UC1.4: Avvio nuova sessione di chat" as UC1_4
 }
 
 dp -- UC1
@@ -15,5 +17,7 @@ UC1 -- llm
 
 UC1 <.. UC1_1 : <<extend>>
 UC1 <.. UC1_2 : <<extend>>
+UC1 <.. UC1_3 : <<extend>>
+UC1 <.. UC1_4 : <<extend>>
 
 @enduml

@@ -1,0 +1,19 @@
+@startuml UC1_4
+left to right direction
+
+actor "Dipendente" as dp
+
+rectangle "NEXUM Concierge" {
+    usecase "UC1: Interazione chat testuale" as UC1
+    usecase "UC1.4: Avvio nuova sessione di chat" as UC1_4
+}
+
+dp -- UC1
+
+UC1 <.. UC1_4 : <<extend>>
+note on link
+Il dipendente richiede di avviare
+una nuova sessione di chat
+end note
+
+@enduml

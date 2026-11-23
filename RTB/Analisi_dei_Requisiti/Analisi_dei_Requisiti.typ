@@ -178,6 +178,8 @@ In conformità alle norme di progetto concordate:
   [UC1], [Interazione chat testuale], [Base], [Dipendente], [Provider LLM], [RB-01, RB-02, RB-03, RB-04],
   [UC1.1], [Chiarimento di informazioni ambigue], [<<extend>>], [Dipendente], [Provider LLM], [RB-04],
   [UC1.2], [Visualizzazione errore comunicazione LLM], [<<extend>>], [Dipendente], [Provider LLM], [RB-14],
+  [UC1.3], [Visualizzazione errore di connessione lato client], [<<extend>>], [Dipendente], [—], [RB-14, VE-2.4],
+  [UC1.4], [Avvio nuova sessione di chat], [<<extend>>], [Dipendente], [—], [RB-04, VE-2.3],
   [UC2], [Richiesta informazioni su regolamenti aziendali], [Base], [Dipendente], [Provider LLM], [RB-02, RB-08],
   [UC2.1], [Visualizzazione messaggio di astensione], [<<extend>>], [Dipendente], [Provider LLM], [RB-08],
   [UC3], [Richiesta istruzioni su funzionalità NEXUM], [Base], [Dipendente], [Provider LLM], [RB-02, RB-07, RB-08],
@@ -204,39 +206,75 @@ In conformità alle norme di progetto concordate:
 #pagebreak()
 
 == Macroarea 1: Interazione Conversazionale e Gestione Contesto
-Gestisce l'accesso e l'invio di messaggi tramite interfaccia chat testuale. Il sistema mantiene il contesto storico dei messaggi scambiati nella sessione, identifica le intenzioni dell'utente (routing verso la capacità opportuna) e interviene in modo proattivo quando le richieste contengono dati incompleti o ambigui (es. "vorrei prendere ferie dal 3 al 7" -> il sistema chiede conferma dell'anno o del mese di riferimento). In caso di mancata risposta o timeout da parte del provider AWS Bedrock, scatta la notifica dell'errore tecnico (UC1.2).
+Gestisce l'invio di messaggi e la ricezione di risposte tramite interfaccia chat testuale. Il sistema mantiene il contesto dei messaggi scambiati per tutta la durata della singola sessione (anche in caso di ricaricamento della pagina o cambio schermata), identifica l'intento dell'utente e interviene proattivamente in caso di richieste ambigue o incomplete (`UC1.1`). Sono inoltre gestiti la comunicazione di eventuali errori del provider LLM (`UC1.2`), gli errori di connessione lato client (`UC1.3`) e l'avvio esplicito di una nuova sessione di chat priva di contesto pregresso (`UC1.4`).
+
+#figure(image("Casi_Uso/out/macroarea1.svg", width: 85%), caption: [Diagramma panoramico – Macroarea 1])
 
 === UC1: Interazione chat testuale
-#figure(image("Casi_Uso/out/UC1.svg", width: 75%), caption: [UC1 – Interazione chat testuale])
-- *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario).
-- *Descrizione:* [Il dipendente inizia una conversazione con l'assistente virtuale]
-- *Precondizioni:* [Il dipendente è autorizzato ed è stato autenticato]
+#figure(image("Casi_Uso/out/UC1.svg", width: 70%), caption: [UC1 – Interazione chat testuale])
+- *Attori:* Dipendente (Primario), Provider LLM (Secondario).
+- *Descrizione:* Il dipendente invia una richiesta in linguaggio naturale tramite l'interfaccia chat e riceve una risposta pertinente, mantenendo il contesto della sessione corrente.
+- *Precondizioni:* Il sistema è attivo; il dipendente è autenticato e si trova nella schermata della chat.
+- *Trigger:* Il dipendente desidera porre una domanda o avviare un'operazione tramite l'assistente conversazionale.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
-- *Estensioni:* UC1.1, UC1.2.
+  1. Il dipendente accede alla chat; se esiste una conversazione attiva nella sessione corrente (anche dopo un ricaricamento della pagina o un cambio schermata), il sistema la mantiene visibile.
+  2. Il dipendente inserisce e invia un messaggio testuale in linguaggio naturale.
+  3. Il sistema acquisisce il messaggio, lo interpreta nel contesto della sessione corrente con il supporto del Provider LLM e identifica la capacità richiesta (regolamenti aziendali, istruzioni NEXUM, dati personali o operazioni).
+  4. Il sistema elabora la richiesta e mostra la risposta testuale nella chat, aggiornando la cronologia della sessione corrente.
+- *Scenari Alternativi:*
+  - Se il messaggio contiene elementi ambigui o incompleti, il sistema richiede un chiarimento (*UC1.1*).
+  - Se il Provider LLM non risponde o si verifica un errore tecnico persistente dopo i tentativi automatici di ripetizione, il sistema mostra un messaggio di errore non tecnico (*UC1.2*).
+  - Se si verifica una caduta di rete o una disconnessione lato client, l'interfaccia segnala l'errore di connessione (*UC1.3*).
+  - Se il dipendente sceglie di iniziare da zero, avvia una nuova sessione di chat (*UC1.4*).
+- *Postcondizioni:* Il dipendente visualizza la risposta del sistema e la cronologia della sessione corrente è aggiornata e mantenuta fino all'avvio esplicito di una nuova sessione.
+- *Estensioni:* UC1.1, UC1.2, UC1.3, UC1.4.
 
 === UC1.1: Chiarimento di informazioni ambigue
 #figure(image("Casi_Uso/out/UC1_1.svg", width: 75%), caption: [UC1.1 – Chiarimento di informazioni ambigue])
-- *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+- *Attori:* Dipendente (Primario), Provider LLM (Secondario).
+- *Descrizione:* Il sistema rileva ambiguità o informazioni mancanti nel messaggio del dipendente e chiede un chiarimento mirato prima di procedere.
+- *Precondizioni:* Il dipendente ha inviato un messaggio in `UC1` che ammette più interpretazioni o manca di parametri essenziali (es. una data priva di anno o di mese non deducibile dal contesto).
+- *Condizione di estensione:* Nel contesto della richiesta sono presenti elementi ambigui o incompleti.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. Il sistema individua gli elementi mancanti o ambigui nella richiesta del dipendente con il supporto del Provider LLM.
+  2. Il sistema sospende l'esecuzione della richiesta e formula nella chat una domanda di chiarimento chiara e mirata.
+  3. Il dipendente risponde fornendo le precisazioni richieste, consentendo al dialogo di proseguire nel contesto corrente.
+- *Postcondizioni:* Il dipendente ha ricevuto la richiesta di chiarimento e può completare i dati necessari per soddisfare la propria richiesta iniziale.
 
 === UC1.2: Visualizzazione errore di comunicazione LLM
 #figure(image("Casi_Uso/out/UC1_2.svg", width: 75%), caption: [UC1.2 – Visualizzazione errore di comunicazione LLM])
-- *Attori Coinvolti:* Dipendente (Primario), Provider LLM (Secondario).
-- *Descrizione:* [Descrizione sintetica dell'interazione]
-- *Precondizioni:* [Precondizioni d'accesso o di stato del sistema]
+- *Attori:* Dipendente (Primario), Provider LLM (Secondario).
+- *Descrizione:* Il sistema informa il dipendente in modo comprensibile qualora la comunicazione con il Provider LLM fallisca in modo persistente.
+- *Precondizioni:* Il dipendente ha inviato un messaggio in `UC1` e la comunicazione verso il Provider LLM ha generato un errore tecnico o un timeout anche dopo i tentativi automatici di ripetizione.
+- *Condizione di estensione:* Indisponibilità o errore tecnico persistente del Provider LLM.
 - *Scenario Principale:*
-  1. [Passo 1]
-  2. [Passo 2]
-- *Postcondizioni:* [Stato del sistema al completamento con successo]
+  1. Il sistema rileva il fallimento persistente della comunicazione con il Provider LLM.
+  2. Il sistema nasconde eventuali dettagli o codici tecnici interni e mostra nella chat un messaggio sintetico e comprensibile (es. servizio temporaneamente non disponibile, invitando a riprovare più tardi).
+- *Postcondizioni:* Il dipendente è informato dell'impossibilità temporanea di ottenere risposta, senza esposizione di codici di errore tecnici e senza compromettere la sessione di chat.
 
+=== UC1.3: Visualizzazione errore di connessione lato client
+#figure(image("Casi_Uso/out/UC1_3.svg", width: 75%), caption: [UC1.3 – Visualizzazione errore di connessione lato client])
+- *Attori:* Dipendente (Primario).
+- *Descrizione:* L'interfaccia utente avvisa il dipendente in caso di perdita di connettività o interruzione della comunicazione lato client.
+- *Precondizioni:* Il dipendente sta interagendo con la chat in `UC1` e si verifica una perdita di connessione di rete o una disconnessione verso il sistema.
+- *Condizione di estensione:* Perdita di connettività o disconnessione lato client.
+- *Scenario Principale:*
+  1. L'interfaccia utente rileva l'interruzione della connessione con il sistema.
+  2. L'interfaccia mostra al dipendente un avviso chiaro sullo stato di disconnessione e sull'impossibilità temporanea di inviare o ricevere messaggi.
+- *Postcondizioni:* Il dipendente è informato del problema di connettività lato client; i messaggi precedenti della sessione restano conservati fino al ripristino della connessione.
+
+=== UC1.4: Avvio nuova sessione di chat
+#figure(image("Casi_Uso/out/UC1_4.svg", width: 75%), caption: [UC1.4 – Avvio nuova sessione di chat])
+- *Attori:* Dipendente (Primario).
+- *Descrizione:* Il dipendente chiude esplicitamente la conversazione in corso per avviare una nuova sessione di chat priva del contesto precedente.
+- *Precondizioni:* Il dipendente si trova in una sessione di chat attiva (`UC1`).
+- *Trigger:* Il dipendente desidera iniziare una nuova conversazione senza mantenere il contesto di quella precedente.
+- *Condizione di estensione:* Il dipendente seleziona la funzionalità di avvio di una nuova sessione di chat.
+- *Scenario Principale:*
+  1. Il dipendente richiede esplicitamente l'avvio di una nuova sessione di chat tramite l'interfaccia.
+  2. Il sistema chiude la sessione conversazionale corrente.
+  3. Il sistema apre una nuova sessione di chat pulita, pronta a ricevere nuovi messaggi senza memoria della conversazione precedente.
+- *Postcondizioni:* La sessione precedente non è più attiva nella chat e il dipendente opera in una nuova sessione inizializzata da stato pulito.
 #pagebreak()
 
 == Macroarea 2: Consultazione Conoscenza (Regolamenti e Manuali)

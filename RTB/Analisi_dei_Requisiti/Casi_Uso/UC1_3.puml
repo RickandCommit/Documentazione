@@ -1,0 +1,19 @@
+@startuml UC1_3
+left to right direction
+
+actor "Dipendente" as dp
+
+rectangle "NEXUM Concierge" {
+    usecase "UC1: Interazione chat testuale" as UC1
+    usecase "UC1.3: Visualizzazione errore di connessione lato client" as UC1_3
+}
+
+dp -- UC1
+
+UC1 <.. UC1_3 : <<extend>>
+note on link
+Perdita di connessione o
+disconnessione lato client
+end note
+
+@enduml
