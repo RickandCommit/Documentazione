@@ -43,6 +43,22 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Installa PlantUML e Graphviz
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y plantuml graphviz
+
+      - name: Verifica automatica PlantUML e genera gli SVG
+        shell: bash
+        run: |
+          set -e
+          dir="RTB/Analisi_dei_Requisiti/Casi_Uso"
+          mkdir -p "$dir"
+          printf '@startuml\nAlice -> Bob: prova CI\n@enduml\n' > "$dir/__ci_test__.puml"
+          python .github/scripts/generate_plantuml.py
+          test -s "$dir/out/__ci_test__.svg"
+          rm "$dir/__ci_test__.puml" "$dir/out/__ci_test__.svg"
+
       - name: Esegui controllo struttura e compilazione documenti
         run: |
           python .github/scripts/validate_structure.py --root-dir .
